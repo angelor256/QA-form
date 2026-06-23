@@ -3,118 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub — Premium Feedback Matrix</title>
+    <title>QA Quality Hub — Professional Dashboard</title>
     
-    <!-- Modern & Edgy Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- ExcelJS & FileSaver Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #F4F3EF; /* Clean, premium off-white */
+            --bg-main: #F8FAFC;       /* Soft, smooth background */
             --bg-card: #FFFFFF;
-            --bg-input: #FDFDFD;
-            --border-color: #1A1A1A; /* Sharp, clean black strokes */
-            --text-main: #1A1A1A;
-            --text-muted: #666666;
-            --primary: #5B42F3; /* Vibrant Electric Purple */
-            --primary-glow: rgba(91, 66, 243, 0.1);
-            --success: #00E676; /* Mint Neon Success */
-            --success-bg: #E8FDF3;
-            --warning: #FFB300;
-            --warning-bg: #FFF8E1;
-            --danger: #FF3366; /* Hot Pink Neon Danger */
-            --danger-bg: #FFE5EC;
-            --neutral: #757575;
-            --neutral-bg: #F5F5F5;
-            --shadow-flat: 4px 4px 0px #1A1A1A;
-            --shadow-flat-hover: 7px 7px 0px #1A1A1A;
+            --bg-input: #F8FAFC;
+            --border-color: #E2E8F0;   /* Ultra-delicate 1px borders */
+            --text-main: #0F172A;      /* Elegant dark slate */
+            --text-muted: #64748B;     /* Smooth gray for secondary text */
+            
+            --primary: #4F46E5;        /* Deep, professional Indigo */
+            --primary-light: #EEF2FF;
+            --success: #10B981;        /* Smooth Mint Green */
+            --success-bg: #ECFDF5;
+            --success-text: #065F46;
+            --warning: #F59E0B;        /* Delicate Amber */
+            --warning-bg: #FFFBEB;
+            --warning-text: #92400E;
+            --danger: #EF4444;         /* Soft Crimson Rose */
+            --danger-bg: #FEF2F2;
+            --danger-text: #991B1B;
+            --neutral-bg: #F1F5F9;
+            
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding: 2.5rem 2rem;
+            padding: 2rem;
             min-height: 100vh;
         }
 
         header {
             max-width: 1400px;
-            margin: 0 auto 2.5rem auto;
+            margin: 0 auto 2rem auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--bg-card);
-            border: 3px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            box-shadow: var(--shadow-flat);
-            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
         }
 
         .logo-area h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: -1px;
-            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
         }
 
         .logo-area p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-top: 0.15rem;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
         }
 
         .header-actions {
             display: flex;
-            gap: 1.2rem;
+            gap: 0.75rem;
         }
 
         .btn {
-            padding: 0.8rem 1.6rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.15s ease;
-            border: 3px solid var(--border-color);
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            box-shadow: 3px 3px 0px var(--border-color);
-            text-transform: uppercase;
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 0.5px;
-        }
-
-        .btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px var(--border-color);
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: #00F5D4; /* Vibrant Cyber Teal */
-            color: var(--text-main);
+            background: var(--primary);
+            color: #FFFFFF;
+            border-color: var(--primary);
         }
 
         .btn-primary:hover {
-            background: #00F5D4;
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border-color);
+            background: #4338CA;
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-secondary {
@@ -123,67 +115,52 @@
         }
 
         .btn-secondary:hover {
-            background: #FF007F;
-            color: #FFF;
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border-color);
-        }
-
-        .btn-success {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border-color);
+            background: var(--bg-main);
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 310px 1fr;
-            gap: 2.5rem;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
         }
 
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .card {
             background-color: var(--bg-card);
-            border: 3px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.75rem;
-            box-shadow: var(--shadow-flat);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            border-bottom: 2px dashed var(--border-color);
-            padding-bottom: 0.5rem;
+            gap: 0.5rem;
+            color: var(--text-main);
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -191,119 +168,106 @@
         .form-control {
             width: 100%;
             background-color: var(--bg-input);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.75rem 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.6rem 0.75rem;
             color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            transition: all 0.15s ease;
         }
 
         .form-control:focus {
             outline: none;
-            background: #FFF;
-            box-shadow: 3px 3px 0px var(--primary);
+            border-color: var(--primary);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px var(--primary-light);
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.6rem 0.5rem;
-            border-radius: 8px;
-            transition: background 0.2s ease;
-        }
-        .checkbox-item:hover {
-            background: var(--bg-main);
+            padding: 0.5rem 0.25rem;
         }
         
         .checkbox-item label {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.875rem;
+            font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--text-main);
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: var(--primary);
             cursor: pointer;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
         }
 
         .workspace {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .channel-groups {
             display: flex;
-            gap: 0.75rem;
-            background: transparent;
-            overflow-x: auto;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
         }
 
         .tab-btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            background: var(--bg-card);
-            color: var(--text-main);
-            border: 3px solid var(--border-color);
-            font-weight: 700;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            font-size: 0.875rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.15s ease;
-            white-space: nowrap;
-            box-shadow: 3px 3px 0px var(--border-color);
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
         }
 
         .tab-btn:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 4px 4px 0px var(--border-color);
+            color: var(--text-main);
+            background: var(--neutral-bg);
         }
 
         .tab-btn.active {
-            background: #FCEADE; /* Soft Peach Contrast Highlight */
-            box-shadow: none;
-            transform: translate(2px, 2px);
-            border-color: var(--border-color);
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .tab-btn.disabled-tab {
-            opacity: 0.4;
+            opacity: 0.3;
             cursor: not-allowed;
             text-decoration: line-through;
-            box-shadow: none;
         }
 
         .sub-navigation {
             display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
+            gap: 0.4rem;
         }
 
         .sub-tab-btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
             background: var(--bg-card);
             color: var(--text-muted);
-            border: 2px solid var(--border-color);
-            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            font-weight: 500;
             cursor: pointer;
-            font-weight: 700;
         }
 
         .sub-tab-btn.active {
             background: var(--text-main);
-            color: #FFF;
+            color: #FFFFFF;
+            border-color: var(--text-main);
         }
 
         .form-container {
@@ -316,41 +280,39 @@
 
         .evaluation-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border: 3px solid var(--border-color);
-            border-radius: 14px;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             overflow: hidden;
-            background: #FFF;
+            box-shadow: var(--shadow-sm);
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 1rem;
-            background: var(--border-color);
-            color: #FFF;
-            font-size: 0.85rem;
+            padding: 0.85rem 1rem;
+            background: #F8FAFC;
+            color: var(--text-muted);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: #F1EFFFF;
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 0.95rem;
-            padding: 1rem;
-            border-bottom: 2px solid var(--border-color);
-            font-family: 'Space Grotesk', sans-serif;
+            background: #F1F5F9;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table td {
-            padding: 1.1rem 1rem;
-            border-bottom: 2px solid var(--border-color);
-            font-size: 0.95rem;
-            background: #FFF;
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.875rem;
         }
 
         .evaluation-table tr:last-child td {
@@ -361,47 +323,44 @@
             display: block;
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 0.35rem;
-            font-weight: 500;
+            margin-top: 0.2rem;
         }
 
         .select-classification {
-            background-color: #FFF;
+            background-color: #FFFFFF;
             color: var(--text-main);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.5rem;
-            width: 120px;
-            font-weight: 700;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.4rem;
+            width: 110px;
+            font-size: 0.85rem;
             cursor: pointer;
         }
 
         .score-display-box {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 800;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
             text-align: center;
-            min-width: 70px;
-            border: 2px solid var(--border-color);
+            min-width: 50px;
         }
 
-        /* Sharp Status Colors */
-        .status-yes { background-color: var(--success-bg); color: #007934; }
-        .status-partial { background-color: var(--warning-bg); color: #B78103; }
-        .status-no { background-color: var(--danger-bg); color: #C2185B; }
+        .status-yes { background-color: var(--success-bg); color: var(--success-text); }
+        .status-partial { background-color: var(--warning-bg); color: var(--warning-text); }
+        .status-no { background-color: var(--danger-bg); color: var(--danger-text); }
         .status-na { background-color: var(--neutral-bg); color: var(--text-muted); }
 
         .form-footer-scores {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             display: flex;
             justify-content: flex-end;
-            gap: 2rem;
+            gap: 1.5rem;
             background: var(--bg-card);
-            padding: 1.25rem 2rem;
-            border-radius: 14px;
-            border: 3px solid var(--border-color);
-            box-shadow: 4px 4px 0px var(--border-color);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
 
         .footer-score-block {
@@ -410,109 +369,110 @@
 
         .footer-score-block span {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            font-weight: 600;
         }
 
         .footer-score-block div {
-            font-size: 2rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-top: 0.1rem;
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1.9fr 1.1fr;
-            gap: 2rem;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 1.5rem;
         }
 
         .feedback-badge-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #FFE2E2; /* Contrast color block */
-            padding: 1.75rem 2.25rem;
-            border-radius: 16px;
-            border: 3px solid var(--border-color);
-            box-shadow: var(--shadow-flat);
-            margin-bottom: 2rem;
+            background: #FFFFFF;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
         }
 
         .global-score-hero {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.8rem;
-            font-weight: 800;
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .matrix-table th, .matrix-table td {
-            border: 2px solid var(--border-color);
-            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
             text-align: center;
-            font-weight: 600;
         }
 
         .matrix-table th {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: #F8FAFC;
+            color: var(--text-muted);
+            font-weight: 600;
             text-transform: uppercase;
+            font-size: 0.75rem;
         }
 
         .matrix-badge {
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
-            font-weight: 800;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
             font-size: 0.8rem;
             display: inline-block;
-            border: 1px solid var(--border-color);
         }
 
         .feedback-card-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .feedback-item-box {
-            padding: 1rem;
-            border-radius: 10px;
-            border: 2px solid var(--border-color);
-            margin-bottom: 0.6rem;
-            box-shadow: 2px 2px 0px var(--border-color);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
         }
 
-        .feedback-item-box.f-yes { background: var(--success-bg); }
-        .feedback-item-box.f-partial { background: var(--warning-bg); }
-        .feedback-item-box.f-no { background: var(--danger-bg); }
+        .feedback-item-box.f-yes { background: var(--success-bg); color: var(--success-text); }
+        .feedback-item-box.f-partial { background: var(--warning-bg); color: var(--warning-text); }
+        .feedback-item-box.f-no { background: var(--danger-bg); color: var(--danger-text); }
 
         .feedback-item-title {
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        .feedback-item-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-            font-weight: 500;
+        .comment-box-area {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.6rem;
+            color: var(--text-main);
+            min-height: 80px;
+            resize: vertical;
+            font-size: 0.875rem;
+            margin-top: 0.3rem;
         }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(26, 26, 26, 0.4);
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.15);
+            backdrop-filter: blur(2px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -521,55 +481,33 @@
 
         .modal-card {
             background: var(--bg-card);
-            border: 3px solid var(--border-color);
+            border: 1px solid var(--border-color);
             width: 100%;
-            max-width: 500px;
-            border-radius: 16px;
-            padding: 2.25rem;
-            box-shadow: 8px 8px 0px var(--border-color);
+            max-width: 450px;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
         }
-
-        .comment-box-area {
-            width: 100%;
-            background: var(--bg-input);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.75rem;
-            color: var(--text-main);
-            min-height: 100px;
-            resize: vertical;
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-top: 0.5rem;
-        }
-
-        ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
     </style>
 </head>
 <body>
 
-    <!-- MAIN HEADER -->
     <header>
         <div class="logo-area">
-            <h1>QA QUALITY HUB</h1>
-            <p>Elevating Performance • Matrix Dashboard Edition</p>
+            <h1>QA Quality Hub</h1>
+            <p>Performance Evaluation & Metrics Manager</p>
         </div>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Manage Lists</button>
-            <button class="btn btn-success" onclick="exportPremiumExcel()">📊 Export Report</button>
+            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Manage Attributes</button>
+            <button class="btn btn-primary" onclick="exportPremiumExcel()">📊 Export Session Report</button>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- SIDEBAR PARAMETERS -->
         <div class="sidebar">
             <div class="card">
-                <div class="card-title">📋 Evaluation Data</div>
+                <div class="card-title">📋 Session Meta</div>
                 
                 <div class="form-group">
                     <label>Agent</label>
@@ -580,7 +518,7 @@
                     <select id="metaEvaluator" class="form-control"></select>
                 </div>
                 <div class="form-group">
-                    <label>Current Role</label>
+                    <label>Role</label>
                     <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
                 </div>
                 <div class="form-group">
@@ -594,64 +532,51 @@
             </div>
 
             <div class="card">
-                <div class="card-title">🎯 Active Cases</div>
-                <div id="checkboxGrid">
-                    <!-- Dynamic Items -->
-                </div>
+                <div class="card-title">🎯 Active Interactions</div>
+                <div id="checkboxGrid"></div>
             </div>
         </div>
 
-        <!-- MAIN WORKSPACE -->
         <div class="workspace">
             
-            <!-- Channel Tab Selectors -->
             <div class="channel-groups">
-                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">📱 Phones Channel</button>
-                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">💬 Chats Channel</button>
-                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">📧 Emails Channel</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; background: #E6E2FF; color: var(--primary);">📋 Performance Card</button>
+                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
+                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
+                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; color: var(--primary); font-weight:600;">Performance Card</button>
             </div>
 
-            <!-- Case Sub-Navigation Navigation -->
-            <div class="sub-navigation" id="subTabsArea">
-                <!-- Autogenerated via JS -->
-            </div>
+            <div class="sub-navigation" id="subTabsArea"></div>
 
-            <!-- Dynamic Workspace Area for Tables -->
-            <div id="formsWorkspaceArea">
-                <!-- 12 Forms injected here -->
-            </div>
+            <div id="formsWorkspaceArea"></div>
 
-            <!-- CONSOLIDATED DASHBOARD VIEW -->
             <div id="dashboardViewArea" style="display:none;">
                 <div class="feedback-badge-container">
                     <div>
-                        <h2 style="font-family:'Space Grotesk', sans-serif; font-size:1.8rem; font-weight:700; margin-bottom:0.25rem; text-transform:uppercase;">Consolidated Performance</h2>
-                        <p style="color:var(--text-muted); font-weight:500;">Overall score computed from all verified and active interactions.</p>
+                        <h2 style="font-family:'Plus Jakarta Sans'; font-size:1.35rem; font-weight:700; margin-bottom:0.15rem;">Consolidated Score</h2>
+                        <p style="color:var(--text-muted); font-size:0.85rem;">Aggregated compliance result computed from active cases.</p>
                     </div>
                     <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div>
-                        <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
-                            <div class="card-title">📊 Scorecard Grid Matrix</div>
-                            <table class="matrix-table" id="matrixPointsTable">
-                                <!-- Computed values -->
-                            </table>
+                        <div class="card" style="margin-bottom: 1.5rem; overflow-x: auto; padding:1rem;">
+                            <div class="card-title" style="margin-bottom:0.75rem;">📊 Performance Criteria Matrix</div>
+                            <table class="matrix-table" id="matrixPointsTable"></table>
                         </div>
 
                         <div class="card">
-                            <div class="card-title">📝 Strategic Feedback Notes</div>
+                            <div class="card-title">📝 Strategic Comments</div>
                             <div class="form-group">
-                                <label>General Review Comments</label>
-                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Type key findings and actionable highlights for this session..."></textarea>
+                                <label>General Evaluation Feedback</label>
+                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Type key findings..."></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Growth Action Items & Goals</label>
-                                <textarea id="dashGoals" class="comment-box-area" placeholder="Target development milestones for the agent next period..."></textarea>
+                                <label>Action Plan & Next Steps</label>
+                                <textarea id="dashGoals" class="comment-box-area" placeholder="Target milestones..."></textarea>
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.75rem;">
                                 <div class="form-group">
                                     <label>Session Status</label>
                                     <select id="dashPerformanceRating" class="form-control">
@@ -660,26 +585,25 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Follow-Up Target Date</label>
+                                    <label>Follow-Up Date</label>
                                     <input type="date" id="dashFollowUpDate" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Visual Feedback Cards -->
                     <div class="feedback-card-list">
-                        <div class="card" style="border-top: 6px solid #00C853;">
-                            <div class="card-title" style="color:#007934;">🌟 Key Strengths</div>
-                            <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="padding:1.25rem;">
+                            <div class="card-title" style="color:var(--success-text); font-size:0.95rem;">🌟 Observed Strengths</div>
+                            <div id="dashFortalezasList" style="max-height: 200px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="border-top: 6px solid #FFAB00;">
-                            <div class="card-title" style="color:#B78103;">👁️ Main Observations</div>
-                            <div id="dashObservarList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="padding:1.25rem;">
+                            <div class="card-title" style="color:var(--warning-text); font-size:0.95rem;">👁️ Strategic Observations</div>
+                            <div id="dashObservarList" style="max-height: 200px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="border-top: 6px solid #FF1744;">
-                            <div class="card-title" style="color:#C2185B;">🚀 Improvement Areas</div>
-                            <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="padding:1.25rem;">
+                            <div class="card-title" style="color:var(--danger-text); font-size:0.95rem;">🚀 Areas for Growth</div>
+                            <div id="dashMejorasList" style="max-height: 200px; overflow-y:auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -688,33 +612,28 @@
         </div>
     </div>
 
-    <!-- CONFIGURATION LIST PARAMETERS MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
-            <div class="card-title">⚙️ Manage Attributes</div>
-            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.25rem; font-weight:500;">Add customized elements to lists dynamically inside active local browser cache storage.</p>
-            
+            <div class="card-title">⚙️ Add Attributes</div>
             <div class="form-group">
-                <label>List Dataset Target</label>
+                <label>Target List</label>
                 <select id="configType" class="form-control">
-                    <option value="agents">New Agent Profile</option>
-                    <option value="evaluators">New Evaluator Profile</option>
-                    <option value="roles">New Standard Role</option>
+                    <option value="agents">Agent Profile</option>
+                    <option value="evaluators">Evaluator Profile</option>
+                    <option value="roles">Standard Role</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Value Designation</label>
-                <input type="text" id="configValue" class="form-control" placeholder="e.g., Jonathan Doe / Tier 4 Team">
+                <label>Value Label</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Type label name...">
             </div>
-            
-            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:2rem;">
-                <button class="btn btn-secondary" style="box-shadow:none;" onclick="closeModal('configModal')">Cancel</button>
+            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancel</button>
                 <button class="btn btn-primary" onclick="addNewConfigItem()">Add Record</button>
             </div>
         </div>
     </div>
 
-    <!-- CODE LOGIC ARCHITECTURE ENGINE -->
     <script>
         const defaultLists = {
             agents: [
@@ -739,7 +658,7 @@
             roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_v2')) || defaultLists;
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_v3')) || defaultLists;
 
         const phoneChatCriteria = [
             { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
@@ -777,6 +696,7 @@
                     evaluationState[g][i] = {
                         active: true,
                         accountNumber: "",
+                        interactionId: "", // Field requested added here
                         comments: { "S1": "", "S2": "", "S3": "", "S4": "" },
                         scores: {}
                     };
@@ -824,9 +744,7 @@
                     let ck = document.getElementById(`ck_Emails_${i}`);
                     if(ck) ck.checked = false;
                 }
-                if (currentGroup === "Emails") {
-                    switchChannelGroup("Phones");
-                }
+                if (currentGroup === "Emails") switchChannelGroup("Phones");
             } else {
                 emailTab.classList.remove('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = true;
@@ -848,7 +766,7 @@
 
             groups.forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:0.75rem; font-weight:800; font-size:0.8rem; letter-spacing:0.5px; color:var(--primary); font-family:'Space Grotesk'">${g.toUpperCase()}</div>`;
+                html += `<div style="margin-top:0.5rem; font-weight:600; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
                 for(let i=1; i<=4; i++) {
                     const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
@@ -866,9 +784,7 @@
         function toggleCaseActive(group, index, isChecked) {
             evaluationState[group][index].active = isChecked;
             const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
-            if(subTabEl) {
-                subTabEl.style.opacity = !isChecked ? "0.4" : "1";
-            }
+            if(subTabEl) subTabEl.style.opacity = !isChecked ? "0.3" : "1";
             calculateSingleFormScore(group, index);
             calculateGlobalMatrix();
         }
@@ -907,7 +823,7 @@
             for (let i = 1; i <= 4; i++) {
                 const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
                 const activeClass = i === currentSubIndex ? "active" : "";
-                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.4;'";
+                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.3;'";
                 html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
             }
             area.innerHTML = html;
@@ -929,14 +845,13 @@
             if (targetEl) targetEl.classList.add('active');
         }
 
-        function updateAccountNumber(group, index, value) {
-            evaluationState[group][index].accountNumber = value.trim();
+        function updateFormValue(group, index, field, value) {
+            evaluationState[group][index][field] = value.trim();
         }
 
         function buildAllForms() {
             const area = document.getElementById('formsWorkspaceArea');
             area.innerHTML = "";
-
             const groups = ["Phones", "Chats", "Emails"];
 
             groups.forEach(g => {
@@ -948,24 +863,28 @@
                     container.className = "form-container";
 
                     let tableHtml = `
-                        <!-- Account Details Top Banner Block -->
-                        <div style="background:#FFF; border:3px solid var(--border-color); padding:1rem; border-radius:12px; margin-bottom:1rem; display:flex; align-items:center; gap:1.5rem; box-shadow:3px 3px 0px var(--border-color)">
-                            <div style="font-family:'Space Grotesk'; font-weight:700; font-size:1rem; text-transform:uppercase; min-width:130px;">🎯 Interaction Meta:</div>
-                            <div style="display:flex; align-items:center; gap:0.5rem; width:100%; max-width:400px;">
-                                <label style="font-size:0.85rem; font-weight:800; text-transform:uppercase; white-space:nowrap;">Account #:</label>
-                                <input type="text" placeholder="Insert CX Account Reference Number..." 
-                                       class="form-control" style="padding:0.4rem 0.6rem; font-size:0.9rem;"
-                                       value="${evaluationState[g][i].accountNumber || ''}"
-                                       oninput="updateAccountNumber('${g}', ${i}, this.value)">
+                        <div style="background:#FFF; border:1px solid var(--border-color); padding:0.75rem 1.25rem; border-radius:8px; margin-bottom:1rem; display:flex; justify-content: space-between; align-items:center; box-shadow:var(--shadow-sm)">
+                            <div style="font-weight:600; font-size:0.85rem; color:var(--text-muted); text-transform:uppercase;">Interactions Reference Meta</div>
+                            <div style="display:flex; gap:1.5rem;">
+                                <div style="display:flex; align-items:center; gap:0.4rem;">
+                                    <label style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">Account #:</label>
+                                    <input type="text" placeholder="CX Account Num" class="form-control" style="width:160px; padding:0.3rem 0.5rem;"
+                                           value="${evaluationState[g][i].accountNumber || ''}" oninput="updateFormValue('${g}', ${i}, 'accountNumber', this.value)">
+                                </div>
+                                <div style="display:flex; align-items:center; gap:0.4rem;">
+                                    <label style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">Interaction ID:</label>
+                                    <input type="text" placeholder="Call/Chat/Email Ref ID" class="form-control" style="width:180px; padding:0.3rem 0.5rem;"
+                                           value="${evaluationState[g][i].interactionId || ''}" oninput="updateFormValue('${g}', ${i}, 'interactionId', this.value)">
+                                </div>
                             </div>
                         </div>
 
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Evaluation Criteria Descriptor</th>
+                                    <th>Criteria Item Definition</th>
                                     <th>Classification</th>
-                                    <th>Max Pts</th>
+                                    <th>Max</th>
                                     <th>Score</th>
                                 </tr>
                             </thead>
@@ -980,9 +899,8 @@
                                 <tr class="section-header-row">
                                     <td colspan="2">${currentSection}</td>
                                     <td colspan="2" style="text-align:right;">
-                                        <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem;">Section Comments:</span>
-                                        <input type="text" placeholder="Add section notes..." 
-                                               class="form-control" style="width:300px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.85rem;"
+                                        <input type="text" placeholder="Section reference feedback commentary notes..." 
+                                               class="form-control" style="width:340px; display:inline-block; padding:0.25rem 0.5rem; font-size:0.8rem; background:#FFF;"
                                                value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
                                                onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
@@ -991,9 +909,9 @@
                         }
 
                         tableHtml += `
-                            <tr class="criterion-row">
-                                <td style="width:50%;">
-                                    <strong style="font-weight:700; color:var(--text-main);">${c.text}</strong>
+                            <tr>
+                                <td style="width:55%;">
+                                    <span style="font-weight:500; color:var(--text-main);">${c.text}</span>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
                                 <td>
@@ -1004,7 +922,7 @@
                                         <option value="N/A">N/A</option>
                                     </select>
                                 </td>
-                                <td style="font-weight:700; color:var(--text-muted);">${c.max_pts}</td>
+                                <td style="color:var(--text-muted); font-size:0.8rem;">${c.max_pts}</td>
                                 <td>
                                     <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
                                 </td>
@@ -1017,13 +935,13 @@
                         </table>
                         
                         <div class="form-footer-scores">
-                            <div class="footer-score-block">
-                                <span>Points Secured</span>
-                                <div id="lbl_pts_${g}_${i}" style="color:var(--text-main);">100.00</div>
+                            <div class="footer-score-block" style="border-right: 1px solid var(--border-color); padding-right:1.5rem;">
+                                <span>Earned Points</span>
+                                <div id="lbl_pts_${g}_${i}">100.00</div>
                             </div>
                             <div class="footer-score-block">
-                                <span>Interaction Percentage</span>
-                                <div id="lbl_pct_${g}_${i}" style="color:#007934;">100%</div>
+                                <span>Compliance Rate</span>
+                                <div id="lbl_pct_${g}_${i}" style="color:var(--success);">100%</div>
                             </div>
                         </div>
                     `;
@@ -1054,26 +972,13 @@
             const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
             box.className = "score-display-box";
 
-            if (value === "Yes") {
-                finalPts = crit.max_pts;
-                box.classList.add('status-yes');
-            } else if (value === "Partially") {
-                finalPts = crit.max_pts * 0.5;
-                box.classList.add('status-partial');
-            } else if (value === "No") {
-                finalPts = 0;
-                box.classList.add('status-no');
-            } else if (value === "N/A") {
-                finalPts = 0;
-                box.classList.add('status-na');
-            }
+            if (value === "Yes") { finalPts = crit.max_pts; box.classList.add('status-yes'); }
+            else if (value === "Partially") { finalPts = crit.max_pts * 0.5; box.classList.add('status-partial'); }
+            else if (value === "No") { finalPts = 0; box.classList.add('status-no'); }
+            else if (value === "N/A") { finalPts = 0; box.classList.add('status-na'); }
 
             box.innerText = value === "N/A" ? "N/A" : finalPts;
-
-            evaluationState[group][index].scores[criterionId] = {
-                classification: value,
-                points: finalPts
-            };
+            evaluationState[group][index].scores[criterionId] = { classification: value, points: finalPts };
 
             calculateSingleFormScore(group, index);
         }
@@ -1082,8 +987,7 @@
             if (!evaluationState[group] || !evaluationState[group][index]) return;
 
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
-            let earnedSum = 0;
-            let maxSumAvailable = 0;
+            let earnedSum = 0, maxSumAvailable = 0;
 
             criteriaList.forEach(c => {
                 const sc = evaluationState[group][index].scores[c.id];
@@ -1094,7 +998,6 @@
             });
 
             let pct = maxSumAvailable > 0 ? (earnedSum / maxSumAvailable) * 100 : 100;
-
             evaluationState[group][index].calculatedScore = earnedSum;
             evaluationState[group][index].calculatedMax = maxSumAvailable;
             evaluationState[group][index].calculatedPct = pct;
@@ -1105,7 +1008,7 @@
             if(lblPts && lblPct) {
                 lblPts.innerText = earnedSum.toFixed(2);
                 lblPct.innerText = pct.toFixed(0) + "%";
-                lblPct.style.color = pct >= 90 ? "#007934" : (pct >= 70 ? "#B78103" : "#C2185B");
+                lblPct.style.color = pct >= 90 ? "var(--success)" : (pct >= 70 ? "var(--warning)" : "var(--danger)");
             }
         }
 
@@ -1113,68 +1016,79 @@
             const isT1 = (document.getElementById('metaRole').value === "T1");
             const groups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
             
-            let totalEarnedGlobal = 0;
-            let totalMaxGlobal = 0;
+            let totalEarnedGlobal = 0, totalMaxGlobal = 0;
 
             const fortList = document.getElementById('dashFortalezasList');
             const obsList = document.getElementById('dashObservarList');
             const mejList = document.getElementById('dashMejorasList');
             
-            fortList.innerHTML = "";
-            obsList.innerHTML = "";
-            mejList.innerHTML = "";
+            fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
-            let addedFort = new Set();
-            let addedObs = new Set();
-            let addedMej = new Set();
+            let addedFort = new Set(), addedObs = new Set(), addedMej = new Set();
 
             const matrixTable = document.getElementById('matrixPointsTable');
+            
+            // REQUESTED UPDATE: Replace raw Identifier Code ID with actual full parameter strings titles labels
             let mHtml = `
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th style="text-align:left;">Evaluation Quality Criteria Name</th>
                         <th>Phones Avg</th>
                         <th>Chats Avg</th>
                         ${!isT1 ? '<th>Emails Avg</th>' : ''}
-                        <th>Total Average</th>
+                        <th style="background:#F1F5F9;">Overall Status</th>
                     </tr>
                 </thead>
                 <tbody>
             `;
 
-            const standardIds = ["1.1", "2.1", "2.2", "3.1", "3.2", "3.3", "4.1", "4.2"];
+            // Unified listing map of unique text categories parameters to run loops seamlessly 
+            const uniqueTexts = [
+                "Proper Greeting & Account Verification",
+                "Accurate & Effective Resolution",
+                "Alternatives Offered",
+                "Professional Communication & Emotional Intelligence",
+                "Grammar & Spelling",
+                "Hold & Dead Air Time Management",
+                "Extra Assistance - Additional Support (Mandatory)",
+                "Extra Assistance - Promotions & Offers",
+                "Personalized Greeting",
+                "Accurate Information & Effective Resolution",
+                "Correct Template Used",
+                "Proper Formatting",
+                "Timely Response",
+                "Signature Included"
+            ];
 
-            standardIds.forEach(id => {
-                let rowSumPoints = 0;
-                let rowCountCases = 0;
+            uniqueTexts.forEach(txtTitle => {
+                let rowSumPoints = 0, rowCountCases = 0;
                 let channelAverages = {};
+                let foundMatchInActiveSession = false;
 
                 groups.forEach(g => {
-                    let chanSum = 0;
-                    let chanCount = 0;
-                    
+                    let chanSum = 0, chanCount = 0;
                     const critList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
-                    const crObj = critList.find(c => c.id === id);
+                    const crObj = critList.find(c => c.text === txtTitle);
 
-                    for(let i=1; i<=4; i++) {
-                        if(evaluationState[g][i].active) {
-                            const sc = evaluationState[g][i].scores[id];
-                            if(sc && sc.classification !== "N/A") {
-                                chanSum += sc.points;
-                                chanCount += crObj.max_pts;
+                    if(crObj) {
+                        for(let i=1; i<=4; i++) {
+                            if(evaluationState[g][i].active) {
+                                const sc = evaluationState[g][i].scores[crObj.id];
+                                if(sc && sc.classification !== "N/A") {
+                                    foundMatchInActiveSession = true;
+                                    chanSum += sc.points;
+                                    chanCount += crObj.max_pts;
 
-                                const fullText = crObj.text;
-                                const fullDesc = crObj.desc;
-
-                                if(sc.classification === "Yes" && !addedFort.has(fullText)) {
-                                    addedFort.add(fullText);
-                                    fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
-                                } else if(sc.classification === "Partially" && !addedObs.has(fullText)) {
-                                    addedObs.add(fullText);
-                                    obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
-                                } else if(sc.classification === "No" && !addedMej.has(fullText)) {
-                                    addedMej.add(fullText);
-                                    mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                    if(sc.classification === "Yes" && !addedFort.has(txtTitle)) {
+                                        addedFort.add(txtTitle);
+                                        fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                    } else if(sc.classification === "Partially" && !addedObs.has(txtTitle)) {
+                                        addedObs.add(txtTitle);
+                                        obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                    } else if(sc.classification === "No" && !addedMej.has(txtTitle)) {
+                                        addedMej.add(txtTitle);
+                                        mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                    }
                                 }
                             }
                         }
@@ -1189,17 +1103,18 @@
                     }
                 });
 
-                let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : 100;
-
-                mHtml += `
-                    <tr>
-                        <td style="font-weight:700; color:var(--primary); font-family:'Space Grotesk';">${id}</td>
-                        <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
-                        <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
-                        ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
-                        <td style="background: rgba(0,0,0,0.02); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
-                    </tr>
-                `;
+                if(foundMatchInActiveSession) {
+                    let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : 100;
+                    mHtml += `
+                        <tr>
+                            <td style="text-align:left; font-weight:500; color:var(--text-main);">${txtTitle}</td>
+                            <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
+                            <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
+                            ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
+                            <td style="background: #F8FAFC; font-weight:600;">${renderMatrixBadge(totalRowAvg)}</td>
+                        </tr>
+                    `;
+                }
             });
 
             mHtml += `</tbody>`;
@@ -1217,9 +1132,9 @@
             let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
             document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
             
-            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
-            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
-            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
+            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
+            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
+            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
         }
 
         function renderMatrixBadge(val) {
@@ -1237,12 +1152,11 @@
             const type = document.getElementById('configType').value;
             const value = document.getElementById('configValue').value.trim();
 
-            if(!value) { alert("Please input a valid configuration label name."); return; }
-
+            if(!value) return;
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
 
-            localStorage.setItem('qa_lists_v2', JSON.stringify(currentLists));
+            localStorage.setItem('qa_lists_v3', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
             
@@ -1259,112 +1173,103 @@
             const globalScoreStr = document.getElementById('lblGlobalScore').innerText;
 
             const workbook = new ExcelJS.Workbook();
-            
             const wsSummary = workbook.addWorksheet('Feedback Summary');
             wsSummary.views = [{ showGridLines: true }];
 
             wsSummary.mergeCells('A1:F2');
             const titleCell = wsSummary.getCell('A1');
-            titleCell.value = "QA PERFORMANCE FEEDBACK CARD";
-            titleCell.font = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
-            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1A1A1A' } };
+            titleCell.value = "QA EVALUATION PERFORMANCE REPORT";
+            titleCell.font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FFFFFF' } };
+            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '4F46E5' } };
             titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
 
             wsSummary.getCell('A4').value = "Agent Name:"; wsSummary.getCell('B4').value = agentName;
-            wsSummary.getCell('A5').value = "Role:"; wsSummary.getCell('B5').value = roleName;
+            wsSummary.getCell('A5').value = "Role Profile:"; wsSummary.getCell('B5').value = roleName;
             wsSummary.getCell('A6').value = "Evaluator:"; wsSummary.getCell('B6').value = evaluatorName;
             wsSummary.getCell('C4').value = "Interaction Date:"; wsSummary.getCell('D4').value = intDate;
             wsSummary.getCell('C5').value = "Evaluation Date:"; wsSummary.getCell('D5').value = evalDate;
             
-            wsSummary.getCell('E4').value = "OVERALL SCORE";
-            wsSummary.getCell('E4').font = { name: 'Arial', size: 9, bold: true, color: { argb: '555555' } };
+            wsSummary.getCell('E4').value = "TOTAL PERFORMANCE";
             wsSummary.getCell('E5').value = parseFloat(globalScoreStr) / 100;
-            wsSummary.getCell('E5').font = { name: 'Arial', size: 22, bold: true, color: { argb: '1A1A1A' } };
+            wsSummary.getCell('E5').font = { size: 18, bold: true };
             wsSummary.getCell('E5').numFmt = '0.00%';
 
-            ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true, color: { argb: '1A1A1A' } });
+            let matrixRowStart = 9;
+            wsSummary.getCell(`A${matrixRowStart}`).value = "CRITERIA ANALYSIS SUMMARY MATRIX";
+            wsSummary.getCell(`A${matrixRowStart}`).font = { bold: true };
 
-            wsSummary.getCell('A8').value = "CONSOLIDATED PERFORMANCE MATRIX GRID";
-            wsSummary.getCell('A8').font = { size: 12, bold: true, color: { argb: '1A1A1A' } };
-
-            const headers = ["Criterion ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
-            headers.forEach((h, i) => {
-                const cell = wsSummary.getCell(9, i + 1);
-                cell.value = h;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '5B42F3' } };
-                cell.font = { bold: true, color: { argb: 'FFFFFF' } };
-                cell.alignment = { horizontal: 'center' };
+            const tblHeaders = ["Quality Metric Criteria Designation", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
+            tblHeaders.forEach((th, i) => {
+                const cell = wsSummary.getCell(matrixRowStart + 1, i + 1);
+                cell.value = th;
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'F1F5F9' } };
+                cell.font = { bold: true };
             });
 
             const matrixRows = document.querySelectorAll('#matrixPointsTable tbody tr');
             matrixRows.forEach((row, rIdx) => {
                 const cells = row.querySelectorAll('td');
                 cells.forEach((c, cIdx) => {
-                    const targetCell = wsSummary.getCell(10 + rIdx, cIdx + 1);
+                    const targetCell = wsSummary.getCell(matrixRowStart + 2 + rIdx, cIdx + 1);
                     let txt = c.innerText.trim();
                     if(txt.includes('%')) {
                         targetCell.value = parseFloat(txt) / 100;
                         targetCell.numFmt = '0%';
-                        let num = parseFloat(txt);
-                        let color = num >= 90 ? 'E8FDF3' : (num >= 70 ? 'FFF8E1' : 'FFE5EC');
-                        targetCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
                     } else {
                         targetCell.value = txt;
                     }
-                    targetCell.alignment = { horizontal: 'center' };
                 });
             });
 
-            let nextRow = 13 + matrixRows.length;
-            wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC FEEDBACK ANALYSIS";
-            wsSummary.getCell(`A${nextRow}`).font = { size: 12, bold: true };
+            let trackingOffset = matrixRowStart + 4 + matrixRows.length;
+            wsSummary.getCell(`A${trackingOffset}`).value = "STRATEGIC SESSION COMMENTS & FEEDBACK";
+            wsSummary.getCell(`A${trackingOffset}`).font = { bold: true };
+            wsSummary.getCell(`A${trackingOffset+1}`).value = document.getElementById('dashGeneralComments').value;
+            wsSummary.getCell(`A${trackingOffset+3}`).value = "DEVELOPMENT GOALS PLAN";
+            wsSummary.getCell(`A${trackingOffset+3}`).font = { bold: true };
+            wsSummary.getCell(`A${trackingOffset+4}`).value = document.getElementById('dashGoals').value;
 
-            wsSummary.getCell(`A${nextRow+2}`).value = "General Session Review Notes:";
-            wsSummary.getCell(`B${nextRow+2}`).value = document.getElementById('dashGeneralComments').value;
-            wsSummary.getCell(`A${nextRow+4}`).value = "Milestone Goals for Next Horizon:";
-            wsSummary.getCell(`B${nextRow+4}`).value = document.getElementById('dashGoals').value;
-            wsSummary.getCell(`A${nextRow+6}`).value = "Session Status:";
-            wsSummary.getCell(`B${nextRow+6}`).value = document.getElementById('dashPerformanceRating').value;
-            wsSummary.getCell(`C${nextRow+6}`).value = "Target Follow-up Plan Date:";
-            wsSummary.getCell(`D${nextRow+6}`).value = document.getElementById('dashFollowUpDate').value;
+            wsSummary.columns = [{ width: 45 }, { width: 16 }, { width: 16 }, { width: 16 }, { width: 18 }];
 
-            [`A${nextRow+2}`, `A${nextRow+4}`, `A${nextRow+6}`, `C${nextRow+6}`].forEach(k => wsSummary.getCell(k).font = { bold: true });
-            wsSummary.columns.forEach(col => col.width = 24);
-
-            // --- TAB 2: AUDIT RAW TRACKING DATA WITH ACCOUNT NUMBERS ---
-            const wsData = workbook.addWorksheet('Raw Evaluation Logs');
+            // DATA LOGS PER INTERACTION SHEET (With Account # and Interaction ID fields embedded properly)
+            const wsData = workbook.addWorksheet('Granular Interaction Audits');
             wsData.views = [{ showGridLines: true }];
 
-            const dataHeaders = ["Channel", "Interaction Ref ID", "Customer Account #", "Criterion Identifier", "Status Matrix", "Earned Score Pts"];
-            dataHeaders.forEach((dh, idx) => {
+            const logHeaders = ["Channel", "Case Reference Index", "Account Number", "Interaction ID Link", "Criterion Metric Name", "Classification Status", "Score Earned Pts"];
+            logHeaders.forEach((lh, idx) => {
                 const cell = wsData.getCell(1, idx + 1);
-                cell.value = dh;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1A1A1A' } };
+                cell.value = lh;
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '0F172A' } };
                 cell.font = { bold: true, color: { argb: 'FFFFFF' } };
             });
 
-            let dataRowCounter = 2;
+            let activeRowIdx = 2;
             const groups = ["Phones", "Chats", "Emails"];
             groups.forEach(g => {
+                const listRef = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
-                        Object.keys(evaluationState[g][i].scores).forEach(cId => {
-                            const item = evaluationState[g][i].scores[cId];
-                            wsData.getCell(dataRowCounter, 1).value = g;
-                            wsData.getCell(dataRowCounter, 2).value = `Case Reference ${i}`;
-                            wsData.getCell(dataRowCounter, 3).value = evaluationState[g][i].accountNumber || "N/A";
-                            wsData.getCell(dataRowCounter, 4).value = cId;
-                            wsData.getCell(dataRowCounter, 5).value = item.classification;
-                            wsData.getCell(dataRowCounter, 6).value = item.points;
-                            dataRowCounter++;
+                        listRef.forEach(critObj => {
+                            const matchScore = evaluationState[g][i].scores[critObj.id];
+                            if(matchScore) {
+                                wsData.getCell(activeRowIdx, 1).value = g;
+                                wsData.getCell(activeRowIdx, 2).value = `Case Reference ${i}`;
+                                wsData.getCell(activeRowIdx, 3).value = evaluationState[g][i].accountNumber || "N/A";
+                                wsData.getCell(activeRowIdx, 4).value = evaluationState[g][i].interactionId || "N/A";
+                                wsData.getCell(activeRowIdx, 5).value = critObj.text;
+                                wsData.getCell(activeRowIdx, 6).value = matchScore.classification;
+                                wsData.getCell(activeRowIdx, 7).value = matchScore.points;
+                                activeRowIdx++;
+                            }
                         });
                     }
                 }
             });
-            wsData.columns.forEach(col => col.width = 22);
+
+            wsData.columns = [{ width: 12 }, { width: 18 }, { width: 18 }, { width: 22 }, { width: 45 }, { width: 16 }, { width: 15 }];
 
             const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer]), `QA_Feedback_Dashboard_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
+            saveAs(new Blob([buffer]), `QA_Dashboard_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
         }
     </script>
 </body>
