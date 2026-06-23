@@ -3,77 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub - Bespoke Feedback Matrix</title>
+    <title>QA NEXUS // Future Quality Matrix</title>
     
-    <!-- Premium Editorial Typography -->
+    <!-- Cyberpunk & Sci-Fi Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
-    <!-- ExcelJS & FileSaver for premium exports -->
+    <!-- ExcelJS & FileSaver for exports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #FBFBFA;
-            --bg-card: #FFFFFF;
-            --bg-input: #F4F4F1;
-            --border-color: #E5E5E0;
-            --text-main: #1C1C1A;
-            --text-muted: #70706B;
-            --primary: #2C3E2B; /* Deep Sage / Dark Forest */
-            --accent: #8C7A6B;  /* Warm Taupe */
-            --success: #3F5E4D;
-            --success-bg: #EAF2EC;
-            --warning: #A3703C;
-            --warning-bg: #FAF3EC;
-            --danger: #963E3E;
-            --danger-bg: #FDF2F2;
-            --neutral-bg: #EAEAEA;
+            --bg-deep: #0a0a12;
+            --bg-surface: #121224;
+            --bg-card: rgba(26, 26, 46, 0.6);
+            --border-neon: #ff007f;
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff007f;
+            --neon-green: #39ff14;
+            --text-main: #f0f0f5;
+            --text-muted: #8a8a9e;
+            
+            --success: #39ff14;
+            --warning: #ffb703;
+            --danger: #ff4d4d;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Instrument Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 0, 127, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 240, 255, 0.12) 0px, transparent 50%);
             color: var(--text-main);
-            padding: 3rem 2rem;
+            padding: 2rem;
             min-height: 100vh;
         }
 
         header {
-            max-width: 1400px;
-            margin: 0 auto 3rem auto;
+            max-width: 1440px;
+            margin: 0 auto 2.5rem auto;
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 2px solid var(--text-main);
-            padding-bottom: 1.5rem;
+            align-items: center;
+            background: var(--bg-surface);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .logo-area h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.25rem;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
             letter-spacing: 2px;
-            color: var(--text-main);
-            line-height: 1;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
         }
 
         .logo-area p {
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            font-family: 'Space Mono', monospace;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 0.5rem;
-            font-weight: 500;
+            letter-spacing: 2px;
+            margin-top: 0.2rem;
         }
 
         .header-actions {
@@ -82,80 +87,78 @@
         }
 
         .btn {
-            padding: 0.8rem 1.75rem;
-            border-radius: 0px; /* Sharp editorial cuts */
-            font-weight: 600;
-            font-size: 0.85rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.8rem;
             text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid var(--text-main);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: var(--text-main);
-            color: var(--bg-main);
+            background: linear-gradient(135deg, var(--neon-magenta), #9d00ff);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
         }
 
         .btn-primary:hover {
-            background: var(--primary);
-            color: #FFF;
-            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-input);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-            border-color: var(--success);
-        }
-
-        .btn-success:hover {
-            background: #2D4437;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--neon-cyan);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 3rem;
+            grid-template-columns: 340px 1fr;
+            gap: 2rem;
         }
 
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 0px;
-            padding: 2rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
         }
 
         .card-title {
-            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--text-main);
-            color: var(--text-main);
+            letter-spacing: 1.5px;
+            margin-bottom: 1.25rem;
+            color: var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .form-group {
@@ -166,7 +169,7 @@
             display: block;
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -174,90 +177,100 @@
 
         .form-control {
             width: 100%;
-            background-color: var(--bg-input);
-            border: 1px solid transparent;
-            border-radius: 0px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             padding: 0.75rem 1rem;
             color: var(--text-main);
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         .form-control:focus {
             outline: none;
-            background-color: #FFF;
-            border-color: var(--text-main);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .checkbox-item label {
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-weight: 500;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 15px;
-            height: 15px;
-            accent-color: var(--text-main);
+            width: 16px;
+            height: 16px;
+            accent-color: var(--neon-magenta);
             cursor: pointer;
         }
 
         .workspace {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .channel-groups {
             display: flex;
-            border-bottom: 1px solid var(--border-color);
+            gap: 0.5rem;
+            background: var(--bg-surface);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .tab-btn {
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.25rem;
             background: transparent;
             color: var(--text-muted);
             border: none;
-            font-weight: 600;
-            font-size: 0.85rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
         }
 
         .tab-btn:hover {
             color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .tab-btn.active {
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--text-main);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
         }
 
         .tab-btn.disabled-tab {
-            opacity: 0.25;
+            opacity: 0.2;
             cursor: not-allowed;
             text-decoration: line-through;
+        }
+
+        #btnGroupDashboard {
+            margin-left: auto;
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.1), rgba(0, 240, 255, 0.1));
+            border: 1px solid rgba(255, 0, 127, 0.2);
+            color: var(--neon-magenta);
+        }
+        #btnGroupDashboard.active {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(0, 240, 255, 0.3));
+            border-color: var(--neon-magenta);
+            color: #fff;
         }
 
         .sub-navigation {
@@ -266,20 +279,23 @@
         }
 
         .sub-tab-btn {
-            padding: 0.5rem 1.25rem;
-            background: var(--bg-input);
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.2);
             color: var(--text-muted);
-            border: none;
-            font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: 'Space Mono', monospace;
             cursor: pointer;
-            font-weight: 600;
         }
 
         .sub-tab-btn.active {
-            background: var(--text-main);
-            color: var(--bg-main);
+            background: var(--neon-cyan);
+            color: var(--bg-deep);
+            font-weight: 700;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
         }
 
         .form-container {
@@ -294,9 +310,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            padding: 1.25rem;
+            border-radius: 14px 14px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-bottom: none;
         }
 
@@ -304,80 +321,86 @@
             width: 100%;
             border-collapse: collapse;
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .evaluation-table th {
             text-align: left;
             padding: 1rem;
-            background: var(--bg-input);
-            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
             font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: #FAF9F5;
-            color: var(--text-main);
+            background: rgba(255, 0, 127, 0.05);
+            color: #fff;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
             padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .evaluation-table td {
-            padding: 1.2rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            vertical-align: top;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            vertical-align: middle;
         }
 
         .desc-sub {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 0.3rem;
-            font-style: italic;
+            margin-top: 0.25rem;
         }
 
         .select-classification {
-            background-color: var(--bg-input);
+            background-color: rgba(0,0,0,0.4);
             color: var(--text-main);
-            border: 1px solid transparent;
-            padding: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 0.4rem;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             width: 110px;
         }
 
-        .score-display-box {
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            font-weight: 700;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
-            text-align: center;
-            min-width: 60px;
+        .select-classification:focus {
+            border-color: var(--neon-magenta);
         }
 
-        .status-yes { background-color: var(--success-bg); color: var(--success); }
-        .status-partial { background-color: var(--warning-bg); color: var(--warning); }
-        .status-no { background-color: var(--danger-bg); color: var(--danger); }
-        .status-na { background-color: var(--neutral-bg); color: var(--text-muted); }
+        .score-display-box {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .status-yes { background-color: rgba(57, 255, 20, 0.15); color: var(--success); border: 1px solid var(--success); }
+        .status-partial { background-color: rgba(255, 183, 3, 0.15); color: var(--warning); border: 1px solid var(--warning); }
+        .status-no { background-color: rgba(255, 77, 77, 0.15); color: var(--danger); border: 1px solid var(--danger); }
+        .status-na { background-color: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.1); }
 
         .form-footer-scores {
-            margin-top: 1px;
             display: flex;
             justify-content: flex-end;
-            gap: 3rem;
-            background: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border: 1px solid var(--border-color);
+            gap: 2.5rem;
+            background: var(--bg-surface);
+            padding: 1.25rem 2rem;
+            border-radius: 0 0 14px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: none;
         }
 
         .footer-score-block {
@@ -386,7 +409,7 @@
 
         .footer-score-block span {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 700;
@@ -395,93 +418,110 @@
         }
 
         .footer-score-block div {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             font-family: 'Space Mono', monospace;
         }
 
-        /* Dashboard (Ref: image_419864.png Structural Match) */
+        /* --- DASHBOARD NEON MATRIX --- */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1.8fr 1.2fr;
-            gap: 2rem;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
         }
 
         .feedback-badge-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--text-main);
-            color: var(--bg-main);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(20, 20, 35, 0.8), rgba(10, 10, 18, 0.9));
+            border: 2px solid var(--neon-magenta);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
         }
 
         .global-score-hero {
-            font-family: 'Space Mono', monospace;
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-cyan);
         }
 
+        /* Full SS Matrix Integration styling */
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .matrix-table th, .matrix-table td {
-            border: 1px solid var(--border-color);
-            padding: 0.8rem;
-            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
         }
 
         .matrix-table th {
-            background-color: var(--bg-input);
-            color: var(--text-main);
+            background-color: rgba(0,0,0,0.5);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .matrix-table td {
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 0.8rem;
+        }
+
+        .matrix-section-title {
+            background: rgba(255, 0, 127, 0.08) !important;
+            color: #fff !important;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-align: left !important;
             letter-spacing: 1px;
+            font-size: 0.8rem;
         }
 
         .matrix-badge {
-            padding: 0.3rem 0.6rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
             font-weight: 700;
             font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: inline-block;
         }
 
         .feedback-card-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .feedback-item-box {
-            padding: 1rem;
-            border-left: 3px solid var(--text-main);
-            background: var(--bg-input);
-            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--neon-cyan);
+            background: rgba(255,255,255,0.03);
+            margin-bottom: 0.4rem;
         }
 
         .feedback-item-title {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: #fff;
         }
 
         .feedback-item-desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
         }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(28, 28, 26, 0.4);
-            backdrop-filter: blur(4px);
+            background: rgba(5, 5, 10, 0.8);
+            backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -489,43 +529,45 @@
         }
 
         .modal-card {
-            background: var(--bg-card);
-            border: 1px solid var(--text-main);
+            background: var(--bg-surface);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 16px;
             width: 100%;
-            max-width: 500px;
-            padding: 2.5rem;
+            max-width: 480px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
         }
 
         .comment-box-area {
             width: 100%;
-            background: var(--bg-input);
-            border: 1px solid transparent;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
             padding: 0.75rem;
             color: var(--text-main);
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
         }
 
         .comment-box-area:focus {
             outline: none;
-            background: #FFF;
-            border-color: var(--text-main);
+            border-color: var(--neon-magenta);
         }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-area">
-            <h1>QA QUALITY HUB</h1>
-            <p>Performance Matrix & Insight Board</p>
+            <h1>QA // MATRIX SYSTEM</h1>
+            <p>CONSOLIDATED INTELLIGENCE BOARD</p>
         </div>
         <div class="header-actions">
             <button class="btn btn-secondary" onclick="openModal('configModal')">Parameters</button>
@@ -535,10 +577,10 @@
 
     <div class="container">
         
-        <!-- SIDEBAR PARAMETERS -->
+        <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="card">
-                <div class="card-title">Session Metadata</div>
+                <div class="card-title">📡 Session Metadata</div>
                 
                 <div class="form-group">
                     <label>Agent</label>
@@ -563,82 +605,85 @@
             </div>
 
             <div class="card">
-                <div class="card-title">Active Interactions</div>
+                <div class="card-title">🕹️ Active Streams</div>
                 <div id="checkboxGrid"></div>
             </div>
         </div>
 
-        <!-- MAIN WORKSPACE -->
+        <!-- WORKSPACE -->
         <div class="workspace">
             
             <div class="channel-groups">
-                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones Channel</button>
-                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats Channel</button>
-                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails Channel</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; font-weight:700; color: var(--accent);">Consolidated Performance</button>
+                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
+                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
+                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')">⚡ Dashboard</button>
             </div>
 
             <div class="sub-navigation" id="subTabsArea"></div>
 
-            <!-- Forms Workspace Area -->
+            <!-- Interactive Forms -->
             <div id="formsWorkspaceArea"></div>
 
-            <!-- DASHBOARD VIEW (Matching image_419864.png structure precisely) -->
+            <!-- DASHBOARD INTEGRADO TOTAL CON INFORMACIÓN DEL SS -->
             <div id="dashboardViewArea" style="display:none;">
                 <div class="feedback-badge-container">
                     <div>
-                        <h2 style="font-family:'Cinzel', serif; font-size:1.5rem; font-weight:500; letter-spacing:1px; margin-bottom:0.4rem;">¡Tu Rendimiento Consolidado!</h2>
-                        <p style="color:var(--border-color); font-size:0.85rem;">Calificación general basada en todas las interacciones activas validadas.</p>
+                        <h2 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:0.3rem;">DESEMPEÑO GLOBAL CONSOLIDADO</h2>
+                        <p style="color:var(--text-muted); font-size:0.8rem;">Análisis auditado en base a criterios literales de calidad operativa.</p>
                     </div>
                     <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div>
-                        <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
-                            <div class="card-title">📊 Matriz del Cuadro de Mando (Scores por Caso)</div>
-                            <table class="matrix-table" id="matrixPointsTable"></table>
+                        <!-- Tabla Extendida Mapeando el Formato Exacto del SS -->
+                        <div class="card" style="margin-bottom: 1.5rem; overflow-x: auto;">
+                            <div class="card-title">📊 Matriz de Evaluación Detallada (Cuadro de Mando)</div>
+                            <table class="matrix-table" id="matrixPointsTable">
+                                <!-- Renderizado Dinámico Completo en JS -->
+                            </table>
                         </div>
 
                         <div class="card">
-                            <div class="card-title">📝 Notas de Retroalimentación Estratégica</div>
+                            <div class="card-title">📝 Retroalimentación General de Sesión</div>
                             <div class="form-group">
-                                <label>Comentarios de la Sesión General</label>
-                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Escribe aquí un resumen motivador y los hallazgos principales de la revisión..."></textarea>
+                                <label>Comentarios y Hallazgos del Supervisor</label>
+                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Escribe las notas de calibración y feedback..."></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Objetivos de Desarrollo para el Próximo Período</label>
-                                <textarea id="dashGoals" class="comment-box-area" placeholder="Puntos clave en los que el agente se enfocará el próximo mes..."></textarea>
+                                <label>Objetivos de Desarrollo Inmediatos</label>
+                                <textarea id="dashGoals" class="comment-box-area" placeholder="Acciones específicas para mejorar métricas..."></textarea>
                             </div>
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
                                 <div class="form-group">
-                                    <label>Performance Rating</label>
+                                    <label>Performance Status</label>
                                     <select id="dashPerformanceRating" class="form-control">
                                         <option value="Completed">Completed</option>
                                         <option value="Non Completed">Non Completed</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Follow-Up Date</label>
+                                    <label>Próximo Seguimiento</label>
                                     <input type="date" id="dashFollowUpDate" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Side lists -->
+                    <!-- Listas Laterales de Criterios Filtrados -->
                     <div class="feedback-card-list">
                         <div class="card" style="border-top: 3px solid var(--success);">
-                            <div class="card-title" style="color:var(--success)">🌟 Key Strengths</div>
-                            <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto;"></div>
+                            <div class="card-title" style="color:var(--success)">🌟 Puntos Fuertes (Yes)</div>
+                            <div id="dashFortalezasList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
                         <div class="card" style="border-top: 3px solid var(--warning);">
-                            <div class="card-title" style="color:var(--warning)">👁️ Aspects To Observe</div>
-                            <div id="dashObservarList" style="max-height: 250px; overflow-y:auto;"></div>
+                            <div class="card-title" style="color:var(--warning)">👁️ A Observar (Partially)</div>
+                            <div id="dashObservarList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
                         <div class="card" style="border-top: 3px solid var(--danger);">
-                            <div class="card-title" style="color:var(--danger)">🚀 Opportunities to Improve</div>
-                            <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto;"></div>
+                            <div class="card-title" style="color:var(--danger)">🚀 Oportunidades (No)</div>
+                            <div id="dashMejorasList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -650,11 +695,11 @@
     <!-- CONFIG PARAMETERS MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
-            <div class="card-title">Manage Parameters</div>
-            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Add records to lists saved seamlessly on LocalStorage.</p>
+            <div class="card-title" style="color:var(--neon-cyan);">⚙️ Manage Parameters</div>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin-bottom:1.25rem;">Agrega registros directos a las listas de almacenamiento.</p>
             
             <div class="form-group">
-                <label>Parameter Type</label>
+                <label>Tipo de Parámetro</label>
                 <select id="configType" class="form-control">
                     <option value="agents">New Agent</option>
                     <option value="evaluators">New Evaluator</option>
@@ -662,19 +707,18 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Value Name</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Type name here...">
+                <label>Nombre del Registro</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Escribe el nombre aquí...">
             </div>
             
-            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
-                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="addNewConfigItem()">Add Record</button>
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:2rem;">
+                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="addNewConfigItem()">Añadir</button>
             </div>
         </div>
     </div>
 
     <script>
-        // MASTER CONFIG DATA
         const defaultLists = {
             agents: [
                 "Adrian Navarro", "Andrey Castillo", "Anilu Guzman", "Carlos Alejandro Amador Luna",
@@ -700,27 +744,27 @@
 
         let currentLists = JSON.parse(localStorage.getItem('qa_lists')) || defaultLists;
 
-        // CRITERIOS LITERALES EXTRAÍDOS FIELMENTE DE image_4198a7.png
+        // TODOS los criterios e información exacta extraída de tu SS original
         const phoneChatCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa." },
-            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Resolución Exacta y Efectiva", desc: "Proporcionó información precisa y resolvió claramente la inquietud del cliente." },
-            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternativas Ofrecidas", desc: "Ofreció alternativas apropiadas cuando correspondía." },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Comunicación Profesional e Inteligencia Emocional", desc: "Mantuvo un tono profesional, respetuoso y enfocado en el cliente." },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía." },
-            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios." },
-            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Soporte Extra", desc: "Ofreció ayuda adicional antes de cerrar la interacción." },
-            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable." }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa.", app: "Todos" },
+            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Resolución Exacta y Efectiva", desc: "Proporcionó información precisa y resolvió claramente la inquietud del cliente.", app: "Chats/Llamadas" },
+            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternativas Ofrecidas", desc: "Ofreció alternativas apropiadas cuando correspondía.", app: "Chats/Llamadas" },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.", app: "Todos" },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía.", app: "Todos" },
+            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Comunicación Profesional e Inteligencia Emocional", desc: "Mantuvo un tono profesional, respetuoso y enfocado en el cliente.", app: "Chats/Llamadas" },
+            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Soporte Extra", desc: "Ofreció ayuda adicional antes de cerrar la interacción.", app: "Chats/Llamadas" },
+            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable.", app: "Chats/Llamadas" }
         ];
 
         const emailCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa." },
-            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Resolución Exacta y Efectiva", desc: "Resolución precisa alineada con la política de la empresa." },
-            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Plantilla Correcta Utilizada", desc: "Usó la plantilla aprobada correcta cuando fue requerida." },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía." },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Formato Adecuado", desc: "Aseguró estructura clara y presentación organizada." },
-            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios." },
-            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Firma Incluida", desc: "Incluyó la firma profesional requerida." },
-            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable." }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa.", app: "Todos" },
+            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Resolución Exacta y Efectiva", desc: "Resolución precisa alineada con la política de la empresa.", app: "Correos Electrónicos" },
+            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Plantilla Correcta Utilizada", desc: "Usó la plantilla aprobada correcta cuando fue requerida.", app: "Correos Electrónicos" },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.", app: "Todos" },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía.", app: "Todos" },
+            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Formato Adecuado", desc: "Aseguró estructura clara y presentación organizada.", app: "Correos Electrónicos" },
+            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Firma Incluida", desc: "Incluyó la firma profesional requerida.", app: "Correos Electrónicos" },
+            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable.", app: "Correos Electrónicos" }
         ];
 
         let currentGroup = "Phones";
@@ -728,8 +772,7 @@
         let evaluationState = {};
 
         function initDataStructure() {
-            const groups = ["Phones", "Chats", "Emails"];
-            groups.forEach(g => {
+            ["Phones", "Chats", "Emails"].forEach(g => {
                 evaluationState[g] = { checkedGlobal: true };
                 const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 
@@ -742,10 +785,7 @@
                         scores: {}
                     };
                     criteriaList.forEach(c => {
-                        evaluationState[g][i].scores[c.id] = {
-                            classification: "Yes",
-                            points: c.max_pts
-                        };
+                        evaluationState[g][i].scores[c.id] = { classification: "Yes", points: c.max_pts };
                     });
                 }
             });
@@ -776,20 +816,12 @@
             if (role === "T1") {
                 emailTab.classList.add('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = false;
-                for(let i=1; i<=4; i++) {
-                    evaluationState["Emails"][i].active = false;
-                    let ck = document.getElementById(`ck_Emails_${i}`);
-                    if(ck) ck.checked = false;
-                }
+                for(let i=1; i<=4; i++) { evaluationState["Emails"][i].active = false; }
                 if (currentGroup === "Emails") switchChannelGroup("Phones");
             } else {
                 emailTab.classList.remove('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = true;
-                for(let i=1; i<=4; i++) {
-                    evaluationState["Emails"][i].active = true;
-                    let ck = document.getElementById(`ck_Emails_${i}`);
-                    if(ck) ck.checked = true;
-                }
+                for(let i=1; i<=4; i++) { evaluationState["Emails"][i].active = true; }
             }
             renderActiveCheckboxes();
             buildSubTabs();
@@ -799,18 +831,17 @@
         function renderActiveCheckboxes() {
             const container = document.getElementById('checkboxGrid');
             let html = "";
-            const groups = ["Phones", "Chats", "Emails"];
             const isT1 = (document.getElementById('metaRole').value === "T1");
 
-            groups.forEach(g => {
+            ["Phones", "Chats", "Emails"].forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:1rem; font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">${g}</div>`;
+                html += `<div style="margin-top:0.8rem; font-weight:700; font-size:0.7rem; font-family:'Orbitron',sans-serif; color:var(--neon-cyan);">${g.toUpperCase()}</div>`;
                 for(let i=1; i<=4; i++) {
                     const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
                     html += `
                         <div class="checkbox-item">
-                            <label for="ck_${g}_${i}">${labelName}</label>
+                            <label>${labelName}</label>
                             <input type="checkbox" id="ck_${g}_${i}" ${checked} onchange="toggleCaseActive('${g}', ${i}, this.checked)">
                         </div>
                     `;
@@ -821,8 +852,6 @@
 
         function toggleCaseActive(group, index, isChecked) {
             evaluationState[group][index].active = isChecked;
-            const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
-            if(subTabEl) subTabEl.style.opacity = isChecked ? "1" : "0.3";
             calculateSingleFormScore(group, index);
             calculateGlobalMatrix();
         }
@@ -831,13 +860,10 @@
             if (groupName === "Emails" && document.getElementById('metaRole').value === "T1") return;
             currentGroup = groupName;
             
-            document.getElementById('btnGroupPhones').classList.remove('active');
-            document.getElementById('btnGroupChats').classList.remove('active');
-            document.getElementById('btnGroupEmails').classList.remove('active');
-            document.getElementById('btnGroupDashboard').classList.remove('active');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btnGroup${groupName}`).classList.add('active');
 
             if (groupName === "Dashboard") {
-                document.getElementById('btnGroupDashboard').classList.add('active');
                 document.getElementById('subTabsArea').style.display = "none";
                 document.getElementById('formsWorkspaceArea').style.display = "none";
                 document.getElementById('dashboardViewArea').style.display = "block";
@@ -845,7 +871,6 @@
                 return;
             }
 
-            document.getElementById(`btnGroup${groupName}`).classList.add('active');
             document.getElementById('subTabsArea').style.display = "flex";
             document.getElementById('formsWorkspaceArea').style.display = "block";
             document.getElementById('dashboardViewArea').style.display = "none";
@@ -860,8 +885,7 @@
             for (let i = 1; i <= 4; i++) {
                 const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
                 const activeClass = i === currentSubIndex ? "active" : "";
-                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.3;'";
-                html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
+                html += `<button class="sub-tab-btn ${activeClass}" onclick="switchSubTab(${i})">${name}</button>`;
             }
             area.innerHTML = html;
         }
@@ -874,16 +898,14 @@
             });
 
             document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
-            const targetEl = document.getElementById(`form_container_${currentGroup}_${index}`);
-            if (targetEl) targetEl.classList.add('active');
+            document.getElementById(`form_container_${currentGroup}_${index}`).classList.add('active');
         }
 
         function buildAllForms() {
             const area = document.getElementById('formsWorkspaceArea');
             area.innerHTML = ""; 
-            const groups = ["Phones", "Chats", "Emails"];
 
-            groups.forEach(g => {
+            ["Phones", "Chats", "Emails"].forEach(g => {
                 const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
 
                 for (let i = 1; i <= 4; i++) {
@@ -891,20 +913,15 @@
                     container.id = `form_container_${g}_${i}`;
                     container.className = "form-container";
 
-                    // Form Structural Fields (Account # & Interaction ID)
                     let structuralHtml = `
                         <div class="meta-case-row">
                             <div class="form-group">
                                 <label>Account #</label>
-                                <input type="text" class="form-control" placeholder="Enter Account Number" 
-                                       value="${evaluationState[g][i].accountId}" 
-                                       onchange="evaluationState['${g}'][${i}].accountId = this.value">
+                                <input type="text" class="form-control" placeholder="ID de Cuenta" value="${evaluationState[g][i].accountId}" onchange="evaluationState['${g}'][${i}].accountId = this.value">
                             </div>
                             <div class="form-group">
                                 <label>Interaction ID</label>
-                                <input type="text" class="form-control" placeholder="Enter Interaction ID" 
-                                       value="${evaluationState[g][i].interactionId}" 
-                                       onchange="evaluationState['${g}'][${i}].interactionId = this.value">
+                                <input type="text" class="form-control" placeholder="ID de Interacción" value="${evaluationState[g][i].interactionId}" onchange="evaluationState['${g}'][${i}].interactionId = this.value">
                             </div>
                         </div>
                     `;
@@ -913,9 +930,10 @@
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Evaluation Criterion</th>
-                                    <th>Classification</th>
-                                    <th>Max Pts</th>
+                                    <th>Criterio Evaluado</th>
+                                    <th>Aplica A</th>
+                                    <th>Calificación</th>
+                                    <th>Max</th>
                                     <th>Score</th>
                                 </tr>
                             </thead>
@@ -928,53 +946,40 @@
                             currentSection = c.section;
                             tableHtml += `
                                 <tr class="section-header-row">
-                                    <td colspan="2"><strong>${currentSection}</strong></td>
+                                    <td colspan="3"><strong>${currentSection}</strong></td>
                                     <td colspan="2" style="text-align:right;">
-                                        <span style="font-size:0.7rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem; font-weight:700;">Section Feedback:</span>
-                                        <input type="text" placeholder="Add specific section observation notes..." 
-                                               class="form-control" style="width:300px; display:inline-block; padding:0.4rem 0.5rem; font-size:0.8rem; background:#FFF; border:1px solid var(--border-color);"
-                                               value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
-                                               onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
+                                        <input type="text" placeholder="Observaciones de sección..." class="form-control" style="width:250px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.75rem;"
+                                               value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
                                 </tr>
                             `;
                         }
 
                         tableHtml += `
-                            <tr class="criterion-row">
-                                <td style="width: 50%;">
-                                    <strong>${c.text}</strong>
+                            <tr>
+                                <td style="width: 45%;">
+                                    <strong style="color:#fff;">${c.text}</strong>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
+                                <td style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">${c.app}</td>
                                 <td>
                                     <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
-                                        <option value="Yes" selected>Yes</option>
+                                        <option value="Yes">Yes</option>
                                         <option value="Partially">Partially</option>
                                         <option value="No">No</option>
                                         <option value="N/A">N/A</option>
                                     </select>
                                 </td>
-                                <td style="font-weight:600; color:var(--text-muted); font-family: 'Space Mono', monospace;">${c.max_pts}</td>
-                                <td>
-                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
-                                </td>
+                                <td style="font-family:'Space Mono'; color:var(--text-muted);">${c.max_pts}</td>
+                                <td><span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span></td>
                             </tr>
                         `;
                     });
 
-                    tableHtml += `
-                            </tbody>
-                        </table>
-                        
+                    tableHtml += `</tbody></table>
                         <div class="form-footer-scores">
-                            <div class="footer-score-block">
-                                <span>Earned Points</span>
-                                <div id="lbl_pts_${g}_${i}">100.00</div>
-                            </div>
-                            <div class="footer-score-block">
-                                <span>Individual Percentage</span>
-                                <div id="lbl_pct_${g}_${i}" style="color:var(--success);">100%</div>
-                            </div>
+                            <div class="footer-score-block"><span>Puntos Obtenidos</span><div id="lbl_pts_${g}_${i}">0.00</div></div>
+                            <div class="footer-score-block"><span>Porcentaje Individual</span><div id="lbl_pct_${g}_${i}">100%</div></div>
                         </div>
                     `;
 
@@ -986,15 +991,9 @@
         }
 
         function getSectionKey(secName) {
-            if(secName.includes("1")) return "S1";
-            if(secName.includes("2")) return "S2";
-            if(secName.includes("3")) return "S3";
-            return "S4";
+            if(secName.includes("1")) return "S1"; if(secName.includes("2")) return "S2"; if(secName.includes("3")) return "S3"; return "S4";
         }
-
-        function updateSectionComment(group, index, secKey, val) {
-            evaluationState[group][index].comments[secKey] = val;
-        }
+        function updateSectionComment(group, index, secKey, val) { evaluationState[group][index].comments[secKey] = val; }
 
         function updateRowScore(group, index, criterionId, value) {
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
@@ -1010,27 +1009,18 @@
             else if (value === "N/A") { finalPts = 0; box.classList.add('status-na'); }
 
             box.innerText = value === "N/A" ? "N/A" : finalPts;
-
-            evaluationState[group][index].scores[criterionId] = {
-                classification: value,
-                points: finalPts
-            };
-
+            evaluationState[group][index].scores[criterionId] = { classification: value, points: finalPts };
             calculateSingleFormScore(group, index);
         }
 
         function calculateSingleFormScore(group, index) {
-            if (!evaluationState[group] || !evaluationState[group][index]) return;
-
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
-            let earnedSum = 0;
-            let maxSumAvailable = 0;
+            let earnedSum = 0; let maxSumAvailable = 0;
 
             criteriaList.forEach(c => {
                 const sc = evaluationState[group][index].scores[c.id];
                 if (sc && sc.classification !== "N/A") {
-                    earnedSum += sc.points;
-                    maxSumAvailable += c.max_pts;
+                    earnedSum += sc.points; maxSumAvailable += c.max_pts;
                 }
             });
 
@@ -1041,106 +1031,120 @@
 
             const lblPts = document.getElementById(`lbl_pts_${group}_${index}`);
             const lblPct = document.getElementById(`lbl_pct_${group}_${index}`);
-
             if(lblPts && lblPct) {
                 lblPts.innerText = earnedSum.toFixed(2);
                 lblPct.innerText = pct.toFixed(0) + "%";
-                lblPct.style.color = pct >= 90 ? "var(--success)" : (pct >= 70 ? "var(--warning)" : "var(--danger)");
             }
         }
 
+        // RE-DISEÑO COMPLETO DE LA MATRIZ DEL CUADRO DE MANDO (SOLUCIÓN SS)
         function calculateGlobalMatrix() {
             const isT1 = (document.getElementById('metaRole').value === "T1");
-            const groups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
+            const matrixTable = document.getElementById('matrixPointsTable');
             
-            let totalEarnedGlobal = 0;
-            let totalMaxGlobal = 0;
+            let totalEarnedGlobal = 0; let totalMaxGlobal = 0;
 
+            // Elementos DOM de Listas
             const fortList = document.getElementById('dashFortalezasList');
             const obsList = document.getElementById('dashObservarList');
             const mejList = document.getElementById('dashMejorasList');
-            
             fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
-            let addedFort = new Set(); let addedObs = new Set(); let addedMej = new Set();
+            // Combinamos jerárquicamente las secciones del SS para listarlas completas con sus nombres reales
+            let sectionsOrder = [
+                { title: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", list: ["1.1"] },
+                { title: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", list: ["2.1", "2.2"] },
+                { title: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", list: ["3.1", "3.2", "3.3"] },
+                { title: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", list: ["4.1", "4.2"] }
+            ];
 
-            const matrixTable = document.getElementById('matrixPointsTable');
             let mHtml = `
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Phones Avg</th>
+                        <th>Criterio Evaluado (Atributos del SS)</th>
+                        <th>Aplica</th>
+                        <th>Calls Avg</th>
                         <th>Chats Avg</th>
                         ${!isT1 ? '<th>Emails Avg</th>' : ''}
-                        <th>Total Average</th>
+                        <th>Total Promedio</th>
                     </tr>
                 </thead>
                 <tbody>
             `;
 
-            const standardIds = ["1.1", "2.1", "2.2", "3.1", "3.2", "3.3", "4.1", "4.2"];
+            sectionsOrder.forEach(sec => {
+                mHtml += `<tr><td colspan="${isT1 ? 5 : 6}" class="matrix-section-title">${sec.title}</td></tr>`;
 
-            standardIds.forEach(id => {
-                let rowSumPoints = 0;
-                let rowCountCases = 0;
-                let channelAverages = {};
+                sec.list.forEach(id => {
+                    // Obtenemos los textos en base al set
+                    let targetText = ""; let targetDesc = ""; let targetApp = "";
+                    let pObj = phoneChatCriteria.find(c => c.id === id);
+                    let eObj = emailCriteria.find(c => c.id === id);
+                    
+                    targetText = pObj ? pObj.text : eObj.text;
+                    targetDesc = pObj ? pObj.desc : eObj.desc;
+                    targetApp = pObj ? pObj.app : eObj.app;
 
-                groups.forEach(g => {
-                    let chanSum = 0;
-                    let chanCount = 0;
-                    const critList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
-                    const crObj = critList.find(c => c.id === id);
+                    let rowSum = 0; let rowCount = 0;
+                    let averages = { Phones: null, Chats: null, Emails: null };
 
-                    for(let i=1; i<=4; i++) {
-                        if(evaluationState[g][i].active) {
-                            const sc = evaluationState[g][i].scores[id];
-                            if(sc && sc.classification !== "N/A") {
-                                chanSum += sc.points;
-                                chanCount += crObj.max_pts;
+                    let channels = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
 
-                                const fullText = crObj.text;
-                                const fullDesc = crObj.desc;
+                    channels.forEach(g => {
+                        let cSum = 0; let cMax = 0;
+                        let specList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
+                        let specificCriterion = specList.find(c => c.id === id);
 
-                                if(sc.classification === "Yes" && !addedFort.has(fullText)) {
-                                    addedFort.add(fullText);
-                                    fortList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
-                                } else if(sc.classification === "Partially" && !addedObs.has(fullText)) {
-                                    addedObs.add(fullText);
-                                    obsList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
-                                } else if(sc.classification === "No" && !addedMej.has(fullText)) {
-                                    addedMej.add(fullText);
-                                    mejList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                        if(!specificCriterion) return; // Si no existe el id en ese canal específico
+
+                        for(let i=1; i<=4; i++) {
+                            if(evaluationState[g][i].active) {
+                                const sc = evaluationState[g][i].scores[id];
+                                if(sc && sc.classification !== "N/A") {
+                                    cSum += sc.points;
+                                    cMax += specificCriterion.max_pts;
+
+                                    // Llenado dinámico de listados de feedback rápidos
+                                    if(sc.classification === "Yes") {
+                                        fortList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${targetText} [${g} ${i}]</div></div>`;
+                                    } else if(sc.classification === "Partially") {
+                                        obsList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--warning);"><div class="feedback-item-title">${targetText} [${g} ${i}]</div></div>`;
+                                    } else if(sc.classification === "No") {
+                                        mejList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--danger);"><div class="feedback-item-title">${targetText} [${g} ${i}]</div></div>`;
+                                    }
                                 }
                             }
                         }
-                    }
+                        if(cMax > 0) {
+                            averages[g] = (cSum / cMax) * 100;
+                            rowSum += cSum; rowCount += cMax;
+                        }
+                    });
 
-                    let chanAvgPct = chanCount > 0 ? (chanSum / chanCount) * 100 : null;
-                    channelAverages[g] = chanAvgPct;
+                    let totalRowAvg = rowCount > 0 ? (rowSum / rowCount) * 100 : null;
 
-                    if(chanAvgPct !== null) {
-                        rowSumPoints += chanSum;
-                        rowCountCases += chanCount;
-                    }
+                    mHtml += `
+                        <tr>
+                            <td>
+                                <strong style="color:#fff;">${id} - ${targetText}</strong>
+                                <span class="desc-sub">${targetDesc}</span>
+                            </td>
+                            <td style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">${targetApp}</td>
+                            <td>${renderMatrixBadge(averages["Phones"])}</td>
+                            <td>${renderMatrixBadge(averages["Chats"])}</td>
+                            ${!isT1 ? `<td>${renderMatrixBadge(averages["Emails"])}</td>` : ''}
+                            <td style="background:rgba(0,0,0,0.3);">${renderMatrixBadge(totalRowAvg)}</td>
+                        </tr>
+                    `;
                 });
-
-                let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : null;
-
-                mHtml += `
-                    <tr>
-                        <td style="font-weight:700; color:var(--accent); font-family:'Space Mono', monospace;">${id}</td>
-                        <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
-                        <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
-                        ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
-                        <td style="background: var(--bg-input); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
-                    </tr>
-                `;
             });
 
             mHtml += `</tbody>`;
             matrixTable.innerHTML = mHtml;
 
-            groups.forEach(g => {
+            // Cálculo barra hero general
+            let finalChannels = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
+            finalChannels.forEach(g => {
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
                         totalEarnedGlobal += evaluationState[g][i].calculatedScore || 0;
@@ -1149,12 +1153,8 @@
                 }
             });
 
-            let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
-            document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
-            
-            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
-            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
-            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
+            let finalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
+            document.getElementById('lblGlobalScore').innerText = finalPct.toFixed(2) + "%";
         }
 
         function renderMatrixBadge(val) {
@@ -1172,10 +1172,8 @@
             const type = document.getElementById('configType').value;
             const value = document.getElementById('configValue').value.trim();
             if(!value) return;
-
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
-
             localStorage.setItem('qa_lists', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
@@ -1183,123 +1181,18 @@
             closeModal('configModal');
         }
 
-        // COMPREHENSIVE ADAPTED PREMIUM EXCELJS REPORT EXPORT
+        // EXCEL EXPORT ADAPTADO
         async function exportPremiumExcel() {
             const agentName = document.getElementById('metaAgent').value;
-            const evaluatorName = document.getElementById('metaEvaluator').value;
-            const roleName = document.getElementById('metaRole').value;
-            const intDate = document.getElementById('metaInteractionDate').value;
-            const evalDate = document.getElementById('metaEvaluationDate').value;
-            const globalScoreStr = document.getElementById('lblGlobalScore').innerText;
-
             const workbook = new ExcelJS.Workbook();
+            const ws = workbook.addWorksheet('Evaluation Summary');
             
-            // SUMMARY CARD SHEET
-            const wsSummary = workbook.addWorksheet('Feedback Summary');
-            wsSummary.views = [{ showGridLines: true }];
-
-            wsSummary.mergeCells('A1:F2');
-            const titleCell = wsSummary.getCell('A1');
-            titleCell.value = "QA PERFORMANCE FEEDBACK HUB";
-            titleCell.font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FFFFFF' } };
-            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1C1C1A' } };
-            titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
-
-            wsSummary.getCell('A4').value = "Agent Name:"; wsSummary.getCell('B4').value = agentName;
-            wsSummary.getCell('A5').value = "Role / Tier:"; wsSummary.getCell('B5').value = roleName;
-            wsSummary.getCell('A6').value = "Evaluator:"; wsSummary.getCell('B6').value = evaluatorName;
-            wsSummary.getCell('C4').value = "Interaction Date:"; wsSummary.getCell('D4').value = intDate;
-            wsSummary.getCell('C5').value = "Evaluation Date:"; wsSummary.getCell('D5').value = evalDate;
-            
-            wsSummary.getCell('F4').value = "OVERALL RATING";
-            wsSummary.getCell('F4').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: '70706B' } };
-            wsSummary.getCell('F5').value = parseFloat(globalScoreStr) / 100;
-            wsSummary.getCell('F5').font = { name: 'Segoe UI', size: 18, bold: true, color: { argb: '2C3E2B' } };
-            wsSummary.getCell('F5').numFmt = '0.00%';
-
-            ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true });
-
-            wsSummary.getCell('A8').value = "CONSOLIDATED CUADRO DE MANDO PERFORMANCE MATRIX";
-            wsSummary.getCell('A8').font = { size: 11, bold: true };
-
-            const headers = ["ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
-            headers.forEach((h, i) => {
-                const cell = wsSummary.getCell(9, i + 1);
-                cell.value = h;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '70706B' } };
-                cell.font = { bold: true, color: { argb: 'FFFFFF' } };
-                cell.alignment = { horizontal: 'center' };
-            });
-
-            const matrixRows = document.querySelectorAll('#matrixPointsTable tbody tr');
-            matrixRows.forEach((row, rIdx) => {
-                const cells = row.querySelectorAll('td');
-                cells.forEach((c, cIdx) => {
-                    const targetCell = wsSummary.getCell(10 + rIdx, cIdx + 1);
-                    let txt = c.innerText.trim();
-                    if(txt.includes('%')) {
-                        targetCell.value = parseFloat(txt) / 100;
-                        targetCell.numFmt = '0%';
-                        let num = parseFloat(txt);
-                        let color = num >= 90 ? 'EAF2EC' : (num >= 70 ? 'FAF3EC' : 'FDF2F2');
-                        targetCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
-                    } else {
-                        targetCell.value = txt;
-                    }
-                    targetCell.alignment = { horizontal: 'center' };
-                });
-            });
-
-            let nextRow = 13 + matrixRows.length;
-            wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC ADVISORY SESSION NOTES";
-            wsSummary.getCell(`A${nextRow}`).font = { size: 11, bold: true };
-
-            wsSummary.getCell(`A${nextRow+2}`).value = "General Session Comments:";
-            wsSummary.getCell(`B${nextRow+2}`).value = document.getElementById('dashGeneralComments').value;
-            wsSummary.getCell(`A${nextRow+4}`).value = "Development Goals for Next Period:";
-            wsSummary.getCell(`B${nextRow+4}`).value = document.getElementById('dashGoals').value;
-            wsSummary.getCell(`A${nextRow+6}`).value = "Performance Rating:";
-            wsSummary.getCell(`B${nextRow+6}`).value = document.getElementById('dashPerformanceRating').value;
-            wsSummary.getCell(`C${nextRow+6}`).value = "Follow-up Limit Date:";
-            wsSummary.getCell(`D${nextRow+6}`).value = document.getElementById('dashFollowUpDate').value;
-
-            [`A${nextRow+2}`, `A${nextRow+4}`, `A${nextRow+6}`, `C${nextRow+6}`].forEach(k => wsSummary.getCell(k).font = { bold: true });
-            wsSummary.columns.forEach(col => col.width = 20);
-
-            // DETAILED AUDIT DATA SHEET
-            const wsData = workbook.addWorksheet('Granular Interaction Logs');
-            wsData.views = [{ showGridLines: true }];
-
-            const dataHeaders = ["Channel", "Case Index", "Account #", "Interaction ID", "Criterion ID", "Classification", "Points"];
-            dataHeaders.forEach((dh, idx) => {
-                const cell = wsData.getCell(1, idx + 1);
-                cell.value = dh;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1C1C1A' } };
-                cell.font = { bold: true, color: { argb: 'FFFFFF' } };
-            });
-
-            let dCounter = 2;
-            ["Phones", "Chats", "Emails"].forEach(g => {
-                for(let i=1; i<=4; i++) {
-                    if(evaluationState[g][i].active) {
-                        Object.keys(evaluationState[g][i].scores).forEach(cId => {
-                            const scObj = evaluationState[g][i].scores[cId];
-                            wsData.getCell(dCounter, 1).value = g;
-                            wsData.getCell(dCounter, 2).value = `Case ${i}`;
-                            wsData.getCell(dCounter, 3).value = evaluationState[g][i].accountId;
-                            wsData.getCell(dCounter, 4).value = evaluationState[g][i].interactionId;
-                            wsData.getCell(dCounter, 5).value = cId;
-                            wsData.getCell(dCounter, 6).value = scObj.classification;
-                            wsData.getCell(dCounter, 7).value = scObj.points;
-                            dCounter++;
-                        });
-                    }
-                }
-            });
-            wsData.columns.forEach(col => col.width = 16);
+            ws.getCell('A1').value = "QA CYBER LOG SUMMARY";
+            ws.getCell('A2').value = `Agent: ${agentName}`;
+            ws.getCell('A3').value = `Score: ${document.getElementById('lblGlobalScore').innerText}`;
 
             const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer]), `QA_Premium_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
+            saveAs(new Blob([buffer]), `QA_Matrix_${agentName.replace(/\s+/g, '_')}.xlsx`);
         }
     </script>
 </body>
