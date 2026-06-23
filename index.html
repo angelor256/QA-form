@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Performance Dashboard // Home & Matrix Edition</title>
+    <title>QA Performance Dashboard // Home & Matrix Complete</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
@@ -162,12 +160,6 @@
         .nav-btn.dash-toggle.active {
             background: var(--accent-btn);
             color: white;
-        }
-
-        .nav-btn.disabled-tab {
-            opacity: 0.3;
-            cursor: not-allowed;
-            text-decoration: line-through;
         }
 
         .nav-divider {
@@ -342,6 +334,7 @@
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 700;
+            display: inline-block;
         }
 
         .status-yes { background: var(--success); color: var(--success-txt); }
@@ -406,6 +399,7 @@
             text-transform: uppercase;
             padding: 1rem;
             border: 1px solid var(--border-color);
+            text-align: left;
         }
 
         .matrix-table td {
@@ -418,8 +412,9 @@
             background: #fdf8f2 !important;
             color: var(--text-main) !important;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            padding: 1rem !important;
         }
 
         .feedback-spanish-grid {
@@ -465,21 +460,12 @@
             margin-top: 2rem;
         }
 
-        .comment-box-area {
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-outer);
-            padding: 1rem;
-            font-size: 0.85rem;
-        }
-
         .form-container { display: none; }
         .form-container.active { display: block; }
     </style>
 </head>
 <body>
 
-    <!-- TOP NAVIGATION BAR (With new Home Button) -->
     <div class="top-navbar" id="globalNavbar">
         <div class="nav-container">
             <button class="nav-btn home-btn" onclick="navigateToView('welcome')">🏠 Home</button>
@@ -492,10 +478,8 @@
         </div>
     </div>
 
-    <!-- MAIN SPA WRAPPER -->
     <div class="app-view-container" id="mainAppSlider">
         
-        <!-- PÁGINA 1: HOME/WELCOME -->
         <div class="view-section welcome-view">
             <div class="welcome-hero">
                 <h1>Welcome to your<br>QA Performance Dashboard</h1>
@@ -507,13 +491,11 @@
             </div>
         </div>
 
-        <!-- PÁGINA 2: EVALUATION FORMS -->
         <div class="view-section">
             <div class="main-wrapper">
                 <div class="premium-card-layout">
                     <div class="evaluation-layout-grid">
                         
-                        <!-- SIDEBAR -->
                         <div class="meta-sidebar">
                             <div class="section-mini-title">Session Profiles</div>
                             <div class="form-group">
@@ -536,7 +518,6 @@
                             <div id="checkboxGrid"></div>
                         </div>
 
-                        <!-- CHANNELS SLIDER -->
                         <div class="channels-slider-window">
                             <div class="sub-navigation" id="subTabsArea"></div>
                             <div class="channels-slider-track" id="channelsTrack">
@@ -551,7 +532,6 @@
             </div>
         </div>
 
-        <!-- PÁGINA 3: DASHBOARD (100% ASIGNADO A IMAGE_437102.PNG) -->
         <div class="view-section">
             <div class="main-wrapper" id="pdfExportContainer">
                 <div class="premium-card-layout">
@@ -564,15 +544,12 @@
                         <div class="global-score-display" id="lblGlobalScore">100.00%</div>
                     </div>
 
-                    <!-- MATRIZ DETALLADA CON CONTENIDO DE IMAGE_437102.PNG -->
                     <div style="margin-bottom: 3rem;">
                         <div class="section-mini-title" style="color:var(--text-main); font-size:0.85rem; margin-bottom:1.5rem;">📊 Matriz del Cuadro de Mando Oficial</div>
                         <table class="matrix-table" id="matrixPointsTable">
-                            <!-- Inyectado dinámicamente con los datos de image_437102.png -->
-                        </table>
+                            </table>
                     </div>
 
-                    <!-- HALLAZGOS -->
                     <div class="feedback-spanish-grid">
                         <div class="feedback-column" style="border-top: 4px solid #b2cbb2;">
                             <h3 style="color: var(--success-txt); font-size:0.85rem; margin-bottom:1rem;">FORTALEZAS (YES)</h3>
@@ -605,7 +582,7 @@
             roles: ["Standard Profile", "T1"]
         };
 
-        // Criterios unificados basados exactamente en image_437102.png
+        // Datos estructurales basados en image_437102.png
         const officialMatrixData = [
             { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", channel: "Todos", text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa.", max_pts: 5 },
             
@@ -635,7 +612,6 @@
                 for(let i=1; i<=4; i++) {
                     evaluationState[g][i] = { active: true, accountId: "", interactionId: "", scores: {} };
                     officialMatrixData.forEach(c => {
-                        // Mapeo selectivo por canales para no sobrecargar formularios
                         if (g === "Emails" && (c.channel === "Todos" || c.channel === "Correos Electrónicos")) {
                             evaluationState[g][i].scores[c.id] = { classification: "Yes", points: c.max_pts };
                         } else if ((g === "Phones" || g === "Chats") && (c.channel === "Todos" || c.channel === "Chats/Llamadas")) {
@@ -652,6 +628,7 @@
             document.getElementById('metaInteractionDate').valueAsDate = new Date();
             renderActiveCheckboxes();
             buildAllForms();
+            calculateGlobalMatrix(); // Asegurar datos iniciales
         };
 
         function navigateToView(viewTarget) {
@@ -716,13 +693,11 @@
             if(targetBtn) targetBtn.classList.add('active');
 
             if (groupName === "Dashboard") {
-                navigateToView('dash');
                 calculateGlobalMatrix();
                 return;
             }
 
             const internalTrack = document.getElementById('channelsTrack');
-            document.getElementById('mainAppSlider').style.transform = "translateX(-100vw)";
             if(groupName === "Phones") internalTrack.style.transform = "translateX(0vw)";
             if(groupName === "Chats") internalTrack.style.transform = "translateX(-33.333vw)";
             if(groupName === "Emails") internalTrack.style.transform = "translateX(-66.666vw)";
@@ -778,7 +753,6 @@
 
                     let currentSection = "";
                     officialMatrixData.forEach(c => {
-                        // Filtrar los que pertenecen al canal correcto
                         if (g === "Emails" && (c.channel !== "Todos" && c.channel !== "Correos Electrónicos")) return;
                         if ((g === "Phones" || g === "Chats") && (c.channel !== "Todos" && c.channel !== "Chats/Llamadas")) return;
 
@@ -833,6 +807,7 @@
             box.innerText = value === "N/A" ? "N/A" : finalPts;
             evaluationState[group][index].scores[criterionId] = { classification: value, points: finalPts };
             calculateSingleFormScore(group, index);
+            calculateGlobalMatrix();
         }
 
         function calculateSingleFormScore(group, index) {
@@ -861,12 +836,17 @@
         function calculateGlobalMatrix() {
             const isT1 = (document.getElementById('metaRole').value === "T1");
             const matrixTable = document.getElementById('matrixPointsTable');
+            if(!matrixTable) return;
+
             let totalEarnedGlobal = 0; let totalMaxGlobal = 0;
 
             const fortList = document.getElementById('dashFortalezasList');
             const obsList = document.getElementById('dashObservarList');
             const mejList = document.getElementById('dashMejorasList');
-            fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
+            
+            if(fortList) fortList.innerHTML = ""; 
+            if(obsList) obsList.innerHTML = ""; 
+            if(mejList) mejList.innerHTML = "";
 
             let mHtml = `
                 <thead>
@@ -905,10 +885,10 @@
                                     cSum += sc.points;
                                     cMax += c.max_pts;
 
-                                    let tag = `<b>${c.text}</b> (En ${g} ${i})`;
-                                    if(sc.classification === "Yes" && !fortList.innerHTML.includes(tag)) fortList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--success-txt)">${tag}</div>`;
-                                    if(sc.classification === "Partially" && !obsList.innerHTML.includes(tag)) obsList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--warning-txt)">${tag}</div>`;
-                                    if(sc.classification === "No" && !mejList.innerHTML.includes(tag)) mejList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--danger-txt)">${tag}</div>`;
+                                    let tag = `<b>${c.text}</b> (${g === 'Phones' ? 'Llamada' : g === 'Chats' ? 'Chat' : 'Correo'} ${i})`;
+                                    if(sc.classification === "Yes" && fortList && !fortList.innerHTML.includes(tag)) fortList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--success-txt)">${tag}</div>`;
+                                    if(sc.classification === "Partially" && obsList && !obsList.innerHTML.includes(tag)) obsList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--warning-txt)">${tag}</div>`;
+                                    if(sc.classification === "No" && mejList && !mejList.innerHTML.includes(tag)) mejList.innerHTML += `<div class="feedback-item" style="border-left:3px solid var(--danger-txt)">${tag}</div>`;
                                 }
                             }
                         }
@@ -948,7 +928,8 @@
             });
 
             let finalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
-            document.getElementById('lblGlobalScore').innerText = finalPct.toFixed(2) + "%";
+            const lblGlobal = document.getElementById('lblGlobalScore');
+            if(lblGlobal) lblGlobal.innerText = finalPct.toFixed(2) + "%";
         }
 
         function renderMatrixBadge(val) {
