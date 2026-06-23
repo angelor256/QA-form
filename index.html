@@ -1,75 +1,79 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub - Premium Feedback Matrix</title>
+    <title>QA Quality Hub - Bespoke Feedback Matrix</title>
+    
+    <!-- Premium Editorial Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono&display=swap" rel="stylesheet">
     
+    <!-- ExcelJS & FileSaver for premium exports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #0B0F19;
-            --bg-card: #151B2C;
-            --bg-input: #1E2640;
-            --border-color: #2E3A5F;
-            --text-main: #F3F4F6;
-            --text-muted: #9CA3AF;
-            --primary: #6366F1;
-            --primary-glow: rgba(99, 102, 241, 0.15);
-            --success: #10B981;
-            --success-bg: rgba(16, 185, 129, 0.1);
-            --warning: #F59E0B;
-            --warning-bg: rgba(245, 158, 11, 0.1);
-            --danger: #EF4444;
-            --danger-bg: rgba(239, 68, 68, 0.1);
-            --neutral: #6B7280;
-            --neutral-bg: rgba(107, 114, 128, 0.1);
-            --gradient-accent: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --bg-main: #FBFBFA;
+            --bg-card: #FFFFFF;
+            --bg-input: #F4F4F1;
+            --border-color: #E5E5E0;
+            --text-main: #1C1C1A;
+            --text-muted: #70706B;
+            --primary: #2C3E2B; /* Deep Sage / Dark Forest */
+            --accent: #8C7A6B;  /* Warm Taupe */
+            --success: #3F5E4D;
+            --success-bg: #EAF2EC;
+            --warning: #A3703C;
+            --warning-bg: #FAF3EC;
+            --danger: #963E3E;
+            --danger-bg: #FDF2F2;
+            --neutral-bg: #EAEAEA;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Instrument Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding: 2rem;
+            padding: 3rem 2rem;
             min-height: 100vh;
         }
 
         header {
             max-width: 1400px;
-            margin: 0 auto 2rem auto;
+            margin: 0 auto 3rem auto;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            align-items: flex-end;
+            border-bottom: 2px solid var(--text-main);
             padding-bottom: 1.5rem;
         }
 
         .logo-area h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            line-height: 1;
         }
 
         .logo-area p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 0.5rem;
+            font-weight: 500;
         }
 
         .header-actions {
@@ -78,213 +82,206 @@
         }
 
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.8rem 1.75rem;
+            border-radius: 0px; /* Sharp editorial cuts */
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--text-main);
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .btn-primary {
-            background: var(--gradient-accent);
-            color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            background: var(--text-main);
+            color: var(--bg-main);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+            background: var(--primary);
+            color: #FFF;
+            border-color: var(--primary);
         }
 
         .btn-secondary {
-            background: var(--bg-card);
+            background: transparent;
             color: var(--text-main);
-            border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
             background: var(--bg-input);
-            border-color: var(--primary);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            background: var(--success);
             color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+            border-color: var(--success);
         }
 
         .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+            background: #2D4437;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
         }
 
-        /* Sidebar Metadata & Config */
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 0px;
+            padding: 2rem;
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #FFF;
-            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--text-main);
+            color: var(--text-main);
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         .form-control {
             width: 100%;
             background-color: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 0.65rem 0.8rem;
+            border: 1px solid transparent;
+            border-radius: 0px;
+            padding: 0.75rem 1rem;
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.2s ease;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
+            background-color: #FFF;
+            border-color: var(--text-main);
         }
 
-        /* Checkbox Grid Area */
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
-        .checkbox-item:last-child { border-bottom: none; }
         
         .checkbox-item label {
             font-size: 0.9rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-weight: 500;
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--primary);
+            width: 15px;
+            height: 15px;
+            accent-color: var(--text-main);
             cursor: pointer;
         }
 
-        /* Main Workspace Navigation (Tabs) */
         .workspace {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .channel-groups {
             display: flex;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            padding: 0.4rem;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .tab-btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 10px;
+            padding: 1rem 1.5rem;
             background: transparent;
             color: var(--text-muted);
             border: none;
             font-weight: 600;
             font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
+            position: relative;
         }
 
         .tab-btn:hover {
             color: var(--text-main);
-            background: rgba(255,255,255,0.03);
         }
 
         .tab-btn.active {
-            background: var(--primary);
-            color: #FFF;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--text-main);
         }
 
         .tab-btn.disabled-tab {
-            opacity: 0.3;
+            opacity: 0.25;
             cursor: not-allowed;
             text-decoration: line-through;
         }
 
         .sub-navigation {
             display: flex;
-            gap: 0.4rem;
-            overflow-x: auto;
-            padding-bottom: 0.25rem;
+            gap: 0.5rem;
         }
 
         .sub-tab-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            background: var(--bg-card);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .sub-tab-btn.active {
+            padding: 0.5rem 1.25rem;
             background: var(--bg-input);
-            border-color: var(--primary);
-            color: var(--text-main);
+            color: var(--text-muted);
+            border: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
             font-weight: 600;
         }
 
-        /* Form Evaluation Tables */
+        .sub-tab-btn.active {
+            background: var(--text-main);
+            color: var(--bg-main);
+        }
+
         .form-container {
             display: none;
         }
@@ -293,97 +290,93 @@
             display: block;
         }
 
+        .meta-case-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+        }
+
         .evaluation-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 0.5rem;
-            margin-top: 0.5rem;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 0.75rem 1rem;
-            color: var(--text-muted);
-            font-size: 0.8rem;
+            padding: 1rem;
+            background: var(--bg-input);
+            color: var(--text-main);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
             font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: rgba(99, 102, 241, 0.06);
-            color: #AEB7FF;
+            background: #FAF9F5;
+            color: var(--text-main);
             font-weight: 700;
-            font-size: 0.9rem;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 10px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table td {
-            padding: 1rem;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
+            padding: 1.2rem 1rem;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-        }
-
-        .evaluation-table tr.criterion-row td:first-child {
-            border-left: 1px solid var(--border-color);
-            border-top-left-radius: 12px;
-            border-bottom-left-radius: 12px;
-            width: 45%;
-        }
-
-        .evaluation-table tr.criterion-row td:last-child {
-            border-right: 1px solid var(--border-color);
-            border-top-right-radius: 12px;
-            border-bottom-right-radius: 12px;
+            font-size: 0.9rem;
+            vertical-align: top;
         }
 
         .desc-sub {
             display: block;
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 0.25rem;
+            margin-top: 0.3rem;
+            font-style: italic;
         }
 
-        /* Score Boxes styling inside rows */
         .select-classification {
             background-color: var(--bg-input);
-            color: #FFF;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.4rem 0.6rem;
-            width: 110px;
+            color: var(--text-main);
+            border: 1px solid transparent;
+            padding: 0.5rem;
             font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
+            width: 110px;
         }
 
         .score-display-box {
             display: inline-block;
             padding: 0.4rem 0.8rem;
-            border-radius: 8px;
             font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
             text-align: center;
             min-width: 60px;
         }
 
-        /* Status Colors */
-        .status-yes { background-color: var(--success-bg); color: var(--success); border: 1px solid rgba(16,185,129,0.2); }
-        .status-partial { background-color: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245,158,11,0.2); }
-        .status-no { background-color: var(--danger-bg); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
-        .status-na { background-color: var(--neutral-bg); color: var(--text-muted); border: 1px solid var(--border-color); }
+        .status-yes { background-color: var(--success-bg); color: var(--success); }
+        .status-partial { background-color: var(--warning-bg); color: var(--warning); }
+        .status-no { background-color: var(--danger-bg); color: var(--danger); }
+        .status-na { background-color: var(--neutral-bg); color: var(--text-muted); }
 
         .form-footer-scores {
-            margin-top: 1.5rem;
+            margin-top: 1px;
             display: flex;
             justify-content: flex-end;
-            gap: 2rem;
+            gap: 3rem;
             background: var(--bg-card);
-            padding: 1.25rem 2rem;
-            border-radius: 16px;
+            padding: 1.5rem 2rem;
             border: 1px solid var(--border-color);
         }
 
@@ -393,44 +386,41 @@
 
         .footer-score-block span {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 700;
+            letter-spacing: 1px;
             margin-bottom: 0.25rem;
         }
 
         .footer-score-block div {
-            font-size: 1.75rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
         }
 
-        /* Final Dashboard & Matrix View */
+        /* Dashboard (Ref: image_419864.png Structural Match) */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 2rem;
         }
 
         .feedback-badge-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-            padding: 1.5rem 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            margin-bottom: 1.5rem;
+            background: var(--text-main);
+            color: var(--bg-main);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .global-score-hero {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Space Mono', monospace;
             font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .matrix-table {
@@ -442,60 +432,56 @@
 
         .matrix-table th, .matrix-table td {
             border: 1px solid var(--border-color);
-            padding: 0.5rem;
+            padding: 0.8rem;
             text-align: center;
         }
 
         .matrix-table th {
             background-color: var(--bg-input);
             color: var(--text-main);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
 
         .matrix-badge {
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
             display: inline-block;
         }
 
-        /* Dynamic Feedback Cards */
         .feedback-card-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .feedback-item-box {
             padding: 1rem;
-            border-radius: 12px;
-            border-left: 5px solid transparent;
-            background: rgba(255,255,255,0.02);
+            border-left: 3px solid var(--text-main);
+            background: var(--bg-input);
             margin-bottom: 0.5rem;
         }
 
-        .feedback-item-box.f-yes { border-left-color: var(--success); background: rgba(16, 185, 129, 0.03); }
-        .feedback-item-box.f-partial { border-left-color: var(--warning); background: rgba(245, 158, 11, 0.03); }
-        .feedback-item-box.f-no { border-left-color: var(--danger); background: rgba(239, 68, 68, 0.03); }
-
         .feedback-item-title {
             font-weight: 700;
-            font-size: 0.95rem;
-            color: #FFF;
+            font-size: 0.9rem;
         }
 
         .feedback-item-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             margin-top: 0.25rem;
         }
 
-        /* Action Modals or Config View Panels */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(28, 28, 26, 0.4);
+            backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -504,34 +490,34 @@
 
         .modal-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--text-main);
             width: 100%;
             max-width: 500px;
-            border-radius: 24px;
-            padding: 2rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            padding: 2.5rem;
         }
 
-        /* Section textareas */
         .comment-box-area {
             width: 100%;
             background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 1px solid transparent;
             padding: 0.75rem;
-            color: #FFF;
+            color: var(--text-main);
             min-height: 100px;
             resize: vertical;
             font-size: 0.9rem;
             margin-top: 0.5rem;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        .comment-box-area:focus {
+            outline: none;
+            background: #FFF;
+            border-color: var(--text-main);
+        }
 
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -539,79 +525,79 @@
     <header>
         <div class="logo-area">
             <h1>QA QUALITY HUB</h1>
-            <p>Elevating Performance • Matrix Dashboard Edition</p>
+            <p>Performance Matrix & Insight Board</p>
         </div>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Configuración de Listas</button>
-            <button class="btn btn-success" onclick="exportPremiumExcel()">📊 Descargar Reporte Excel</button>
+            <button class="btn btn-secondary" onclick="openModal('configModal')">Parameters</button>
+            <button class="btn btn-primary" onclick="exportPremiumExcel()">Export Report</button>
         </div>
     </header>
 
     <div class="container">
         
+        <!-- SIDEBAR PARAMETERS -->
         <div class="sidebar">
             <div class="card">
-                <div class="card-title">📋 Datos de Evaluación</div>
+                <div class="card-title">Session Metadata</div>
                 
                 <div class="form-group">
-                    <label>Agente</label>
+                    <label>Agent</label>
                     <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
                 </div>
                 <div class="form-group">
-                    <label>Evaluador</label>
+                    <label>Evaluator</label>
                     <select id="metaEvaluator" class="form-control"></select>
                 </div>
                 <div class="form-group">
-                    <label>Rol Actual</label>
+                    <label>Current Role</label>
                     <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
                 </div>
                 <div class="form-group">
-                    <label>Fecha de Interacción</label>
+                    <label>Interaction Date</label>
                     <input type="date" id="metaInteractionDate" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Fecha de Evaluación</label>
+                    <label>Evaluation Date</label>
                     <input type="date" id="metaEvaluationDate" class="form-control">
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">🎯 Casos Activos</div>
-                <div id="checkboxGrid">
-                    </div>
+                <div class="card-title">Active Interactions</div>
+                <div id="checkboxGrid"></div>
             </div>
         </div>
 
+        <!-- MAIN WORKSPACE -->
         <div class="workspace">
             
             <div class="channel-groups">
-                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">📱 Phones Channel</button>
-                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">💬 Chats Channel</button>
-                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">📧 Emails Channel</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; background: rgba(99,102,241,0.15); color: #AEB7FF; border: 1px solid rgba(99,102,241,0.3)">📋 Feedback Card & Report</button>
+                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones Channel</button>
+                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats Channel</button>
+                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails Channel</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; font-weight:700; color: var(--accent);">Consolidated Performance</button>
             </div>
 
-            <div class="sub-navigation" id="subTabsArea">
-                </div>
+            <div class="sub-navigation" id="subTabsArea"></div>
 
-            <div id="formsWorkspaceArea">
-                </div>
+            <!-- Forms Workspace Area -->
+            <div id="formsWorkspaceArea"></div>
 
+            <!-- DASHBOARD VIEW (Matching image_419864.png structure precisely) -->
             <div id="dashboardViewArea" style="display:none;">
                 <div class="feedback-badge-container">
                     <div>
-                        <h2 style="font-family:'Space Grotesk', sans-serif; font-size:1.75rem; margin-bottom:0.25rem;">¡Tu Rendimiento Consolidado!</h2>
-                        <p style="color:var(--text-muted);">Calificación general basada en todas las interacciones activas validadas.</p>
+                        <h2 style="font-family:'Cinzel', serif; font-size:1.5rem; font-weight:500; letter-spacing:1px; margin-bottom:0.4rem;">¡Tu Rendimiento Consolidado!</h2>
+                        <p style="color:var(--border-color); font-size:0.85rem;">Calificación general basada en todas las interacciones activas validadas.</p>
                     </div>
                     <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div>
-                        <div class="card" style="margin-bottom: 1.5rem; overflow-x: auto;">
+                        <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
                             <div class="card-title">📊 Matriz del Cuadro de Mando (Scores por Caso)</div>
-                            <table class="matrix-table" id="matrixPointsTable">
-                                </table>
+                            <table class="matrix-table" id="matrixPointsTable"></table>
                         </div>
 
                         <div class="card">
@@ -626,32 +612,33 @@
                             </div>
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
                                 <div class="form-group">
-                                    <label>Calificación de Desempeño</label>
+                                    <label>Performance Rating</label>
                                     <select id="dashPerformanceRating" class="form-control">
                                         <option value="Completed">Completed</option>
                                         <option value="Non Completed">Non Completed</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Fecha Límite de Seguimiento</label>
+                                    <label>Follow-Up Date</label>
                                     <input type="date" id="dashFollowUpDate" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Side lists -->
                     <div class="feedback-card-list">
-                        <div class="card" style="border-top: 4px solid var(--success);">
-                            <div class="card-title" style="color:var(--success)">🌟 Fortalezas Clave</div>
-                            <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="border-top: 3px solid var(--success);">
+                            <div class="card-title" style="color:var(--success)">🌟 Key Strengths</div>
+                            <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="border-top: 4px solid var(--warning);">
-                            <div class="card-title" style="color:var(--warning)">👁️ Aspectos A Observar</div>
-                            <div id="dashObservarList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="border-top: 3px solid var(--warning);">
+                            <div class="card-title" style="color:var(--warning)">👁️ Aspects To Observe</div>
+                            <div id="dashObservarList" style="max-height: 250px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="border-top: 4px solid var(--danger);">
-                            <div class="card-title" style="color:var(--danger)">🚀 Oportunidades de Mejora</div>
-                            <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        <div class="card" style="border-top: 3px solid var(--danger);">
+                            <div class="card-title" style="color:var(--danger)">🚀 Opportunities to Improve</div>
+                            <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -660,33 +647,34 @@
         </div>
     </div>
 
+    <!-- CONFIG PARAMETERS MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
-            <div class="card-title">⚙️ Administrar Parámetros de QA</div>
-            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">Agrega nuevos perfiles de agentes, evaluadores y roles directamente en el almacenamiento local.</p>
+            <div class="card-title">Manage Parameters</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Add records to lists saved seamlessly on LocalStorage.</p>
             
             <div class="form-group">
-                <label>Tipo de Registro</label>
+                <label>Parameter Type</label>
                 <select id="configType" class="form-control">
-                    <option value="agents">Nuevo Agente</option>
-                    <option value="evaluators">Nuevo Evaluador</option>
-                    <option value="roles">Nuevo Rol</option>
+                    <option value="agents">New Agent</option>
+                    <option value="evaluators">New Evaluator</option>
+                    <option value="roles">New Role</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Nombre / Descripción</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Ej. Juan Pérez / Tier 4">
+                <label>Value Name</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Type name here...">
             </div>
             
-            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
-                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="addNewConfigItem()">Añadir Registro</button>
+            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addNewConfigItem()">Add Record</button>
             </div>
         </div>
     </div>
 
     <script>
-        // DATA MAESTRA INICIAL
+        // MASTER CONFIG DATA
         const defaultLists = {
             agents: [
                 "Adrian Navarro", "Andrey Castillo", "Anilu Guzman", "Carlos Alejandro Amador Luna",
@@ -710,39 +698,35 @@
             roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        // CARGA DESDE LOCALSTORAGE O DEFAULT
         let currentLists = JSON.parse(localStorage.getItem('qa_lists')) || defaultLists;
 
-        // CRITERIOS DE PHONES Y CHATS
+        // CRITERIOS LITERALES EXTRAÍDOS FIELMENTE DE image_4198a7.png
         const phoneChatCriteria = [
-            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
-            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
-            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
-            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
-            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
-            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
-            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
-            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa." },
+            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Resolución Exacta y Efectiva", desc: "Proporcionó información precisa y resolvió claramente la inquietud del cliente." },
+            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternativas Ofrecidas", desc: "Ofreció alternativas apropiadas cuando correspondía." },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Comunicación Profesional e Inteligencia Emocional", desc: "Mantuvo un tono profesional, respetuoso y enfocado en el cliente." },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía." },
+            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios." },
+            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Soporte Extra", desc: "Ofreció ayuda adicional antes de cerrar la interacción." },
+            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable." }
         ];
 
-        // CRITERIOS DE EMAILS
         const emailCriteria = [
-            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
-            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
-            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
-            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
-            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
-            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
-            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
-            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa." },
+            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Resolución Exacta y Efectiva", desc: "Resolución precisa alineada con la política de la empresa." },
+            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Plantilla Correcta Utilizada", desc: "Usó la plantilla aprobada correcta cuando fue requerida." },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía." },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Formato Adecuado", desc: "Aseguró estructura clara y presentación organizada." },
+            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios." },
+            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Firma Incluida", desc: "Incluyó la firma profesional requerida." },
+            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable." }
         ];
 
-        // ESTADO DE LA APLICACIÓN GLOBAL PARA LAS 12 INTERACCIONES
         let currentGroup = "Phones";
         let currentSubIndex = 1;
         let evaluationState = {};
 
-        // INICIALIZACIÓN DE LA ESTRUCTURA DE DATOS PARA LAS 12 PESTAÑAS
         function initDataStructure() {
             const groups = ["Phones", "Chats", "Emails"];
             groups.forEach(g => {
@@ -752,6 +736,8 @@
                 for(let i=1; i<=4; i++) {
                     evaluationState[g][i] = {
                         active: true,
+                        accountId: "",
+                        interactionId: "",
                         comments: { "S1": "", "S2": "", "S3": "", "S4": "" },
                         scores: {}
                     };
@@ -772,24 +758,17 @@
             buildAllForms();
             switchChannelGroup("Phones");
             
-            // Set fechas por defecto (hoy)
             document.getElementById('metaInteractionDate').valueAsDate = new Date();
             document.getElementById('metaEvaluationDate').valueAsDate = new Date();
             document.getElementById('dashFollowUpDate').valueAsDate = new Date(Date.now() + 7*24*60*60*1000);
         };
 
-        // RENDER DE SELECTORES DEL SIDEBAR
         function renderDropdowns() {
-            const sAgent = document.getElementById('metaAgent');
-            const sEval = document.getElementById('metaEvaluator');
-            const sRole = document.getElementById('metaRole');
-
-            sAgent.innerHTML = currentLists.agents.map(a => `<option value="${a}">${a}</option>`).join('');
-            sEval.innerHTML = currentLists.evaluators.map(e => `<option value="${e}">${e}</option>`).join('');
-            sRole.innerHTML = currentLists.roles.map(r => `<option value="${r}">${r}</option>`).join('');
+            document.getElementById('metaAgent').innerHTML = currentLists.agents.map(a => `<option value="${a}">${a}</option>`).join('');
+            document.getElementById('metaEvaluator').innerHTML = currentLists.evaluators.map(e => `<option value="${e}">${e}</option>`).join('');
+            document.getElementById('metaRole').innerHTML = currentLists.roles.map(r => `<option value="${r}">${r}</option>`).join('');
         }
 
-        // CONTROL DE RESTRICCIÓN DE ROL T1 PARA EMAILS
         function checkAgentRole() {
             const role = document.getElementById('metaRole').value;
             const emailTab = document.getElementById('btnGroupEmails');
@@ -802,9 +781,7 @@
                     let ck = document.getElementById(`ck_Emails_${i}`);
                     if(ck) ck.checked = false;
                 }
-                if (currentGroup === "Emails") {
-                    switchChannelGroup("Phones");
-                }
+                if (currentGroup === "Emails") switchChannelGroup("Phones");
             } else {
                 emailTab.classList.remove('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = true;
@@ -815,18 +792,10 @@
                 }
             }
             renderActiveCheckboxes();
-            
-            // Recalcular todos los formularios activos por si acaso
-            const groups = ["Phones", "Chats", "Emails"];
-            groups.forEach(g => {
-                for(let i=1; i<=4; i++) {
-                    calculateSingleFormScore(g, i);
-                }
-            });
+            buildSubTabs();
             calculateGlobalMatrix();
         }
 
-        // RENDER DE CHECKBOXES EN SIDEBAR (CASOS ACTIVOS)
         function renderActiveCheckboxes() {
             const container = document.getElementById('checkboxGrid');
             let html = "";
@@ -835,9 +804,9 @@
 
             groups.forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:0.5rem; font-weight:700; font-size:0.8rem; color:#AEB7FF;">${g.toUpperCase()}</div>`;
+                html += `<div style="margin-top:1rem; font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">${g}</div>`;
                 for(let i=1; i<=4; i++) {
-                    const labelName = g === "Phones" ? `Llamada ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
+                    const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
                     html += `
                         <div class="checkbox-item">
@@ -852,20 +821,14 @@
 
         function toggleCaseActive(group, index, isChecked) {
             evaluationState[group][index].active = isChecked;
-            
             const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
-            if(subTabEl) {
-                if(!isChecked) subTabEl.style.opacity = "0.4";
-                else subTabEl.style.opacity = "1";
-            }
+            if(subTabEl) subTabEl.style.opacity = isChecked ? "1" : "0.3";
             calculateSingleFormScore(group, index);
             calculateGlobalMatrix();
         }
 
-        // NAVEGACIÓN ENTRE GRUPOS Y PESTAÑAS
         function switchChannelGroup(groupName) {
             if (groupName === "Emails" && document.getElementById('metaRole').value === "T1") return;
-
             currentGroup = groupName;
             
             document.getElementById('btnGroupPhones').classList.remove('active');
@@ -895,9 +858,9 @@
             const area = document.getElementById('subTabsArea');
             let html = "";
             for (let i = 1; i <= 4; i++) {
-                const name = currentGroup === "Phones" ? `Llamada ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
+                const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
                 const activeClass = i === currentSubIndex ? "active" : "";
-                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.4;'";
+                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.3;'";
                 html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
             }
             area.innerHTML = html;
@@ -905,25 +868,19 @@
 
         function switchSubTab(index) {
             currentSubIndex = index;
-            const buttons = document.querySelectorAll('.sub-tab-btn');
-            buttons.forEach((b, idx) => {
+            document.querySelectorAll('.sub-tab-btn').forEach((b, idx) => {
                 if (idx === (index - 1)) b.classList.add('active');
                 else b.classList.remove('active');
             });
 
-            const allContainers = document.querySelectorAll('.form-container');
-            allContainers.forEach(c => c.classList.remove('active'));
-
-            const targetId = `form_container_${currentGroup}_${index}`;
-            const targetEl = document.getElementById(targetId);
+            document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
+            const targetEl = document.getElementById(`form_container_${currentGroup}_${index}`);
             if (targetEl) targetEl.classList.add('active');
         }
 
-        // CONSTRUCCIÓN DINÁMICA DE LOS 12 FORMULARIOS DE QA EN EL DOM
         function buildAllForms() {
             const area = document.getElementById('formsWorkspaceArea');
             area.innerHTML = ""; 
-
             const groups = ["Phones", "Chats", "Emails"];
 
             groups.forEach(g => {
@@ -934,13 +891,31 @@
                     container.id = `form_container_${g}_${i}`;
                     container.className = "form-container";
 
+                    // Form Structural Fields (Account # & Interaction ID)
+                    let structuralHtml = `
+                        <div class="meta-case-row">
+                            <div class="form-group">
+                                <label>Account #</label>
+                                <input type="text" class="form-control" placeholder="Enter Account Number" 
+                                       value="${evaluationState[g][i].accountId}" 
+                                       onchange="evaluationState['${g}'][${i}].accountId = this.value">
+                            </div>
+                            <div class="form-group">
+                                <label>Interaction ID</label>
+                                <input type="text" class="form-control" placeholder="Enter Interaction ID" 
+                                       value="${evaluationState[g][i].interactionId}" 
+                                       onchange="evaluationState['${g}'][${i}].interactionId = this.value">
+                            </div>
+                        </div>
+                    `;
+
                     let tableHtml = `
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Criterio de Evaluación</th>
-                                    <th>Clasificación</th>
-                                    <th>Puntos Máx.</th>
+                                    <th>Evaluation Criterion</th>
+                                    <th>Classification</th>
+                                    <th>Max Pts</th>
                                     <th>Score</th>
                                 </tr>
                             </thead>
@@ -953,11 +928,11 @@
                             currentSection = c.section;
                             tableHtml += `
                                 <tr class="section-header-row">
-                                    <td colspan="2">${currentSection}</td>
+                                    <td colspan="2"><strong>${currentSection}</strong></td>
                                     <td colspan="2" style="text-align:right;">
-                                        <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem;">Comentarios Sección:</span>
-                                        <input type="text" placeholder="Añadir observaciones para esta sección..." 
-                                               class="form-control" style="width:280px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.8rem;"
+                                        <span style="font-size:0.7rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem; font-weight:700;">Section Feedback:</span>
+                                        <input type="text" placeholder="Add specific section observation notes..." 
+                                               class="form-control" style="width:300px; display:inline-block; padding:0.4rem 0.5rem; font-size:0.8rem; background:#FFF; border:1px solid var(--border-color);"
                                                value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
                                                onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
@@ -967,7 +942,7 @@
 
                         tableHtml += `
                             <tr class="criterion-row">
-                                <td>
+                                <td style="width: 50%;">
                                     <strong>${c.text}</strong>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
@@ -979,7 +954,7 @@
                                         <option value="N/A">N/A</option>
                                     </select>
                                 </td>
-                                <td style="font-weight:700; color:var(--text-muted);">${c.max_pts}</td>
+                                <td style="font-weight:600; color:var(--text-muted); font-family: 'Space Mono', monospace;">${c.max_pts}</td>
                                 <td>
                                     <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
                                 </td>
@@ -993,17 +968,17 @@
                         
                         <div class="form-footer-scores">
                             <div class="footer-score-block">
-                                <span>Puntos Obtenidos</span>
-                                <div id="lbl_pts_${g}_${i}" style="color:#FFF;">100.00</div>
+                                <span>Earned Points</span>
+                                <div id="lbl_pts_${g}_${i}">100.00</div>
                             </div>
                             <div class="footer-score-block">
-                                <span>Porcentaje Individual</span>
+                                <span>Individual Percentage</span>
                                 <div id="lbl_pct_${g}_${i}" style="color:var(--success);">100%</div>
                             </div>
                         </div>
                     `;
 
-                    container.innerHTML = tableHtml;
+                    container.innerHTML = structuralHtml + tableHtml;
                     area.appendChild(container);
                     calculateSingleFormScore(g, i);
                 }
@@ -1011,9 +986,9 @@
         }
 
         function getSectionKey(secName) {
-            if(secName.includes("SECTION 1")) return "S1";
-            if(secName.includes("SECTION 2")) return "S2";
-            if(secName.includes("SECTION 3")) return "S3";
+            if(secName.includes("1")) return "S1";
+            if(secName.includes("2")) return "S2";
+            if(secName.includes("3")) return "S3";
             return "S4";
         }
 
@@ -1029,19 +1004,10 @@
             const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
             box.className = "score-display-box";
 
-            if (value === "Yes") {
-                finalPts = crit.max_pts;
-                box.classList.add('status-yes');
-            } else if (value === "Partially") {
-                finalPts = crit.max_pts * 0.5;
-                box.classList.add('status-partial');
-            } else if (value === "No") {
-                finalPts = 0;
-                box.classList.add('status-no');
-            } else if (value === "N/A") {
-                finalPts = 0; 
-                box.classList.add('status-na');
-            }
+            if (value === "Yes") { finalPts = crit.max_pts; box.classList.add('status-yes'); }
+            else if (value === "Partially") { finalPts = crit.max_pts * 0.5; box.classList.add('status-partial'); }
+            else if (value === "No") { finalPts = 0; box.classList.add('status-no'); }
+            else if (value === "N/A") { finalPts = 0; box.classList.add('status-na'); }
 
             box.innerText = value === "N/A" ? "N/A" : finalPts;
 
@@ -1069,7 +1035,6 @@
             });
 
             let pct = maxSumAvailable > 0 ? (earnedSum / maxSumAvailable) * 100 : 100;
-
             evaluationState[group][index].calculatedScore = earnedSum;
             evaluationState[group][index].calculatedMax = maxSumAvailable;
             evaluationState[group][index].calculatedPct = pct;
@@ -1095,13 +1060,9 @@
             const obsList = document.getElementById('dashObservarList');
             const mejList = document.getElementById('dashMejorasList');
             
-            fortList.innerHTML = "";
-            obsList.innerHTML = "";
-            mejList.innerHTML = "";
+            fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
-            let addedFort = new Set();
-            let addedObs = new Set();
-            let addedMej = new Set();
+            let addedFort = new Set(); let addedObs = new Set(); let addedMej = new Set();
 
             const matrixTable = document.getElementById('matrixPointsTable');
             let mHtml = `
@@ -1127,7 +1088,6 @@
                 groups.forEach(g => {
                     let chanSum = 0;
                     let chanCount = 0;
-                    
                     const critList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                     const crObj = critList.find(c => c.id === id);
 
@@ -1143,13 +1103,13 @@
 
                                 if(sc.classification === "Yes" && !addedFort.has(fullText)) {
                                     addedFort.add(fullText);
-                                    fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                    fortList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
                                 } else if(sc.classification === "Partially" && !addedObs.has(fullText)) {
                                     addedObs.add(fullText);
-                                    obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                    obsList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
                                 } else if(sc.classification === "No" && !addedMej.has(fullText)) {
                                     addedMej.add(fullText);
-                                    mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                    mejList.innerHTML += `<div class="feedback-item-box"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
                                 }
                             }
                         }
@@ -1168,11 +1128,11 @@
 
                 mHtml += `
                     <tr>
-                        <td style="font-weight:700; color:#AEB7FF;">${id}</td>
+                        <td style="font-weight:700; color:var(--accent); font-family:'Space Mono', monospace;">${id}</td>
                         <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
                         <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
                         ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
-                        <td style="background: rgba(255,255,255,0.02); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
+                        <td style="background: var(--bg-input); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
                     </tr>
                 `;
             });
@@ -1180,7 +1140,6 @@
             mHtml += `</tbody>`;
             matrixTable.innerHTML = mHtml;
 
-            // CÁLCULO DEL SCORE HERO GLOBAL ABSOLUTO
             groups.forEach(g => {
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
@@ -1193,9 +1152,9 @@
             let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
             document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
             
-            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
-            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
-            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
+            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
+            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
+            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem; font-style:italic;'>No criteria recorded.</p>";
         }
 
         function renderMatrixBadge(val) {
@@ -1206,15 +1165,13 @@
             return `<span class="matrix-badge ${cls}">${val.toFixed(0)}%</span>`;
         }
 
-        // MODAL ACTIONS & CONFIG MANAGEMENT
         function openModal(id) { document.getElementById(id).style.display = "flex"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
         function addNewConfigItem() {
             const type = document.getElementById('configType').value;
             const value = document.getElementById('configValue').value.trim();
-
-            if(!value) { alert("Por favor ingresa un nombre válido."); return; }
+            if(!value) return;
 
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
@@ -1222,12 +1179,11 @@
             localStorage.setItem('qa_lists', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
-            
             document.getElementById('configValue').value = "";
             closeModal('configModal');
         }
 
-        // EXPORTACIÓN EXCEL PREMIUM PERSONALIZADA UTILIZANDO EXCELJS
+        // COMPREHENSIVE ADAPTED PREMIUM EXCELJS REPORT EXPORT
         async function exportPremiumExcel() {
             const agentName = document.getElementById('metaAgent').value;
             const evaluatorName = document.getElementById('metaEvaluator').value;
@@ -1238,39 +1194,39 @@
 
             const workbook = new ExcelJS.Workbook();
             
-            // --- TAB 1: SUMMARY DASHBOARD ---
+            // SUMMARY CARD SHEET
             const wsSummary = workbook.addWorksheet('Feedback Summary');
             wsSummary.views = [{ showGridLines: true }];
 
-            wsSummary.mergeCells('A1:E2');
+            wsSummary.mergeCells('A1:F2');
             const titleCell = wsSummary.getCell('A1');
-            titleCell.value = "QA PERFORMANCE FEEDBACK CARD";
-            titleCell.font = { name: 'Segoe UI', size: 16, bold: true, color: { argb: 'FFFFFF' } };
-            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1F2937' } };
+            titleCell.value = "QA PERFORMANCE FEEDBACK HUB";
+            titleCell.font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FFFFFF' } };
+            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1C1C1A' } };
             titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
 
             wsSummary.getCell('A4').value = "Agent Name:"; wsSummary.getCell('B4').value = agentName;
-            wsSummary.getCell('A5').value = "Role:"; wsSummary.getCell('B5').value = roleName;
+            wsSummary.getCell('A5').value = "Role / Tier:"; wsSummary.getCell('B5').value = roleName;
             wsSummary.getCell('A6').value = "Evaluator:"; wsSummary.getCell('B6').value = evaluatorName;
             wsSummary.getCell('C4').value = "Interaction Date:"; wsSummary.getCell('D4').value = intDate;
             wsSummary.getCell('C5').value = "Evaluation Date:"; wsSummary.getCell('D5').value = evalDate;
             
-            wsSummary.getCell('E4').value = "OVERALL SCORE";
-            wsSummary.getCell('E4').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: '4B5563' } };
-            wsSummary.getCell('E5').value = parseFloat(globalScoreStr) / 100;
-            wsSummary.getCell('E5').font = { name: 'Segoe UI', size: 20, bold: true, color: { argb: '10B981' } };
-            wsSummary.getCell('E5').numFmt = '0.00%';
+            wsSummary.getCell('F4').value = "OVERALL RATING";
+            wsSummary.getCell('F4').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: '70706B' } };
+            wsSummary.getCell('F5').value = parseFloat(globalScoreStr) / 100;
+            wsSummary.getCell('F5').font = { name: 'Segoe UI', size: 18, bold: true, color: { argb: '2C3E2B' } };
+            wsSummary.getCell('F5').numFmt = '0.00%';
 
-            ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true, color: { argb: '374151' } });
+            ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true });
 
-            wsSummary.getCell('A8').value = "CONSOLIDATED PERFORMANCE MATRIX";
-            wsSummary.getCell('A8').font = { size: 12, bold: true, color: { argb: '1F2937' } };
+            wsSummary.getCell('A8').value = "CONSOLIDATED CUADRO DE MANDO PERFORMANCE MATRIX";
+            wsSummary.getCell('A8').font = { size: 11, bold: true };
 
-            const headers = ["Criterion ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
+            const headers = ["ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
             headers.forEach((h, i) => {
                 const cell = wsSummary.getCell(9, i + 1);
                 cell.value = h;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '4F46E5' } };
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '70706B' } };
                 cell.font = { bold: true, color: { argb: 'FFFFFF' } };
                 cell.alignment = { horizontal: 'center' };
             });
@@ -1285,7 +1241,7 @@
                         targetCell.value = parseFloat(txt) / 100;
                         targetCell.numFmt = '0%';
                         let num = parseFloat(txt);
-                        let color = num >= 90 ? 'D1FAE5' : (num >= 70 ? 'FEF3C7' : 'FEE2E2');
+                        let color = num >= 90 ? 'EAF2EC' : (num >= 70 ? 'FAF3EC' : 'FDF2F2');
                         targetCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
                     } else {
                         targetCell.value = txt;
@@ -1294,9 +1250,9 @@
                 });
             });
 
-            let nextRow = 12 + matrixRows.length;
-            wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC FEEDBACK NOTES";
-            wsSummary.getCell(`A${nextRow}`).font = { size: 12, bold: true };
+            let nextRow = 13 + matrixRows.length;
+            wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC ADVISORY SESSION NOTES";
+            wsSummary.getCell(`A${nextRow}`).font = { size: 11, bold: true };
 
             wsSummary.getCell(`A${nextRow+2}`).value = "General Session Comments:";
             wsSummary.getCell(`B${nextRow+2}`).value = document.getElementById('dashGeneralComments').value;
@@ -1304,45 +1260,46 @@
             wsSummary.getCell(`B${nextRow+4}`).value = document.getElementById('dashGoals').value;
             wsSummary.getCell(`A${nextRow+6}`).value = "Performance Rating:";
             wsSummary.getCell(`B${nextRow+6}`).value = document.getElementById('dashPerformanceRating').value;
-            wsSummary.getCell(`C${nextRow+6}`).value = "Follow-up Date:";
+            wsSummary.getCell(`C${nextRow+6}`).value = "Follow-up Limit Date:";
             wsSummary.getCell(`D${nextRow+6}`).value = document.getElementById('dashFollowUpDate').value;
 
             [`A${nextRow+2}`, `A${nextRow+4}`, `A${nextRow+6}`, `C${nextRow+6}`].forEach(k => wsSummary.getCell(k).font = { bold: true });
-            wsSummary.columns.forEach(col => col.width = 22);
+            wsSummary.columns.forEach(col => col.width = 20);
 
-            // --- TAB 2: DETAILED INTERACTION DATA ---
-            const wsData = workbook.addWorksheet('Raw Evaluation Data');
+            // DETAILED AUDIT DATA SHEET
+            const wsData = workbook.addWorksheet('Granular Interaction Logs');
             wsData.views = [{ showGridLines: true }];
 
-            const dataHeaders = ["Channel Group", "Case Index", "Criterion ID", "Classification", "Points Earned"];
+            const dataHeaders = ["Channel", "Case Index", "Account #", "Interaction ID", "Criterion ID", "Classification", "Points"];
             dataHeaders.forEach((dh, idx) => {
                 const cell = wsData.getCell(1, idx + 1);
                 cell.value = dh;
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '374151' } };
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1C1C1A' } };
                 cell.font = { bold: true, color: { argb: 'FFFFFF' } };
             });
 
-            let dataRowCounter = 2;
-            const groups = ["Phones", "Chats", "Emails"];
-            groups.forEach(g => {
+            let dCounter = 2;
+            ["Phones", "Chats", "Emails"].forEach(g => {
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
                         Object.keys(evaluationState[g][i].scores).forEach(cId => {
-                            const item = evaluationState[g][i].scores[cId];
-                            wsData.getCell(dataRowCounter, 1).value = g;
-                            wsData.getCell(dataRowCounter, 2).value = `Case ${i}`;
-                            wsData.getCell(dataRowCounter, 3).value = cId;
-                            wsData.getCell(dataRowCounter, 4).value = item.classification;
-                            wsData.getCell(dataRowCounter, 5).value = item.points;
-                            dataRowCounter++;
+                            const scObj = evaluationState[g][i].scores[cId];
+                            wsData.getCell(dCounter, 1).value = g;
+                            wsData.getCell(dCounter, 2).value = `Case ${i}`;
+                            wsData.getCell(dCounter, 3).value = evaluationState[g][i].accountId;
+                            wsData.getCell(dCounter, 4).value = evaluationState[g][i].interactionId;
+                            wsData.getCell(dCounter, 5).value = cId;
+                            wsData.getCell(dCounter, 6).value = scObj.classification;
+                            wsData.getCell(dCounter, 7).value = scObj.points;
+                            dCounter++;
                         });
                     }
                 }
             });
-            wsData.columns.forEach(col => col.width = 18);
+            wsData.columns.forEach(col => col.width = 16);
 
             const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer]), `QA_Feedback_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
+            saveAs(new Blob([buffer]), `QA_Premium_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
         }
     </script>
 </body>
