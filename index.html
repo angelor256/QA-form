@@ -3,45 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub — Hyper-Premium Experience</title>
+    <title>QA Quality Hub — Avant-Garde Luxury Edition</title>
     
     <!-- Modern Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- html2pdf.js Library for Stunning PDFs -->
+    <!-- html2pdf.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #0B0F19;
-            --bg-card: rgba(22, 28, 45, 0.7);
-            --border-glow: rgba(99, 102, 241, 0.15);
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg-main: #060913;
+            --bg-card: rgba(15, 22, 42, 0.65);
+            --border-color: rgba(255, 255, 255, 0.06);
             --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
+            --text-muted: #64748B;
             
-            /* Luxury Neon Palette */
-            --primary: #6366F1;
-            --primary-gradient: linear-gradient(135deg, #818CF8 0%, #4F46E5 100%);
-            --success: #10B981;
-            --success-bg: rgba(16, 185, 129, 0.12);
-            --success-text: #34D399;
-            --warning: #F59E0B;
-            --warning-bg: rgba(245, 158, 11, 0.12);
-            --warning-text: #FBBF24;
-            --danger: #EF4444;
-            --danger-bg: rgba(239, 68, 68, 0.12);
-            --danger-text: #F87171;
-            --neutral-bg: rgba(255, 255, 255, 0.03);
+            /* High-End Luxury Color Palette */
+            --brand-primary: #6366F1;
+            --luxury-gold: #E2E8F0;
+            --success-glow: #10B981;
+            --warning-glow: #F59E0B;
+            --danger-glow: #EF4444;
             
-            --radius-xl: 24px;
-            --radius-md: 14px;
-            --radius-sm: 8px;
-            --blur-effect: blur(20px);
-            --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.2);
+            --radius-xl: 20px;
+            --radius-md: 12px;
+            --radius-sm: 6px;
+            --shadow-cosmic: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
         }
 
         * {
@@ -55,14 +45,14 @@
         body {
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 80% 10%, rgba(79, 70, 229, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
+                radial-gradient(circle at 90% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(30, 41, 59, 0.2) 0%, transparent 60%);
             color: var(--text-main);
             padding: 2.5rem;
             min-height: 100vh;
         }
 
-        /* --- NEO-GLASS HEADER --- */
+        /* --- LUXURY HEADER --- */
         header {
             max-width: 1450px;
             margin: 0 auto 2.5rem auto;
@@ -70,75 +60,67 @@
             justify-content: space-between;
             align-items: center;
             background: var(--bg-card);
-            backdrop-filter: var(--blur-effect);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             padding: 1.5rem 2.5rem;
             border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-premium);
+            box-shadow: var(--shadow-cosmic);
         }
 
         .logo-area h1 {
-            font-size: 1.85rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #A5B4FC 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #FFFFFF;
         }
 
         .logo-area p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            margin-top: 0.25rem;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
+            margin-top: 0.15rem;
         }
 
         .btn {
-            padding: 0.8rem 1.75rem;
+            padding: 0.75rem 1.5rem;
             border-radius: var(--radius-md);
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid var(--border-color);
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: var(--primary-gradient);
-            color: #FFFFFF;
+            background: #FFFFFF;
+            color: #060913;
             border: none;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             color: var(--text-main);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        /* --- LAYOUT STRUCTURE --- */
+        /* --- MAIN CONTAINER --- */
         .container {
             max-width: 1450px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: 310px 1fr;
             gap: 2.5rem;
         }
 
@@ -153,86 +135,70 @@
             border: 1px solid var(--border-color);
             border-radius: var(--radius-xl);
             padding: 2rem;
-            box-shadow: var(--shadow-premium);
-            backdrop-filter: var(--blur-effect);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            box-shadow: var(--shadow-cosmic);
+            backdrop-filter: blur(16px);
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 1.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            letter-spacing: -0.5px;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--text-muted);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
         .form-control {
             width: 100%;
-            background-color: var(--neutral-bg);
+            background-color: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 0.85rem 1.2rem;
+            padding: 0.8rem 1.1rem;
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--primary);
-            background: rgba(22, 28, 45, 0.9);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.75rem 0.5rem;
-            border-radius: var(--radius-sm);
-            transition: background 0.2s ease;
+            padding: 0.6rem 0.25rem;
         }
 
-        .checkbox-item:hover {
-            background-color: var(--neutral-bg);
-        }
-        
         .checkbox-item label {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            cursor: pointer;
+            color: #E2E8F0;
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+            accent-color: #FFFFFF;
             cursor: pointer;
         }
 
-        /* --- PREMIUM TABS CONTROL --- */
+        /* --- NAVIGATION TABS --- */
         .workspace {
             display: flex;
             flex-direction: column;
@@ -241,38 +207,33 @@
 
         .channel-groups {
             display: flex;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.5rem;
+            gap: 0.25rem;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.4rem;
             border-radius: var(--radius-md);
             width: fit-content;
             border: 1px solid var(--border-color);
         }
 
         .tab-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.65rem 1.35rem;
             border-radius: var(--radius-sm);
             background: transparent;
             color: var(--text-muted);
             border: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .tab-btn:hover {
-            color: var(--text-main);
-        }
-
         .tab-btn.active {
-            background: var(--primary-gradient);
+            background: rgba(255, 255, 255, 0.08);
             color: #FFFFFF;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .tab-btn.disabled-tab {
-            opacity: 0.25;
+            opacity: 0.2;
             cursor: not-allowed;
             text-decoration: line-through;
         }
@@ -283,20 +244,19 @@
         }
 
         .sub-tab-btn {
-            padding: 0.6rem 1.4rem;
+            padding: 0.5rem 1.25rem;
             border-radius: var(--radius-md);
             background: transparent;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .sub-tab-btn.active {
             background: #FFFFFF;
-            color: var(--bg-main);
+            color: #060913;
             border-color: #FFFFFF;
         }
 
@@ -308,160 +268,102 @@
             display: block;
         }
 
-        /* --- LUXURY AUDIT TABLES --- */
+        /* --- EVALUATION SHEET BUILDERS --- */
         .evaluation-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            margin-top: -10px;
+            border-collapse: collapse;
+            margin-top: 1rem;
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.25rem;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15) 0%, transparent 100%);
+            background: rgba(255, 255, 255, 0.02);
             color: #FFFFFF;
             font-weight: 700;
-            font-size: 1rem;
-            padding: 1.2rem 1.5rem;
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
-            border-left: 3px solid var(--primary);
+            font-size: 0.9rem;
+            padding: 1.2rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table tbody tr:not(.section-header-row) td {
-            background: rgba(30, 41, 59, 0.4);
-            padding: 1.5rem;
-            border-top: 1px solid var(--border-color);
+            padding: 1.25rem;
             border-bottom: 1px solid var(--border-color);
             font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .evaluation-table tbody tr:not(.section-header-row) td:first-child {
-            border-left: 1px solid var(--border-color);
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
-        }
-
-        .evaluation-table tbody tr:not(.section-header-row) td:last-child {
-            border-right: 1px solid var(--border-color);
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        }
-
-        .evaluation-table tbody tr:not(.section-header-row):hover td {
-            border-color: rgba(99, 102, 241, 0.4);
-            background: rgba(30, 41, 59, 0.7);
         }
 
         .desc-sub {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 0.4rem;
+            margin-top: 0.3rem;
         }
 
-        /* DYNAMIC COMFORT PILL SELECTOR BUTTONS */
+        /* INTERACTIVE QA PILLS */
         .qa-selector-group {
             display: flex;
-            gap: 0.35rem;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.3rem;
+            gap: 0.25rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.25rem;
             border-radius: var(--radius-sm);
             width: fit-content;
-            border: 1px solid var(--border-color);
         }
 
         .qa-pill {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
             border: none;
             background: transparent;
             color: var(--text-muted);
-            transition: all 0.2s ease;
         }
 
-        .qa-pill.active[data-val="Yes"] { background: var(--success); color: white; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
-        .qa-pill.active[data-val="Partially"] { background: var(--warning); color: white; box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
-        .qa-pill.active[data-val="No"] { background: var(--danger); color: white; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4); }
-        .qa-pill.active[data-val="N/A"] { background: rgba(255,255,255,0.2); color: white; }
+        .qa-pill.active[data-val="Yes"] { background: rgba(16, 185, 129, 0.15); color: #34D399; }
+        .qa-pill.active[data-val="Partially"] { background: rgba(245, 158, 11, 0.15); color: #FBBF24; }
+        .qa-pill.active[data-val="No"] { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+        .qa-pill.active[data-val="N/A"] { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
 
         .score-display-box {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: center;
-            min-width: 60px;
         }
 
-        /* --- VISUAL INTERACTIVE HERO HUD SHOWCASE --- */
+        /* --- THE WOW HUD HERO HEADER --- */
         .feedback-badge-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            padding: 3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
             border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-glow);
             margin-bottom: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* High-Definition Glow Dial Gauge */
-        .radial-score-wrapper {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .radial-score-wrapper svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-
-        .radial-score-wrapper circle {
-            width: 100%; height: 100%;
-            fill: none;
-            stroke-width: 12;
-            stroke-linecap: round;
-        }
-
-        .radial-bg-circle { stroke: rgba(255, 255, 255, 0.05); }
-        .radial-progress-circle {
-            stroke: var(--primary);
-            stroke-dasharray: 440; /* 2 * PI * 70 */
-            stroke-dashoffset: 0;
-            transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .global-score-hero {
-            position: absolute;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: #FFFFFF;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: -1px;
         }
 
-        /* SCREENSHOT STYLE SPANISH MATRIX */
+        /* --- STRETCHED MATRIX INSPIRED BY image_36bb1d.png --- */
         .screenshot-matrix {
             width: 100%;
             border-collapse: collapse;
@@ -470,41 +372,46 @@
         }
 
         .screenshot-matrix th, .screenshot-matrix td {
-            padding: 1.1rem 1.25rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Alargado verticalmente para simular exactamente el espaciado amplio de image_36bb1d.png */
+            padding: 1.65rem 1.5rem; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .screenshot-matrix th {
-            background-color: #2E3A4E;
-            color: #FFFFFF;
-            font-size: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            color: #E2E8F0;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .screenshot-matrix .section-title-row {
-            background-color: #1E293B;
+        .screenshot-matrix .section-title-row td {
+            background-color: rgba(255, 255, 255, 0.01);
             font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            letter-spacing: 0.8px;
             text-align: center;
-            color: #E2E8F0;
+            color: #94A3B8;
+            padding: 1.1rem;
+            text-transform: uppercase;
         }
 
         .screenshot-matrix .badge-channel {
-            padding: 0.35rem 0.65rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 4px;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
         }
-        .badge-all { background-color: rgba(56, 189, 248, 0.15); color: #38BDF8; }
-        .badge-cc { background-color: rgba(74, 222, 128, 0.15); color: #4ADE80; }
-        .badge-em { background-color: rgba(251, 146, 60, 0.15); color: #FB923C; }
+        .badge-all { background-color: rgba(56, 189, 248, 0.08); color: #38BDF8; }
+        .badge-cc { background-color: rgba(74, 222, 128, 0.08); color: #4ADE80; }
+        .badge-em { background-color: rgba(251, 146, 60, 0.08); color: #FB923C; }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2fr 1.1fr;
+            grid-template-columns: 1fr;
             gap: 2.5rem;
         }
 
@@ -513,50 +420,51 @@
             display: flex;
             justify-content: flex-end;
             gap: 2.5rem;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 1.5rem 2.5rem;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
+            padding: 1.5rem;
         }
 
         .footer-score-block text {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .footer-score-block div {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-top: 0.25rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.2rem;
         }
 
         .comment-box-area {
             width: 100%;
-            background: var(--neutral-bg);
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 1rem;
             color: var(--text-main);
-            min-height: 100px;
-            resize: vertical;
+            min-height: 90px;
             font-size: 0.95rem;
         }
 
-        /* --- EXPORTABLE WRAPPER TARGET FOR PDF --- */
+        /* --- PDF EXPORT OVERRIDES FOR ANTI-CLIP SAFETY --- */
         #pdfPrintTarget {
-            background-color: var(--bg-main);
-            padding: 10px;
+            background-color: #060913 !important;
+            padding: 2.5rem !important;
+            border-radius: 0px !important;
         }
 
-        /* --- SYSTEM MODAL WINDOW --- */
+        .page-break-before {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        /* --- CONFIG SYSTEM MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 15, 25, 0.8);
+            background: rgba(6, 9, 19, 0.85);
             backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
@@ -565,37 +473,34 @@
         }
 
         .modal-card {
-            background: #161C2D;
+            background: #0F162A;
             border: 1px solid var(--border-color);
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
             border-radius: var(--radius-xl);
             padding: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
 
-    <!-- CORE ACTION EXECUTIVE HUB -->
     <header>
         <div class="logo-area">
             <h1>QA Quality Hub</h1>
-            <p>Next-Gen Evaluation Suite</p>
+            <p>Avant-Garde Performance Suite</p>
         </div>
         <div class="header-actions">
             <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Atributos</button>
-            <button class="btn btn-primary" onclick="exportUltimatePDF()">📥 Exportar PDF Reporte</button>
+            <button class="btn btn-primary" onclick="exportUltimatePDF()">📥 Exportar PDF Perfecto</button>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- AUDIT SIDE PANEL FILTERS -->
+        <!-- SIDE PANEL CONTROL -->
         <div class="sidebar">
             <div class="card">
                 <div class="card-title">📋 Meta Contexto</div>
-                
                 <div class="form-group">
                     <label>Agente</label>
                     <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
@@ -612,10 +517,6 @@
                     <label>Fecha Interacción</label>
                     <input type="date" id="metaInteractionDate" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label>Fecha Evaluación</label>
-                    <input type="date" id="metaEvaluationDate" class="form-control">
-                </div>
             </div>
 
             <div class="card">
@@ -624,54 +525,41 @@
             </div>
         </div>
 
-        <!-- WORKSPACE PRODUCTION DESK -->
+        <!-- MAIN PRODUCTION SCREEN -->
         <div class="workspace">
             
-            <!-- Category Filtering Bar Tabs -->
             <div class="channel-groups">
                 <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
                 <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
                 <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: 2rem; border-left: 1px solid rgba(255,255,255,0.15);">📊 Performance Card</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: 1.5rem; border-left: 1px solid rgba(255,255,255,0.1);">📊 Performance Card</button>
             </div>
 
-            <!-- Context Sub-navigation tabs link -->
             <div class="sub-navigation" id="subTabsArea"></div>
-
-            <!-- Core Auditing Table Sheets Container -->
             <div id="formsWorkspaceArea"></div>
 
-            <!-- HIGH-IMPACT CYBER PERFORMANCE VIEW (PDF RENDER TARGET) -->
+            <!-- EXPORT TARGET WITH STRETCHED ROWS MATRIX -->
             <div id="dashboardViewArea" style="display:none;">
                 <div id="pdfPrintTarget">
                     <div class="feedback-badge-container">
                         <div>
-                            <h2 style="font-family:'Space Grotesk'; font-size:1.85rem; font-weight:700; margin-bottom:0.4rem;">Performance Score Matrix</h2>
-                            <p style="color:var(--text-muted); font-size:0.95rem;">Resumen definitivo y sincronización métrica del control de calidad.</p>
+                            <h2 style="font-family:'Space Grotesk'; font-size:1.6rem; font-weight:700; margin-bottom:0.25rem;">Performance Score Matrix</h2>
+                            <p style="color:var(--text-muted); font-size:0.9rem;">Sincronización métrica global de auditorías de calidad.</p>
                         </div>
-                        
-                        <!-- Premium Neon Circular Gauge HUD -->
-                        <div class="radial-score-wrapper">
-                            <svg>
-                                <circle class="radial-bg-circle" cx="75" cy="75" r="70"></circle>
-                                <circle class="radial-progress-circle" id="radialCircle" cx="75" cy="75" r="70"></circle>
-                            </svg>
-                            <div class="global-score-hero" id="lblGlobalScore">100%</div>
-                        </div>
+                        <div class="global-score-hero" id="lblGlobalScore">100%</div>
                     </div>
 
                     <div class="dashboard-grid">
                         <div>
-                            <!-- EXACT REQUESTED MATRIX FROM SCREENSHOT image_36a75c.png -->
-                            <div class="card" style="margin-bottom: 2.5rem; overflow-x: auto; padding: 0.5rem 0.5rem 1.5rem 0.5rem;">
+                            <div class="card" style="margin-bottom: 2rem; padding: 0px; overflow: hidden; border-radius: var(--radius-md);">
                                 <table class="screenshot-matrix" id="screenshotPerformanceMatrix">
                                     <thead>
                                         <tr>
-                                            <th style="width: 60px; text-align: center;">Item</th>
-                                            <th style="width: 140px; text-align: center;">Canal</th>
+                                            <th style="width: 70px; text-align: center;">Item</th>
+                                            <th style="width: 150px; text-align: center;">Canal</th>
                                             <th>Criterio de Evaluación</th>
-                                            <th style="width: 90px; text-align: center;">Max Pts</th>
-                                            <th style="width: 90px; text-align: center;">Nota Cal.</th>
+                                            <th style="width: 100px; text-align: center;">Max Pts</th>
+                                            <th style="width: 100px; text-align: center;">Nota Cal.</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -681,8 +569,8 @@
                                             <td style="text-align: center; font-weight: 700;">1.1</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
                                             <td style="font-weight: 600;">Saludo Adecuado<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Saludo profesional y personalizado alineado con los estándares de la empresa.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">5</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_1_1">-</td>
+                                            <td style="text-align: center; font-weight: 500;">5</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_1_1">5.0</td>
                                         </tr>
                                         <!-- SECCIÓN 2 -->
                                         <tr class="section-title-row"><td colspan="5">SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO</td></tr>
@@ -690,29 +578,29 @@
                                             <td style="text-align: center; font-weight: 700;">2.1</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
                                             <td style="font-weight: 600;">Resolución Exacta y Efectiva<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Proporcionó información precisa y resolvió claramente la inquietud del cliente.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">20</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_2_1">-</td>
+                                            <td style="text-align: center; font-weight: 500;">20</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_1">20.0</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center; font-weight: 700;">2.2</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
                                             <td style="font-weight: 600;">Alternativas Ofrecidas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Ofreció alternativas apropiadas cuando correspondía.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">15</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_2_2">-</td>
+                                            <td style="text-align: center; font-weight: 500;">15</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_2">15.0</td>
                                         </tr>
                                         <tr id="row_m_2_3">
                                             <td style="text-align: center; font-weight: 700;">2.3</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
                                             <td style="font-weight: 600;">Resolución Exacta y Efectiva<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Resolución precisa alineada con la política de la empresa.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">30</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_2_3">-</td>
+                                            <td style="text-align: center; font-weight: 500;">30</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_3">30.0</td>
                                         </tr>
                                         <tr id="row_m_2_4">
                                             <td style="text-align: center; font-weight: 700;">2.4</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
                                             <td style="font-weight: 600;">Plantilla Correcta Utilizada<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Usó la plantilla aprobada correcta cuando fue requerida.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">15</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_2_4">-</td>
+                                            <td style="text-align: center; font-weight: 500;">15</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_4">15.0</td>
                                         </tr>
                                         <!-- SECCIÓN 3 -->
                                         <tr class="section-title-row"><td colspan="5">SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN</td></tr>
@@ -720,29 +608,29 @@
                                             <td style="text-align: center; font-weight: 700;">3.1</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
                                             <td style="font-weight: 600;">Gestión de Espera y del Tiempo / Respuesta Oportuna<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">15</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_3_1">-</td>
+                                            <td style="text-align: center; font-weight: 500;">15</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_1">15.0</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center; font-weight: 700;">3.2</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
                                             <td style="font-weight: 600;">Gramática y Ortografía<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Comunicación clara, sin errores de gramática ni ortografía.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">10</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_3_2">-</td>
+                                            <td style="text-align: center; font-weight: 500;">10</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_2">10.0</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center; font-weight: 700;">3.3</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
                                             <td style="font-weight: 600;">Comunicación Profesional e Inteligencia Emocional<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Mantuvo un tono profesional, respetuoso y enfocado en el cliente.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">20</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_3_3">-</td>
+                                            <td style="text-align: center; font-weight: 500;">20</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_3">20.0</td>
                                         </tr>
                                         <tr id="row_m_3_4">
                                             <td style="text-align: center; font-weight: 700;">3.4</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
                                             <td style="font-weight: 600;">Formato Adecuado<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Aseguró estructura clara y presentación organizada.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">10</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_3_4">-</td>
+                                            <td style="text-align: center; font-weight: 500;">10</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_4">10.0</td>
                                         </tr>
                                         <!-- SECCIÓN 4 -->
                                         <tr class="section-title-row"><td colspan="5">SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL</td></tr>
@@ -750,69 +638,45 @@
                                             <td style="text-align: center; font-weight: 700;">4.1</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
                                             <td style="font-weight: 600;">Asistencia Adicional - Soporte Extra<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Ofreció ayuda adicional antes de cerrar la interacción.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">10</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_4_1">-</td>
+                                            <td style="text-align: center; font-weight: 500;">10</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_1">10.0</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center; font-weight: 700;">4.2</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
                                             <td style="font-weight: 600;">Asistencia Adicional - Promociones y Ofertas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Compartió promociones relevantes cuando fue aplicable.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">5</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_4_2">-</td>
+                                            <td style="text-align: center; font-weight: 500;">5</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_2">5.0</td>
                                         </tr>
                                         <tr id="row_m_4_3">
                                             <td style="text-align: center; font-weight: 700;">4.3</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
                                             <td style="font-weight: 600;">Firma Incluida<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Incluyó la firma profesional requerida.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">5</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_4_3">-</td>
+                                            <td style="text-align: center; font-weight: 500;">5</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_3">5.0</td>
                                         </tr>
                                         <tr id="row_m_4_4">
                                             <td style="text-align: center; font-weight: 700;">4.4</td>
                                             <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
                                             <td style="font-weight: 600;">Asistencia Adicional - Promociones y Ofertas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Compartió promociones relevantes cuando fue aplicable.</span></td>
-                                            <td style="text-align: center; font-weight: 700;">10</td>
-                                            <td style="text-align: center; font-weight: 800;" id="m_val_4_4">-</td>
+                                            <td style="text-align: center; font-weight: 500;">10</td>
+                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_4">10.0</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
-                            <div class="card">
-                                <div class="card-title">📝 Comentarios de Calibración Ejecutiva</div>
+                            <!-- CONTROL DE CORTE DE PÁGINA PARA LA SECCIÓN DE COMENTARIOS -->
+                            <div class="card page-break-before">
+                                <div class="card-title">📝 Notas de Calibración Estratégica</div>
                                 <div class="form-group">
-                                    <label>Observaciones Generales de la Sesión</label>
-                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Escriba un resumen ejecutivo de la sesión..."></textarea>
+                                    <label>Observaciones Generales</label>
+                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Escriba un resumen del desempeño..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Plan Estratégico de Desarrollo de Objetivos</label>
-                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Ruta de optimización táctica y siguientes pasos del agente..."></textarea>
+                                    <label>Plan de Desarrollo</label>
+                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Objetivos tácticos para el próximo ciclo..."></textarea>
                                 </div>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem;">
-                                    <div class="form-group">
-                                        <label>Estado del Seguimiento</label>
-                                        <select id="dashPerformanceRating" class="form-control">
-                                            <option value="Completed">Completado</option>
-                                            <option value="Non Completed">Pendiente</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Próxima Fecha Recalibración</label>
-                                        <input type="date" id="dashFollowUpDate" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Sidebar Feedlists -->
-                        <div>
-                            <div class="card" style="margin-bottom: 1.5rem;">
-                                <div class="card-title" style="color:var(--success-text);">🌟 Fortalezas Clave</div>
-                                <div id="dashFortalezasList" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
-                            </div>
-                            <div class="card">
-                                <div class="card-title" style="color:var(--danger-text);">🚀 Áreas de Enfoque / Mejora</div>
-                                <div id="dashMejorasList" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
                             </div>
                         </div>
                     </div>
@@ -822,7 +686,7 @@
         </div>
     </div>
 
-    <!-- MODAL WINDOW ATRIBUTES -->
+    <!-- REGISTER MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
             <div class="card-title">⚙️ Agregar Parámetro Dinámico</div>
@@ -836,62 +700,44 @@
             </div>
             <div class="form-group">
                 <label>Identificador del Elemento</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Escriba el nombre o etiqueta...">
+                <input type="text" id="configValue" class="form-control" placeholder="Nombre...">
             </div>
-            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:2rem;">
+            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:2rem;">
                 <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancelar</button>
                 <button class="btn btn-primary" onclick="addNewConfigItem()">Añadir Registro</button>
             </div>
         </div>
     </div>
 
-    <!-- LOGIC APPLICATION SCRIPT ENGINE -->
     <script>
         const defaultLists = {
-            agents: [
-                "Adrian Navarro", "Andrey Castillo", "Anilu Guzman", "Carlos Alejandro Amador Luna",
-                "Carlos Amador", "Carlos Ortiz", "Carolina Castro", "Charlene Rose", "Daniel Gonzalez",
-                "Daniel Leandro", "David Cruz", "David Vogler", "Diego Matamoros", "Eckart Lutz",
-                "Eddison Prendas", "Edson Stewart Retana", "Elena Rojas", "Elliot Navarro", "Emerson Hernandez",
-                "Fer Blanco", "Graciela Bravo", "Ignacio Blanco", "Isaac Barrantes", "Isaac Porras",
-                "Israel Aburto", "Jose David Shedden", "Jose Maria Cartin", "Jose Pablo Robles", "Josué Vargas",
-                "Julian Mena", "Kemar Clare", "Kendall Montoya", "Kevin Salazar", "Kevin Zamora", "Keysha Cross",
-                "Luis Carvajal", "Luis Fernando Ruiz", "Maria Jose Quiros", "Mariana Bejarano", "Mariana Varela",
-                "Marlon Wright", "Mauricio Alvarado", "Michelle Saborio", "Naigell Beckford", "Naomy Sanchez",
-                "Nicole Román", "Pablo Guzman", "Phillip Desanti", "Rory Bulgarelli", "Samuel Carballo",
-                "Sebastian Puerta", "Sebastian Rivera", "Sheydron Clark", "Silvana Suarez", "Stephannie Cunningham",
-                "Tamara Donaire", "Thimy Gonzalez", "Valerie Alfaro", "Vanessa Umaña", "Yasser Quiros"
-            ],
-            evaluators: [
-                "Adriana Vasquez", "Alfred Villalobos", "Amy", "Carlos Barrantes", "Isabelle Morales",
-                "Kendra Temple", "Kunti Solis", "Maria Jose Fallas", "Mario Acon", "Natalia Sibaja",
-                "Nicole Valverde", "Pablo Retana", "Victor Ramirez"
-            ],
-            roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
+            agents: ["Adrian Navarro", "Andrey Castillo", "Carlos Amador", "Daniel Gonzalez", "David Cruz", "Jose Pablo Robles", "Kevin Salazar", "Mariana Varela", "Naomy Sanchez", "Samuel Carballo", "Vanessa Umaña"],
+            evaluators: ["Adriana Vasquez", "Alfred Villalobos", "Carlos Barrantes", "Isabelle Morales", "Mario Acon", "Natalia Sibaja", "Victor Ramirez"],
+            roles: ["New Hire", "T1", "T2", "T3", "Processing Squad", "Deposits", "Payouts", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_premium_dark')) || defaultLists;
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_luxury_edition')) || defaultLists;
 
         const phoneChatCriteria = [
-            { id: "1.1", section: "SECTION 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
-            { id: "2.1", section: "SECTION 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
-            { id: "2.2", section: "SECTION 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
-            { id: "3.1", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
-            { id: "3.2", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
-            { id: "3.3", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
-            { id: "4.1", section: "SECTION 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
-            { id: "4.2", section: "SECTION 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
+            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
+            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
+            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
+            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
+            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
         ];
 
         const emailCriteria = [
-            { id: "1.1", section: "SECTION 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
-            { id: "2.3", section: "SECTION 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
-            { id: "2.4", section: "SECTION 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
-            { id: "3.1", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
-            { id: "3.2", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
-            { id: "3.4", section: "SECTION 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
-            { id: "4.3", section: "SECTION 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
-            { id: "4.4", section: "SECTION 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
+            { id: "2.3", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
+            { id: "2.4", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
+            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
+            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
+            { id: "3.4", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
+            { id: "4.3", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
+            { id: "4.4", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
         ];
 
         let currentGroup = "Phones";
@@ -903,7 +749,6 @@
             groups.forEach(g => {
                 evaluationState[g] = { checkedGlobal: true };
                 const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
-                
                 for(let i=1; i<=4; i++) {
                     evaluationState[g][i] = {
                         active: true,
@@ -925,10 +770,7 @@
             renderActiveCheckboxes();
             buildAllForms();
             switchChannelGroup("Phones");
-            
             document.getElementById('metaInteractionDate').valueAsDate = new Date();
-            document.getElementById('metaEvaluationDate').valueAsDate = new Date();
-            document.getElementById('dashFollowUpDate').valueAsDate = new Date(Date.now() + 7*24*60*60*1000);
         };
 
         function renderDropdowns() {
@@ -949,21 +791,13 @@
             if (role === "T1") {
                 emailTab.classList.add('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = false;
-                for(let i=1; i<=4; i++) {
-                    evaluationState["Emails"][i].active = false;
-                    let ck = document.getElementById(`ck_Emails_${i}`);
-                    if(ck) ck.checked = false;
-                }
+                for(let i=1; i<=4; i++) evaluationState["Emails"][i].active = false;
                 if (row23) { row23.style.display = "none"; row24.style.display = "none"; row34.style.display = "none"; row43.style.display = "none"; row44.style.display = "none"; }
                 if (currentGroup === "Emails") switchChannelGroup("Phones");
             } else {
                 emailTab.classList.remove('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = true;
-                for(let i=1; i<=4; i++) {
-                    evaluationState["Emails"][i].active = true;
-                    let ck = document.getElementById(`ck_Emails_${i}`);
-                    if(ck) ck.checked = true;
-                }
+                for(let i=1; i<=4; i++) evaluationState["Emails"][i].active = true;
                 if (row23) { row23.style.display = "table-row"; row24.style.display = "table-row"; row34.style.display = "table-row"; row43.style.display = "table-row"; row44.style.display = "table-row"; }
             }
             renderActiveCheckboxes();
@@ -978,13 +812,12 @@
 
             groups.forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:0.75rem; font-weight:700; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">${g}</div>`;
+                html += `<div style="margin-top:0.5rem; font-weight:700; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
                 for(let i=1; i<=4; i++) {
-                    const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
                     html += `
                         <div class="checkbox-item">
-                            <label for="ck_${g}_${i}">${labelName}</label>
+                            <label for="ck_${g}_${i}">${g === "Phones" ? "Call" : g === "Chats" ? "Chat" : "Email"} ${i}</label>
                             <input type="checkbox" id="ck_${g}_${i}" ${checked} onchange="toggleCaseActive('${g}', ${i}, this.checked)">
                         </div>
                     `;
@@ -995,8 +828,6 @@
 
         function toggleCaseActive(group, index, isChecked) {
             evaluationState[group][index].active = isChecked;
-            const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
-            if(subTabEl) subTabEl.style.opacity = !isChecked ? "0.25" : "1";
             calculateSingleFormScore(group, index);
             calculateGlobalMatrix();
         }
@@ -1033,19 +864,13 @@
             let html = "";
             for (let i = 1; i <= 4; i++) {
                 const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
-                const activeClass = i === currentSubIndex ? "active" : "";
-                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.25;'";
-                html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
+                html += `<button class="sub-tab-btn ${i === currentSubIndex ? 'active' : ''}" onclick="switchSubTab(${i})">${name}</button>`;
             }
             area.innerHTML = html;
         }
 
         function switchSubTab(index) {
             currentSubIndex = index;
-            document.querySelectorAll('.sub-tab-btn').forEach((b, idx) => {
-                if (idx === (index - 1)) b.classList.add('active');
-                else b.classList.remove('active');
-            });
             document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
             const targetEl = document.getElementById(`form_container_${currentGroup}_${index}`);
             if (targetEl) targetEl.classList.add('active');
@@ -1069,27 +894,11 @@
                     container.className = "form-container";
 
                     let tableHtml = `
-                        <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:1.25rem 2rem; border-radius:var(--radius-md); margin-bottom:1.5rem; display:flex; justify-content: space-between; align-items:center; box-shadow:var(--shadow-premium)">
-                            <div style="font-weight:700; font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Registro Referencia Interacción</div>
-                            <div style="display:flex; gap:1.5rem;">
-                                <div style="display:flex; align-items:center; gap:0.5rem;">
-                                    <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">Cuenta #:</label>
-                                    <input type="text" placeholder="CX Account" class="form-control" style="width:150px; padding:0.4rem 0.75rem;"
-                                           value="${evaluationState[g][i].accountNumber || ''}" oninput="updateFormValue('${g}', ${i}, 'accountNumber', this.value)">
-                                </div>
-                                <div style="display:flex; align-items:center; gap:0.5rem;">
-                                    <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">ID Interacción:</label>
-                                    <input type="text" placeholder="ID Referencia" class="form-control" style="width:180px; padding:0.4rem 0.75rem;"
-                                           value="${evaluationState[g][i].interactionId || ''}" oninput="updateFormValue('${g}', ${i}, 'interactionId', this.value)">
-                                </div>
-                            </div>
-                        </div>
-
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th style="width:50%;">Criterio Interno</th>
-                                    <th>Evaluación QA</th>
+                                    <th style="width:55%;">Criterio</th>
+                                    <th>Evaluación</th>
                                     <th>Max</th>
                                     <th>Puntos</th>
                                 </tr>
@@ -1097,27 +906,11 @@
                             <tbody>
                     `;
 
-                    let currentSection = "";
                     criteriaList.forEach(c => {
-                        if (c.section !== currentSection) {
-                            currentSection = c.section;
-                            tableHtml += `
-                                <tr class="section-header-row">
-                                    <td colspan="2">${currentSection}</td>
-                                    <td colspan="2" style="text-align:right; border-radius: 0 var(--radius-md) var(--radius-md) 0;">
-                                        <input type="text" placeholder="Feedback corto para esta sección..." 
-                                               class="form-control" style="width:360px; display:inline-block; padding:0.4rem 0.75rem; font-size:0.85rem; background:rgba(0,0,0,0.3);"
-                                               value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
-                                               onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
-                                    </td>
-                                </tr>
-                            `;
-                        }
-
                         tableHtml += `
                             <tr>
                                 <td>
-                                    <span style="font-weight:600; font-size:0.95rem;">${c.text}</span>
+                                    <span style="font-weight:600;">${c.text}</span>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
                                 <td>
@@ -1128,46 +921,18 @@
                                         <button class="qa-pill" data-val="N/A" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'N/A', this)">N/A</button>
                                     </div>
                                 </td>
-                                <td style="color:var(--text-muted); font-weight:600; font-size:0.85rem;">${c.max_pts}</td>
-                                <td>
-                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box" style="background:var(--success-bg); color:var(--success-text);">${c.max_pts}</span>
-                                </td>
+                                <td>${c.max_pts}</td>
+                                <td><span id="score_box_${g}_${i}_${c.id}" class="score-display-box" style="background:rgba(16,185,129,0.1); color:#34D399;">${c.max_pts}</span></td>
                             </tr>
                         `;
                     });
 
-                    tableHtml += `
-                            </tbody>
-                        </table>
-                        
-                        <div class="form-footer-scores">
-                            <div class="footer-score-block" style="border-right: 1px solid var(--border-color); padding-right:2.5rem;">
-                                <text>Puntos Ganados</text>
-                                <div id="lbl_pts_${g}_${i}">100.00</div>
-                            </div>
-                            <div class="footer-score-block">
-                                <text>Porcentaje de Cumplimiento</text>
-                                <div id="lbl_pct_${g}_${i}" style="color:var(--success-text);">100%</div>
-                            </div>
-                        </div>
-                    `;
-
+                    tableHtml += `</tbody></table>`;
                     container.innerHTML = tableHtml;
                     area.appendChild(container);
                     calculateSingleFormScore(g, i);
                 }
             });
-        }
-
-        function getSectionKey(secName) {
-            if(secName.includes("SECCIÓN 1")) return "S1";
-            if(secName.includes("SECCIÓN 2")) return "S2";
-            if(secName.includes("SECCIÓN 3")) return "S3";
-            return "S4";
-        }
-
-        function updateSectionComment(group, index, secKey, val) {
-            evaluationState[group][index].comments[secKey] = val;
         }
 
         function setQAClassification(group, index, criterionId, val, btnEl) {
@@ -1178,23 +943,19 @@
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
             const crit = criteriaList.find(c => c.id === criterionId);
             let finalPts = 0;
-
             const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
             
-            if (val === "Yes") { finalPts = crit.max_pts; box.style.background = "var(--success-bg)"; box.style.color = "var(--success-text)"; }
-            else if (val === "Partially") { finalPts = crit.max_pts * 0.5; box.style.background = "var(--warning-bg)"; box.style.color = "var(--warning-text)"; }
-            else if (val === "No") { finalPts = 0; box.style.background = "var(--danger-bg)"; box.style.color = "var(--danger-text)"; }
-            else if (val === "N/A") { finalPts = 0; box.style.background = "var(--neutral-bg)"; box.style.color = "var(--text-muted)"; }
+            if (val === "Yes") { finalPts = crit.max_pts; box.style.background = "rgba(16,185,129,0.1)"; box.style.color = "#34D399"; }
+            else if (val === "Partially") { finalPts = crit.max_pts * 0.5; box.style.background = "rgba(245,158,11,0.1)"; box.style.color = "#FBBF24"; }
+            else if (val === "No") { finalPts = 0; box.style.background = "rgba(239,68,68,0.1)"; box.style.color = "#F87171"; }
+            else if (val === "N/A") { finalPts = 0; box.style.background = "rgba(255,255,255,0.05)"; box.style.color = "#64748B"; }
 
             box.innerText = val === "N/A" ? "N/A" : finalPts;
             evaluationState[group][index].scores[criterionId] = { classification: val, points: finalPts };
-
             calculateSingleFormScore(group, index);
         }
 
         function calculateSingleFormScore(group, index) {
-            if (!evaluationState[group] || !evaluationState[group][index]) return;
-
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
             let earnedSum = 0, maxSumAvailable = 0;
 
@@ -1206,19 +967,8 @@
                 }
             });
 
-            let pct = maxSumAvailable > 0 ? (earnedSum / maxSumAvailable) * 100 : 100;
             evaluationState[group][index].calculatedScore = earnedSum;
             evaluationState[group][index].calculatedMax = maxSumAvailable;
-            evaluationState[group][index].calculatedPct = pct;
-
-            const lblPts = document.getElementById(`lbl_pts_${group}_${index}`);
-            const lblPct = document.getElementById(`lbl_pct_${group}_${index}`);
-
-            if(lblPts && lblPct) {
-                lblPts.innerText = earnedSum.toFixed(2);
-                lblPct.innerText = pct.toFixed(0) + "%";
-                lblPct.style.color = pct >= 90 ? "var(--success-text)" : (pct >= 70 ? "var(--warning-text)" : "var(--danger-text)");
-            }
         }
 
         function getMatrixCalculation(targetId, filterGroups, textNameMatched) {
@@ -1245,18 +995,16 @@
             const element = document.getElementById(targetId);
             if (!dynamicActive) {
                 if(element) element.innerText = "N/A";
-                return null;
+                return;
             }
-            let finalValue = totalMax > 0 ? (totalEarned / totalMax) * (targetId.includes("m_val_1_1") ? 5 : (targetId.includes("m_val_2_1") ? 20 : (targetId.includes("m_val_2_2") ? 15 : (targetId.includes("m_val_2_3") ? 30 : (targetId.includes("m_val_2_4") ? 15 : (targetId.includes("m_val_3_1") ? 15 : (targetId.includes("m_val_3_2") ? 10 : (targetId.includes("m_val_3_3") ? 20 : (targetId.includes("m_val_3_4") ? 10 : (targetId.includes("m_val_4_1") ? 10 : (targetId.includes("m_val_4_2") ? 5 : (targetId.includes("m_val_4_3") ? 5 : 10)))))))))))) : 0;
-            
+            let baseMax = targetId.includes("m_val_1_1") ? 5 : (targetId.includes("m_val_2_1") ? 20 : (targetId.includes("m_val_2_2") ? 15 : (targetId.includes("m_val_2_3") ? 30 : (targetId.includes("m_val_2_4") ? 15 : (targetId.includes("m_val_3_1") ? 15 : (targetId.includes("m_val_3_2") ? 10 : (targetId.includes("m_val_3_3") ? 20 : (targetId.includes("m_val_3_4") ? 10 : (targetId.includes("m_val_4_1") ? 10 : (targetId.includes("m_val_4_2") ? 5 : (targetId.includes("m_val_4_3") ? 5 : 10)))))))))))) : 0;
+            let finalValue = totalMax > 0 ? (totalEarned / totalMax) * baseMax : 0;
             if(element) element.innerText = finalValue.toFixed(1);
-            return { earned: totalEarned, max: totalMax };
         }
 
         function calculateGlobalMatrix() {
             const isT1 = (document.getElementById('metaRole').value === "T1");
             
-            // Map exact values requested in screenshot image_36a75c.png
             getMatrixCalculation("m_val_1_1", ["Phones", "Chats", "Emails"], "Proper Greeting & Account Verification");
             getMatrixCalculation("m_val_2_1", ["Phones", "Chats"], "Accurate & Effective Resolution");
             getMatrixCalculation("m_val_2_2", ["Phones", "Chats"], "Alternatives Offered");
@@ -1275,49 +1023,20 @@
             getMatrixCalculation("m_val_4_1", ["Phones", "Chats"], "Extra Assistance - Additional Support (Mandatory)");
             getMatrixCalculation("m_val_4_2", ["Phones", "Chats"], "Extra Assistance - Promotions & Offers");
 
-            // Calculate overall visual Global Percentage HUD
             let totalEarnedGlobal = 0, totalMaxGlobal = 0;
             const coreGroups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
             
-            const fortList = document.getElementById('dashFortalezasList');
-            const mejList = document.getElementById('dashMejorasList');
-            fortList.innerHTML = ""; mejList.innerHTML = "";
-            let addedFort = new Set(), addedMej = new Set();
-
             coreGroups.forEach(g => {
-                const listCriteria = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
                         totalEarnedGlobal += evaluationState[g][i].calculatedScore;
                         totalMaxGlobal += evaluationState[g][i].calculatedMax;
-
-                        listCriteria.forEach(c => {
-                            const sc = evaluationState[g][i].scores[c.id];
-                            if(sc && sc.classification === "Yes" && !addedFort.has(c.text)) {
-                                addedFort.add(c.text);
-                                fortList.innerHTML += `<div style="background:var(--success-bg); color:var(--success-text); padding:0.85rem 1rem; border-radius:var(--radius-sm); font-size:0.9rem; font-weight:600; border-left:3px solid var(--success);">${c.text}</div>`;
-                            } else if(sc && sc.classification === "No" && !addedMej.has(c.text)) {
-                                addedMej.add(c.text);
-                                mejList.innerHTML += `<div style="background:var(--danger-bg); color:var(--danger-text); padding:0.85rem 1rem; border-radius:var(--radius-sm); font-size:0.9rem; font-weight:600; border-left:3px solid var(--danger);">${c.text}</div>`;
-                            }
-                        });
                     }
                 }
             });
 
             let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
             document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(0) + "%";
-            
-            const circle = document.getElementById('radialCircle');
-            let offsetVal = 440 - (440 * finalGlobalPct) / 100;
-            circle.style.strokeDashoffset = offsetVal;
-
-            if(finalGlobalPct >= 90) circle.style.stroke = "var(--success)";
-            else if(finalGlobalPct >= 70) circle.style.stroke = "var(--warning)";
-            else circle.style.stroke = "var(--danger)";
-
-            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.9rem;'>No registradas.</p>";
-            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.9rem;'>No registradas.</p>";
         }
 
         function openModal(id) { document.getElementById(id).style.display = "flex"; }
@@ -1327,14 +1046,9 @@
             const type = document.getElementById('configType').value;
             const value = document.getElementById('configValue').value.trim();
             if(!value) return;
-
             currentLists[type].push(value);
-            if(type !== 'roles') currentLists[type].sort();
-
-            localStorage.setItem('qa_lists_premium_dark', JSON.stringify(currentLists));
+            localStorage.setItem('qa_lists_luxury_edition', JSON.stringify(currentLists));
             renderDropdowns();
-            renderActiveCheckboxes();
-            document.getElementById('configValue').value = "";
             closeModal('configModal');
         }
 
@@ -1342,12 +1056,14 @@
             const agentName = document.getElementById('metaAgent').value || "Agente";
             const element = document.getElementById('pdfPrintTarget');
             
+            // Forzar Layout Limpio de Impresión sin cortes abruptos en bordes
             const opt = {
-                margin:       [0.5, 0.5, 0.5, 0.5],
-                filename:     `QA_Reporte_Premium_${agentName.replace(/\s+/g, '_')}.pdf`,
+                margin:       [0.4, 0.4, 0.4, 0.4],
+                filename:     `QA_Reporte_${agentName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0B0F19' },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#060913' },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css'] } // Evita que se corten tablas e inputs por la mitad
             };
 
             html2pdf().set(opt).from(element).save();
