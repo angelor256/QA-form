@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quality Matrix // Premium Studio Edition</title>
+    <title>QA Platform // Editorial Premium Edition</title>
     
-    <!-- Google Fonts: Alta Gama & Vanguardia -->
+    <!-- Google Fonts: Premium & Editorial Design -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Librería html2pdf para renderizado exacto y limpio de PDF -->
+    <!-- html2pdf library for clean rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #f8f9fa;
+            --bg-main: #fcfcfc;
             --bg-card: #ffffff;
-            --text-dark: #0f1115;
-            --text-muted: #67748e;
-            --accent-premium: #2563eb; /* Azul eléctrico premium */
-            --accent-soft: #eff6ff;
-            --border-clean: #1e293b;
+            --text-dark: #000000;
+            --text-muted: #707070;
+            --accent-green: #10b981;
+            --accent-brand: #000000;
+            --border-thin: #e5e5e5;
             
             --success: #10b981;
             --warning: #f59e0b;
@@ -33,50 +33,43 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-dark);
-            padding: 2.5rem;
+            padding: 0;
             min-height: 100vh;
         }
 
-        /* --- CONTENEDOR EXPORTABLE (Todo lo que va al PDF) --- */
-        #pdfExportContainer {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
+        /* --- EDITORIAL HERO HEADER (Inspired by image layout) --- */
         header {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 3rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
-            padding: 1.75rem 2.5rem;
-            border: 2px solid var(--border-clean);
-            border-radius: 24px;
-            box-shadow: 4px 4px 0px var(--border-clean);
-            margin-bottom: 2.5rem;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--text-dark);
         }
 
         .logo-area h1 {
             font-family: 'Syne', sans-serif;
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--text-dark);
+            line-height: 0.9;
+            letter-spacing: -2px;
             text-transform: uppercase;
         }
 
         .logo-area p {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            color: #a3a3a3;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 0.15rem;
+            margin-top: 0.75rem;
         }
 
         .header-actions {
@@ -85,160 +78,149 @@
         }
 
         .btn {
-            padding: 0.85rem 1.75rem;
-            border-radius: 14px;
-            font-weight: 700;
+            padding: 1rem 2rem;
+            font-weight: 600;
             font-size: 0.85rem;
             font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
         }
 
         .btn-primary {
-            background: var(--text-dark);
-            color: white;
-            border: 2px solid var(--text-dark);
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            background: white;
+            color: black;
         }
 
         .btn-primary:hover {
-            background: var(--accent-premium);
-            border-color: var(--accent-premium);
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border-clean);
+            background: transparent;
+            color: white;
+            border-color: white;
         }
 
         .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-dark);
-            border: 2px solid var(--border-clean);
-            box-shadow: 3px 3px 0px var(--border-clean);
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.3);
         }
 
         .btn-secondary:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border-clean);
+            border-color: white;
         }
 
+        /* --- ASYMMETRIC GRID LAYOUT --- */
         .app-layout {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 320px 1fr;
+            min-height: calc(100vh - 180px);
+        }
+
+        /* Sidebar with explicit borders like a magazine template */
+        .sidebar {
+            border-right: 1px solid var(--border-thin);
+            background: white;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
             gap: 2.5rem;
         }
 
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 2px solid var(--border-clean);
-            border-radius: 24px;
-            padding: 2rem;
-            box-shadow: 4px 4px 0px var(--border-clean);
-        }
-
-        .card-title {
+        .sidebar-section-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 1.5rem;
             color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 2px solid var(--bg-main);
-            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--text-dark);
+            padding-bottom: 0.25rem;
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--text-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         .form-control {
             width: 100%;
-            background-color: var(--bg-main);
-            border: 2px solid var(--border-clean);
-            border-radius: 12px;
-            padding: 0.85rem 1rem;
+            background-color: transparent;
+            border: 1px solid #d1d1d1;
+            padding: 0.75rem 1rem;
             color: var(--text-dark);
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 400;
             transition: all 0.2s ease;
         }
 
         .form-control:focus {
             outline: none;
-            background: white;
-            border-color: var(--accent-premium);
+            border-color: var(--text-dark);
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px dashed #e2e8f0;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-thin);
         }
 
         .checkbox-item label {
             font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-dark);
+            font-weight: 500;
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-premium);
+            width: 16px;
+            height: 16px;
+            accent-color: var(--text-dark);
             cursor: pointer;
         }
 
+        /* Workspace Core */
         .workspace {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            background: var(--bg-main);
         }
 
+        /* Magazine Style Channel Tabs */
         .channel-groups {
-            display: flex;
-            gap: 0.75rem;
-            background: #e2e8f0;
-            padding: 0.5rem;
-            border-radius: 18px;
-            border: 2px solid var(--border-clean);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--text-dark);
+            background: white;
         }
 
         .tab-btn {
-            padding: 0.85rem 1.5rem;
+            padding: 1.5rem;
             background: transparent;
             color: var(--text-muted);
             border: none;
-            border-radius: 12px;
+            border-right: 1px solid var(--border-thin);
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            text-align: center;
         }
 
         .tab-btn:hover {
             color: var(--text-dark);
+            background: #fafafa;
         }
 
         .tab-btn.active {
@@ -247,47 +229,54 @@
         }
 
         .tab-btn.disabled-tab {
-            opacity: 0.3;
+            opacity: 0.25;
             cursor: not-allowed;
             text-decoration: line-through;
         }
 
         #btnGroupDashboard {
-            margin-left: auto;
-            background: var(--accent-soft);
-            color: var(--accent-premium);
-            border: 1px dashed var(--accent-premium);
+            border-right: none;
+            background: #f1f5f9;
+            color: var(--text-dark);
         }
         #btnGroupDashboard.active {
-            background: var(--accent-premium);
+            background: #1e293b;
             color: white;
-            border-style: solid;
         }
 
         .sub-navigation {
             display: flex;
-            gap: 0.5rem;
+            background: white;
+            border-bottom: 1px solid var(--border-thin);
+            padding: 0 2rem;
         }
 
         .sub-tab-btn {
-            padding: 0.6rem 1.25rem;
-            background: white;
+            padding: 1rem 1.5rem;
+            background: transparent;
             color: var(--text-muted);
-            border: 2px solid var(--border-clean);
-            border-radius: 10px;
+            border: none;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 600;
+            text-transform: uppercase;
             cursor: pointer;
+            position: relative;
         }
 
         .sub-tab-btn.active {
-            background: var(--accent-soft);
-            color: var(--accent-premium);
-            border-color: var(--accent-premium);
+            color: var(--text-dark);
+        }
+        .sub-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--text-dark);
         }
 
         .form-container {
             display: none;
+            padding: 3rem;
         }
 
         .form-container.active {
@@ -297,45 +286,47 @@
         .meta-case-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
             background: white;
-            padding: 1.5rem;
-            border: 2px solid var(--border-clean);
+            padding: 2rem;
+            border: 1px solid var(--border-thin);
             border-bottom: none;
-            border-radius: 24px 24px 0 0;
         }
 
+        /* Clean Editorial Tables */
         .evaluation-table {
             width: 100%;
             border-collapse: collapse;
-            background: var(--bg-card);
-            border: 2px solid var(--border-clean);
+            background: white;
+            border: 1px solid var(--border-thin);
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 1.25rem;
-            background: var(--bg-main);
+            padding: 1rem 1.5rem;
+            background: #fafafa;
             color: var(--text-dark);
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            border-bottom: 2px solid var(--border-clean);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--text-dark);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: #f1f5f9;
-            color: var(--text-dark);
-            font-weight: 800;
+            background: var(--text-dark);
+            color: white;
+            font-weight: 700;
             font-size: 0.85rem;
             font-family: 'Space Grotesk', sans-serif;
-            padding: 1.25rem;
-            border-bottom: 2px solid var(--border-clean);
+            padding: 1rem 1.5rem;
+            letter-spacing: 1px;
         }
 
         .evaluation-table td {
-            padding: 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-thin);
             font-size: 0.9rem;
             vertical-align: middle;
         }
@@ -344,152 +335,222 @@
             display: block;
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 0.3rem;
-            font-weight: 500;
+            margin-top: 0.25rem;
+            font-weight: 400;
         }
 
         .select-classification {
             background-color: white;
             color: var(--text-dark);
-            border: 2px solid var(--border-clean);
-            border-radius: 10px;
-            padding: 0.5rem;
-            font-weight: 700;
+            border: 1px solid #c8c8c8;
+            padding: 0.4rem 0.6rem;
+            font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            width: 120px;
+            width: 110px;
         }
 
         .badge-pill {
-            padding: 0.4rem 0.8rem;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            font-weight: 700;
+            font-size: 0.75rem;
             text-align: center;
             display: inline-block;
-            border: 2px solid var(--border-clean);
+            text-transform: uppercase;
+            border: 1px solid transparent;
         }
 
-        .status-yes { background-color: #ecfdf5; color: var(--success); }
-        .status-partial { background-color: #fffbeb; color: var(--warning); }
-        .status-no { background-color: #fef2f2; color: var(--danger); }
-        .status-na { background-color: var(--bg-main); color: var(--na); }
+        .status-yes { background-color: #f0fdf4; color: var(--success); border-color: #bbf7d0; }
+        .status-partial { background-color: #fffbeb; color: var(--warning); border-color: #fde68a; }
+        .status-no { background-color: #fef2f2; color: var(--danger); border-color: #fecaca; }
+        .status-na { background-color: #f5f5f5; color: var(--na); border-color: #e5e5e5; }
 
         .form-footer-scores {
             display: flex;
             justify-content: flex-end;
-            gap: 3rem;
+            gap: 4rem;
             background: white;
-            padding: 1.5rem 2.5rem;
-            border: 2px solid var(--border-clean);
+            padding: 2rem;
+            border: 1px solid var(--border-thin);
             border-top: none;
-            border-radius: 0 0 24px 24px;
-            box-shadow: 4px 4px 0px var(--border-clean);
         }
 
         .footer-score-block text {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            letter-spacing: 1px;
             margin-bottom: 0.25rem;
         }
 
         .footer-score-block div {
-            font-size: 1.6rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* --- DASHBOARD INTEGRED --- */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+        /* --- DASHBOARD & FEEDBACK BLOCKS VIEW --- */
+        #dashboardViewArea {
+            padding: 3rem;
         }
 
-        .feedback-badge-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        /* Asymmetric block representation inspired by the user's photo */
+        .editorial-row-hero {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            border: 1px solid var(--text-dark);
             background: white;
-            border: 2px solid var(--border-clean);
-            border-radius: 24px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 4px 4px 0px var(--border-clean);
+            margin-bottom: 3rem;
+        }
+
+        .hero-banner-left {
+            padding: 4rem 3rem;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--text-dark);
+        }
+
+        .hero-banner-left h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-banner-left p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .hero-score-right {
+            background: #10b981; /* Solid block color match */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            text-align: center;
         }
 
         .global-score-hero {
-            font-family: 'Syne', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--accent-premium);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .global-score-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
         }
 
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 0.5rem;
         }
 
         .matrix-table th {
-            background-color: var(--bg-main);
+            background-color: #fafafa;
             color: var(--text-dark);
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
             padding: 1rem;
-            border: 1px solid #cbd5e1;
-            font-size: 0.85rem;
+            border: 1px solid var(--border-thin);
+            font-size: 0.8rem;
+            text-transform: uppercase;
         }
 
         .matrix-table td {
-            border: 1px solid #e2e8f0;
-            padding: 1rem;
+            border: 1px solid var(--border-thin);
+            padding: 1.25rem 1rem;
             font-size: 0.85rem;
         }
 
         .matrix-section-title {
-            background: #f8f9fa !important;
-            color: var(--text-dark) !important;
+            background: #000000 !important;
+            color: #ffffff !important;
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 800;
+            font-weight: 700;
             text-align: left !important;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .comment-box-area {
             width: 100%;
-            background: var(--bg-main);
-            border: 2px solid var(--border-clean);
-            border-radius: 12px;
+            background: #fafafa;
+            border: 1px solid var(--border-thin);
             padding: 1rem;
             color: var(--text-dark);
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
             font-size: 0.9rem;
-            font-weight: 600;
             margin-top: 0.5rem;
         }
 
-        .feedback-item-box {
-            padding: 0.85rem;
-            border-radius: 12px;
-            border: 2px solid var(--border-clean);
-            background: var(--bg-main);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            font-size: 0.85rem;
+        /* EXCLUSIVELY SPANISH LABELS FOR THE FINAL FEEDBACK MODULE AS REQUESTED */
+        .feedback-container-spanish {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
-        /* --- MODAL --- */
+        .feedback-block {
+            background: white;
+            border: 1px solid var(--border-thin);
+            padding: 2rem;
+        }
+        
+        .feedback-block-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-dark);
+        }
+
+        .feedback-item-box {
+            padding: 0.75rem 1rem;
+            border-left: 3px solid var(--text-dark);
+            background: #fafafa;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* --- PDF PRINT BREAK & CUT CONTROLS --- */
+        .pdf-page-block {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 17, 21, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.4);
             display: none;
             justify-content: center;
             align-items: center;
@@ -498,21 +559,25 @@
 
         .modal-card {
             background: white;
-            border: 2px solid var(--border-clean);
-            border-radius: 24px;
+            border: 1px solid var(--text-dark);
             width: 100%;
-            max-width: 480px;
-            padding: 2.5rem;
-            box-shadow: 6px 6px 0px var(--border-clean);
+            max-width: 450px;
+            padding: 3rem;
         }
 
-        /* Ocultar elementos innecesarios exclusivamente en la exportación PDF */
         @media print {
             .header-actions, .channel-groups, .sub-navigation, .sidebar, .select-classification {
                 display: none !important;
             }
             .app-layout {
                 grid-template-columns: 1fr !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            #dashboardViewArea {
+                padding: 0 !important;
             }
         }
     </style>
@@ -522,12 +587,12 @@
     <div id="pdfExportContainer">
         <header>
             <div class="logo-area">
-                <h1>QA // STUDIO PLATFORM</h1>
-                <p>Cuadro de mando e inteligencia operativa</p>
+                <h1>QA // STUDIO INTEL</h1>
+                <p>Operational Performance Dashboard</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-secondary" onclick="openModal('configModal')">Parámetros</button>
-                <button class="btn btn-primary" onclick="exportToPDF()">Exportar PDF</button>
+                <button class="btn btn-secondary" onclick="openModal('configModal')">Parameters</button>
+                <button class="btn btn-primary" onclick="exportToPDF()">Export PDF</button>
             </div>
         </header>
 
@@ -535,33 +600,32 @@
             
             <!-- SIDEBAR -->
             <div class="sidebar">
-                <div class="card">
-                    <div class="card-title">Metadatos de Sesión</div>
-                    
+                <div>
+                    <div class="sidebar-section-title">Session Metadata</div>
                     <div class="form-group">
-                        <label>Agente</label>
+                        <label>Agent</label>
                         <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
                     </div>
                     <div class="form-group">
-                        <label>Evaluador</label>
+                        <label>Evaluator</label>
                         <select id="metaEvaluator" class="form-control"></select>
                     </div>
                     <div class="form-group">
-                        <label>Rol Actual</label>
+                        <label>Current Role</label>
                         <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
                     </div>
                     <div class="form-group">
-                        <label>Fecha Interacción</label>
+                        <label>Interaction Date</label>
                         <input type="date" id="metaInteractionDate" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Fecha Evaluación</label>
+                        <label>Evaluation Date</label>
                         <input type="date" id="metaEvaluationDate" class="form-control">
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-title">Casos Activos</div>
+                <div>
+                    <div class="sidebar-section-title">Active Cases</div>
                     <div id="checkboxGrid"></div>
                 </div>
             </div>
@@ -573,103 +637,112 @@
                     <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
                     <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
                     <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
-                    <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')">⚡ Cuadro de Mando</button>
+                    <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')">Dashboard Matrix</button>
                 </div>
 
                 <div class="sub-navigation" id="subTabsArea"></div>
 
-                <!-- Formularios de Evaluación Interactivos -->
+                <!-- Core Workspace Evaluation Forms -->
                 <div id="formsWorkspaceArea"></div>
 
-                <!-- VISTA DEL CUADRO DE MANDO ASOCIADA A IMAGE_41A6CB.PNG -->
+                <!-- DASHBOARD MODULE CONSOLIDATED -->
                 <div id="dashboardViewArea" style="display:none;">
-                    <div class="feedback-badge-container">
-                        <div>
-                            <h2 style="font-family:'Syne', sans-serif; font-size:1.4rem; font-weight:800;">CALIFICACIÓN GLOBAL CONSOLIDADA</h2>
-                            <p style="color:var(--text-muted); font-size:0.85rem; font-weight:500;">Métricas auditadas con base en criterios explícitos del cuadro de mando.</p>
+                    
+                    <!-- Page Block 1: Hero Score & Core Matrix Table -->
+                    <div class="pdf-page-block" style="margin-bottom: 4rem;">
+                        <div class="editorial-row-hero">
+                            <div class="hero-banner-left">
+                                <h2>Consolidated Global Rating</h2>
+                                <p>Audit results measured explicitly against quality metrics framework.</p>
+                            </div>
+                            <div class="hero-score-right">
+                                <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
+                                <div class="global-score-label">Final Score</div>
+                            </div>
                         </div>
-                        <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
+
+                        <div style="background: white; border: 1px solid var(--border-thin); padding: 2.5rem;">
+                            <div class="sidebar-section-title" style="margin-bottom:2rem;">📊 Scorecard Matrix (Averages per Case Type)</div>
+                            <table class="matrix-table" id="matrixPointsTable">
+                                <!-- Generated Dynamically -->
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <div>
-                            <!-- Tabla de la Matriz con datos Literales de image_41a6cb.png -->
-                            <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
-                                <div class="card-title">📊 Matriz del Cuadro de Mando (Scores por Caso)</div>
-                                <table class="matrix-table" id="matrixPointsTable">
-                                    <!-- Renderizado desde JavaScript -->
-                                </table>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-title">Retroalimentación y Plan de Desarrollo</div>
+                    <!-- Page Block 2: Feedback & Action Plan (Protected against PDF Cuts) -->
+                    <div class="pdf-page-block" style="background: white; border: 1px solid var(--border-thin); padding: 2.5rem;">
+                        <div class="sidebar-section-title">Action Plan & Development</div>
+                        
+                        <div class="dashboard-grid">
+                            <div>
                                 <div class="form-group">
-                                    <label>Comentarios Generales del Auditor</label>
-                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Anotaciones de la calibración..."></textarea>
+                                    <label>Auditor General Comments</label>
+                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Write calibration alignment comments..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Objetivos y Compromisos de Mejora</label>
-                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Acciones concretas acordadas..."></textarea>
+                                    <label>Development Goals & Commitments</label>
+                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Specify targeted performance actions..."></textarea>
                                 </div>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem;">
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
                                     <div class="form-group">
-                                        <label>Estado de la Evaluación</label>
+                                        <label>Evaluation Status</label>
                                         <select id="dashPerformanceRating" class="form-control">
                                             <option value="Completed">Completed</option>
                                             <option value="Non Completed">Non Completed</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Próxima Sesión de Feedback</label>
+                                        <label>Next Feedback Session</label>
                                         <input type="date" id="dashFollowUpDate" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Paneles de Atributos Clasificados -->
-                        <div>
-                            <div class="card" style="margin-bottom: 1.5rem; border-top: 4px solid var(--success);">
-                                <div class="card-title" style="color:var(--success)">Fortalezas (Yes)</div>
-                                <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto;"></div>
+                        <!-- STYLED SPANISH FEEDBACK BOXES AS EXPLICITLY REQUESTED -->
+                        <div class="feedback-container-spanish">
+                            <div class="feedback-block" style="border-top: 3px solid var(--success);">
+                                <div class="feedback-block-title" style="color:var(--success);">Fortalezas (Yes)</div>
+                                <div id="dashFortalezasList"></div>
                             </div>
-                            <div class="card" style="margin-bottom: 1.5rem; border-top: 4px solid var(--warning);">
-                                <div class="card-title" style="color:var(--warning)">Observaciones (Partially)</div>
-                                <div id="dashObservarList" style="max-height: 250px; overflow-y:auto;"></div>
+                            <div class="feedback-block" style="border-top: 3px solid var(--warning);">
+                                <div class="feedback-block-title" style="color:var(--warning);">Observaciones (Partially)</div>
+                                <div id="dashObservarList"></div>
                             </div>
-                            <div class="card" style="border-top: 4px solid var(--danger);">
-                                <div class="card-title" style="color:var(--danger)">Oportunidades (No)</div>
-                                <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto;"></div>
+                            <div class="feedback-block" style="border-top: 3px solid var(--danger);">
+                                <div class="feedback-block-title" style="color:var(--danger);">Oportunidades (No)</div>
+                                <div id="dashMejorasList"></div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- CONFIG PARAMETERS MODAL -->
+    <!-- PARAMETERS CONFIG MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
-            <div class="card-title">Administrar Listas</div>
+            <div class="sidebar-section-title">Manage Profiles</div>
             
             <div class="form-group">
-                <label>Categoría</label>
+                <label>Category</label>
                 <select id="configType" class="form-control">
-                    <option value="agents">Nuevo Agente</option>
-                    <option value="evaluators">Nuevo Evaluador</option>
-                    <option value="roles">Nuevo Rol</option>
+                    <option value="agents">New Agent</option>
+                    <option value="evaluators">New Evaluator</option>
+                    <option value="roles">New Role</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Nombre Completo</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Escribe el nombre...">
+                <label>Full Name</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Enter string name...">
             </div>
             
-            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
-                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="addNewConfigItem()">Guardar</button>
+            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2.5rem;">
+                <button class="btn btn-secondary" style="color:black; border-color:black;" onclick="closeModal('configModal')">Cancel</button>
+                <button class="btn btn-primary" style="background:black; color:white;" onclick="addNewConfigItem()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -681,29 +754,28 @@
             roles: ["New Hire", "T1", "T2", "T3", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_premium')) || defaultLists;
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_editorial')) || defaultLists;
 
-        // Estructura extraída literalmente del archivo "image_41a6cb.png"
         const phoneChatCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa.", app: "Todos" },
-            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Resolución Exacta y Efectiva", desc: "Proporcionó información precisa y resolvió claramente la inquietud del cliente.", app: "Chats/Llamadas" },
-            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternativas Ofrecidas", desc: "Ofreció alternativas apropiadas cuando correspondía.", app: "Chats/Llamadas" },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.", app: "Todos" },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía.", app: "Todos" },
-            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Comunicación Profesional e Inteligencia Emocional", desc: "Mantuvo un tono profesional, respetuoso y enfocado en el cliente.", app: "Chats/Llamadas" },
-            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Soporte Extra", desc: "Ofreció ayuda adicional antes de cerrar la interacción.", app: "Chats/Llamadas" },
-            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable.", app: "Chats/Llamadas" }
+            { id: "1.1", section: "SECTION 1 — OPENING & ACCOUNT PROFILE", max_pts: 5, text: "Proper Greeting", desc: "Professional and personalized greeting aligned with corporate standards.", app: "All Channels" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided precise parameters and resolved primary user concern cleanly.", app: "Chats/Calls" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Alternatives Offered", desc: "Offered valuable alternative options when primary resolution was capped.", app: "Chats/Calls" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Hold & Time Management / Timely Response", desc: "Managed intervals efficiently preventing dead-air or response lag.", app: "All Channels" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Flawless composition, precise syntax and clean mechanics.", app: "All Channels" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained poise, structured alignment and extreme empathy thresholds.", app: "Chats/Calls" },
+            { id: "4.1", section: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", max_pts: 10, text: "Additional Assistance - Extra Support", desc: "Explicitly offered extra assistance workflows prior to lifecycle session teardown.", app: "Chats/Calls" },
+            { id: "4.2", section: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", max_pts: 5, text: "Additional Assistance - Promos & Offers", desc: "Pitching appropriate seasonal promos or features accurately.", app: "Chats/Calls" }
         ];
 
         const emailCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Saludo Adecuado", desc: "Saludo profesional y personalizado alineado con los estándares de la empresa.", app: "Todos" },
-            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Resolución Exacta y Efectiva", desc: "Resolución precisa alineada con la política de la empresa.", app: "Correos Electrónicos" },
-            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Plantilla Correcta Utilizada", desc: "Usó la plantilla aprobada correcta cuando fue requerida.", app: "Correos Electrónicos" },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Gestión de Espera y del Tiempo / Respuesta Oportuna", desc: "Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.", app: "Todos" },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Gramática y Ortografía", desc: "Comunicación clara, sin errores de gramática ni ortografía.", app: "Todos" },
-            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Formato Adecuado", desc: "Aseguró estructura clara y presentación organizada.", app: "Correos Electrónicos" },
-            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Firma Incluida", desc: "Incluyó la firma profesional requerida.", app: "Correos Electrónicos" },
-            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Asistencia Adicional - Promociones y Ofertas", desc: "Compartió promociones relevantes cuando fue aplicable.", app: "Correos Electrónicos" }
+            { id: "1.1", section: "SECTION 1 — OPENING & ACCOUNT PROFILE", max_pts: 5, text: "Proper Greeting", desc: "Professional corporate greeting standard applied.", app: "All Channels" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 30, text: "Accurate & Effective Resolution", desc: "Complete and verified procedural coverage via template or manual composition.", app: "Emails" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Correct Template Used", desc: "Ensured precise template selection matching user state profile.", app: "Emails" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Hold & Time Management / Timely Response", desc: "Turnaround milestones met inside strict service level hours.", app: "All Channels" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Flawless composition, precise syntax and clean mechanics.", app: "All Channels" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Proper Formatting", desc: "Cohesive line spacing, block alignments and polished layout hierarchies.", app: "Emails" },
+            { id: "4.1", section: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", max_pts: 5, text: "Signature Included", desc: "Mandatory transactional verification footer elements standard attached.", app: "Emails" },
+            { id: "4.2", section: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", max_pts: 10, text: "Additional Assistance - Promos & Offers", desc: "Pitching appropriate seasonal promos or features accurately.", app: "Emails" }
         ];
 
         let currentGroup = "Phones";
@@ -712,7 +784,7 @@
 
         function initDataStructure() {
             ["Phones", "Chats", "Emails"].forEach(g => {
-                evaluationState[g] = { checkedGlobal: true };
+                evaluationState[g] = {};
                 const list = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 for(let i=1; i<=4; i++) {
                     evaluationState[g][i] = {
@@ -770,7 +842,7 @@
 
             ["Phones", "Chats", "Emails"].forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:1rem; font-weight:800; font-size:0.75rem; color:var(--text-dark); text-transform:uppercase;">${g}</div>`;
+                html += `<div style="margin-top:1rem; font-weight:700; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
                 for(let i=1; i<=4; i++) {
                     const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
@@ -851,11 +923,11 @@
                         <div class="meta-case-row">
                             <div class="form-group">
                                 <label>Account #</label>
-                                <input type="text" class="form-control" placeholder="ID de Cuenta" value="${evaluationState[g][i].accountId}" onchange="evaluationState['${g}'][${i}].accountId = this.value">
+                                <input type="text" class="form-control" placeholder="Account ID" value="${evaluationState[g][i].accountId}" onchange="evaluationState['${g}'][${i}].accountId = this.value">
                             </div>
                             <div class="form-group">
                                 <label>Interaction ID</label>
-                                <input type="text" class="form-control" placeholder="ID de Interacción" value="${evaluationState[g][i].interactionId}" onchange="evaluationState['${g}'][${i}].interactionId = this.value">
+                                <input type="text" class="form-control" placeholder="Session / Ticket Reference ID" value="${evaluationState[g][i].interactionId}" onchange="evaluationState['${g}'][${i}].interactionId = this.value">
                             </div>
                         </div>
                     `;
@@ -864,11 +936,11 @@
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Atributo de Calidad (image_41a6cb.png)</th>
-                                    <th>Aplica A</th>
-                                    <th>Calificación</th>
-                                    <th>Máx</th>
-                                    <th>Puntos</th>
+                                    <th>Quality Attribute Parameters</th>
+                                    <th>Scope Target</th>
+                                    <th>Classification</th>
+                                    <th>Max</th>
+                                    <th>Points Earned</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -881,8 +953,8 @@
                             tableHtml += `
                                 <tr class="section-header-row">
                                     <td colspan="3"><strong>${currentSection}</strong></td>
-                                    <td colspan="2" style="text-align:right;">
-                                        <input type="text" placeholder="Notas de sección..." class="form-control" style="width:240px; display:inline-block; padding:0.4rem 0.6rem; font-size:0.8rem;"
+                                    <td colspan="2" style="text-align:right; background: black;">
+                                        <input type="text" placeholder="Section targeted milestones notes..." class="form-control" style="width:260px; color: white; border-color: #404040; display:inline-block; padding:0.4rem 0.6rem; font-size:0.8rem;"
                                                value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
                                 </tr>
@@ -892,10 +964,10 @@
                         tableHtml += `
                             <tr>
                                 <td style="width: 50%;">
-                                    <strong style="color:var(--text-dark); font-weight:700;">${c.text}</strong>
+                                    <strong style="color:var(--text-dark); font-weight:600;">${c.text}</strong>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
-                                <td style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase;">${c.app}</td>
+                                <td style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">${c.app}</td>
                                 <td>
                                     <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
                                         <option value="Yes">Yes</option>
@@ -904,7 +976,7 @@
                                         <option value="N/A">N/A</option>
                                     </select>
                                 </td>
-                                <td style="font-weight:700; color:var(--text-muted);">${c.max_pts}</td>
+                                <td style="font-weight:600; color:var(--text-muted);">${c.max_pts}</td>
                                 <td><span id="score_box_${g}_${i}_${c.id}" class="badge-pill status-yes">${c.max_pts}</span></td>
                             </tr>
                         `;
@@ -912,8 +984,8 @@
 
                     tableHtml += `</tbody></table>
                         <div class="form-footer-scores">
-                            <div class="footer-score-block"><text>Suma de Puntos</text><div id="lbl_pts_${g}_${i}">0.00</div></div>
-                            <div class="footer-score-block"><text>Resultado Caso</text><div id="lbl_pct_${g}_${i}">100%</div></div>
+                            <div class="footer-score-block"><text>Sum Score</text><div id="lbl_pts_${g}_${i}">0.00</div></div>
+                            <div class="footer-score-block"><text>Case Pct Result</text><div id="lbl_pct_${g}_${i}">100%</div></div>
                         </div>
                     `;
 
@@ -971,7 +1043,6 @@
             }
         }
 
-        // DESPLIEGUE EXACTO DE LA MATRIZ DE CUADRO DE MANDO SOLICITADA
         function calculateGlobalMatrix() {
             const isT1 = (document.getElementById('metaRole').value === "T1");
             const matrixTable = document.getElementById('matrixPointsTable');
@@ -984,21 +1055,21 @@
             fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
             let sectionsOrder = [
-                { title: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", list: ["1.1"] },
-                { title: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", list: ["2.1", "2.2"] },
-                { title: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", list: ["3.1", "3.2", "3.3"] },
-                { title: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", list: ["4.1", "4.2"] }
+                { title: "SECTION 1 — OPENING & ACCOUNT PROFILE", list: ["1.1"] },
+                { title: "SECTION 2 — PRODUCT KNOWLEDGE", list: ["2.1", "2.2"] },
+                { title: "SECTION 3 — COMMUNICATION SKILLS", list: ["3.1", "3.2", "3.3"] },
+                { title: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", list: ["4.1", "4.2"] }
             ];
 
             let mHtml = `
                 <thead>
                     <tr>
-                        <th>Criterio Evaluado (Parámetros del SS)</th>
-                        <th>Aplica</th>
+                        <th>Evaluated Parameter Metric</th>
+                        <th>Scope Target</th>
                         <th>Calls Avg</th>
                         <th>Chats Avg</th>
                         ${!isT1 ? '<th>Emails Avg</th>' : ''}
-                        <th>Total Promedio</th>
+                        <th>Total Average</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1034,12 +1105,13 @@
                                     cSum += sc.points;
                                     cMax += specificCriterion.max_pts;
 
+                                    // FEEDBACK BOXES POPULATED WITH SPANISH STRINGS AS SPECIFIED
                                     if(sc.classification === "Yes") {
                                         fortList.innerHTML += `<div class="feedback-item-box">${targetText} [${g} ${i}]</div>`;
                                     } else if(sc.classification === "Partially") {
-                                        obsList.innerHTML += `<div class="feedback-item-box" style="border-color:var(--warning);">${targetText} [${g} ${i}]</div>`;
+                                        obsList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--warning);">${targetText} [${g} ${i}]</div>`;
                                     } else if(sc.classification === "No") {
-                                        mejList.innerHTML += `<div class="feedback-item-box" style="border-color:var(--danger);">${targetText} [${g} ${i}]</div>`;
+                                        mejList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--danger);">${targetText} [${g} ${i}]</div>`;
                                     }
                                 }
                             }
@@ -1058,11 +1130,11 @@
                                 <strong>${id} - ${targetText}</strong>
                                 <span class="desc-sub">${targetDesc}</span>
                             </td>
-                            <td style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase;">${targetApp}</td>
+                            <td style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">${targetApp}</td>
                             <td>${renderMatrixBadge(averages["Phones"])}</td>
                             <td>${renderMatrixBadge(averages["Chats"])}</td>
                             ${!isT1 ? `<td>${renderMatrixBadge(averages["Emails"])}</td>` : ''}
-                            <td style="font-weight:bold; background:#fdfdfd;">${renderMatrixBadge(totalRowAvg)}</td>
+                            <td style="font-weight:700; background:#fafafa;">${renderMatrixBadge(totalRowAvg)}</td>
                         </tr>
                     `;
                 });
@@ -1102,33 +1174,33 @@
             if(!value) return;
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
-            localStorage.setItem('qa_lists_premium', JSON.stringify(currentLists));
+            localStorage.setItem('qa_lists_editorial', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
             document.getElementById('configValue').value = "";
             closeModal('configModal');
         }
 
-        // --- EXPORTAR PDF COMPLETAMENTE CONTROLADO Y OPTIMIZADO ---
+        // --- PRECISE PDF GENERATION HANDLING (ANTI-CUT SOLUTION) ---
         function exportToPDF() {
             const agentElement = document.getElementById('metaAgent');
-            const agentName = agentElement.options[agentElement.selectedIndex]?.text || 'Agente';
+            const agentName = agentElement.options[agentElement.selectedIndex]?.text || 'Agent';
             
-            // Forzar vista del Cuadro de Mando antes del render para asegurar datos completos
+            // Force rendering switch to dashboard state to capture full structural values
             switchChannelGroup('Dashboard');
 
             const element = document.getElementById('pdfExportContainer');
             
-            // Configuración del objeto pdf para evitar cortes extraños de hojas y conservar márgenes correctos
+            // Configuration options tweaking the canvas wrapper to prevent unexpected slicing on container breaks
             const opt = {
-                margin:       [0.5, 0.5, 0.5, 0.5],
-                filename:     `QA_Report_Studio_${agentName.replace(/\s+/g, '_')}.pdf`,
+                margin:       [0.4, 0.4, 0.4, 0.4],
+                filename:     `QA_Performance_Studio_Report_${agentName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' },
+                pagebreak:    { mode: ['css', 'legacy'] }
             };
 
-            // Ejecución nativa de la descarga
             html2pdf().set(opt).from(element).save();
         }
     </script>
