@@ -1,823 +1,175 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub — Avant-Garde Luxury Edition</title>
-    
-    <!-- Modern Premium Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
-    <!-- html2pdf.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-    <style>
-        :root {
-            --bg-main: #060913;
-            --bg-card: rgba(15, 22, 42, 0.65);
-            --border-color: rgba(255, 255, 255, 0.06);
-            --text-main: #F8FAFC;
-            --text-muted: #64748B;
-            
-            /* High-End Luxury Color Palette */
-            --brand-primary: #6366F1;
-            --luxury-gold: #E2E8F0;
-            --success-glow: #10B981;
-            --warning-glow: #F59E0B;
-            --danger-glow: #EF4444;
-            
-            --radius-xl: 20px;
-            --radius-md: 12px;
-            --radius-sm: 6px;
-            --shadow-cosmic: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            background-image: 
-                radial-gradient(circle at 90% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 10% 90%, rgba(30, 41, 59, 0.2) 0%, transparent 60%);
-            color: var(--text-main);
-            padding: 2.5rem;
-            min-height: 100vh;
-        }
-
-        /* --- LUXURY HEADER --- */
-        header {
-            max-width: 1450px;
-            margin: 0 auto 2.5rem auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem 2.5rem;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-cosmic);
-        }
-
-        .logo-area h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #FFFFFF;
-        }
-
-        .logo-area p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-top: 0.15rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border-color);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: #FFFFFF;
-            color: #060913;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-main);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* --- MAIN CONTAINER --- */
-        .container {
-            max-width: 1450px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 310px 1fr;
-            gap: 2.5rem;
-        }
-
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            box-shadow: var(--shadow-cosmic);
-            backdrop-filter: blur(16px);
-        }
-
-        .card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.3px;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 0.8rem 1.1rem;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.6rem 0.25rem;
-        }
-
-        .checkbox-item label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #E2E8F0;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #FFFFFF;
-            cursor: pointer;
-        }
-
-        /* --- NAVIGATION TABS --- */
-        .workspace {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .channel-groups {
-            display: flex;
-            gap: 0.25rem;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 0.4rem;
-            border-radius: var(--radius-md);
-            width: fit-content;
-            border: 1px solid var(--border-color);
-        }
-
-        .tab-btn {
-            padding: 0.65rem 1.35rem;
-            border-radius: var(--radius-sm);
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.08);
-            color: #FFFFFF;
-        }
-
-        .tab-btn.disabled-tab {
-            opacity: 0.2;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
-
-        .sub-navigation {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .sub-tab-btn {
-            padding: 0.5rem 1.25rem;
-            border-radius: var(--radius-md);
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .sub-tab-btn.active {
-            background: #FFFFFF;
-            color: #060913;
-            border-color: #FFFFFF;
-        }
-
-        .form-container {
-            display: none;
-        }
-
-        .form-container.active {
-            display: block;
-        }
-
-        /* --- EVALUATION SHEET BUILDERS --- */
-        .evaluation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .evaluation-table th {
-            text-align: left;
-            padding: 1rem 1.25rem;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 700;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .evaluation-table tr.section-header-row td {
-            background: rgba(255, 255, 255, 0.02);
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 0.9rem;
-            padding: 1.2rem 1.25rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .evaluation-table tbody tr:not(.section-header-row) td {
-            padding: 1.25rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-        }
-
-        .desc-sub {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
-        }
-
-        /* INTERACTIVE QA PILLS */
-        .qa-selector-group {
-            display: flex;
-            gap: 0.25rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.25rem;
-            border-radius: var(--radius-sm);
-            width: fit-content;
-        }
-
-        .qa-pill {
-            padding: 0.4rem 0.85rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            color: var(--text-muted);
-        }
-
-        .qa-pill.active[data-val="Yes"] { background: rgba(16, 185, 129, 0.15); color: #34D399; }
-        .qa-pill.active[data-val="Partially"] { background: rgba(245, 158, 11, 0.15); color: #FBBF24; }
-        .qa-pill.active[data-val="No"] { background: rgba(239, 68, 68, 0.15); color: #F87171; }
-        .qa-pill.active[data-val="N/A"] { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
-
-        .score-display-box {
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-
-        /* --- THE WOW HUD HERO HEADER --- */
-        .feedback-badge-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: var(--radius-xl);
-            margin-bottom: 2.5rem;
-        }
-
-        .global-score-hero {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            letter-spacing: -1px;
-        }
-
-        /* --- STRETCHED MATRIX INSPIRED BY image_36bb1d.png --- */
-        .screenshot-matrix {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            color: #FFFFFF;
-        }
-
-        .screenshot-matrix th, .screenshot-matrix td {
-            /* Alargado verticalmente para simular exactamente el espaciado amplio de image_36bb1d.png */
-            padding: 1.65rem 1.5rem; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            border-right: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .screenshot-matrix th {
-            background-color: rgba(255, 255, 255, 0.03);
-            color: #E2E8F0;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .screenshot-matrix .section-title-row td {
-            background-color: rgba(255, 255, 255, 0.01);
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.8px;
-            text-align: center;
-            color: #94A3B8;
-            padding: 1.1rem;
-            text-transform: uppercase;
-        }
-
-        .screenshot-matrix .badge-channel {
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .badge-all { background-color: rgba(56, 189, 248, 0.08); color: #38BDF8; }
-        .badge-cc { background-color: rgba(74, 222, 128, 0.08); color: #4ADE80; }
-        .badge-em { background-color: rgba(251, 146, 60, 0.08); color: #FB923C; }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-        }
-
-        .form-footer-scores {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: flex-end;
-            gap: 2.5rem;
-            padding: 1.5rem;
-        }
-
-        .footer-score-block text {
-            display: block;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .footer-score-block div {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 0.2rem;
-        }
-
-        .comment-box-area {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            color: var(--text-main);
-            min-height: 90px;
-            font-size: 0.95rem;
-        }
-
-        /* --- PDF EXPORT OVERRIDES FOR ANTI-CLIP SAFETY --- */
-        #pdfPrintTarget {
-            background-color: #060913 !important;
-            padding: 2.5rem !important;
-            border-radius: 0px !important;
-        }
-
-        .page-break-before {
-            page-break-before: always;
-            break-before: page;
-        }
-
-        /* --- CONFIG SYSTEM MODAL --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(6, 9, 19, 0.85);
-            backdrop-filter: blur(8px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-card {
-            background: #0F162A;
-            border: 1px solid var(--border-color);
-            width: 100%;
-            max-width: 460px;
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo-area">
-            <h1>QA Quality Hub</h1>
-            <p>Avant-Garde Performance Suite</p>
-        </div>
-        <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Atributos</button>
-            <button class="btn btn-primary" onclick="exportUltimatePDF()">📥 Exportar PDF Perfecto</button>
-        </div>
-    </header>
-
-    <div class="container">
-        
-        <!-- SIDE PANEL CONTROL -->
-        <div class="sidebar">
-            <div class="card">
-                <div class="card-title">📋 Meta Contexto</div>
-                <div class="form-group">
-                    <label>Agente</label>
-                    <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
-                </div>
-                <div class="form-group">
-                    <label>Evaluador</label>
-                    <select id="metaEvaluator" class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label>Perfil Operativo</label>
-                    <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
-                </div>
-                <div class="form-group">
-                    <label>Fecha Interacción</label>
-                    <input type="date" id="metaInteractionDate" class="form-control">
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🎯 Casos Activos</div>
-                <div id="checkboxGrid"></div>
-            </div>
-        </div>
-
-        <!-- MAIN PRODUCTION SCREEN -->
-        <div class="workspace">
-            
-            <div class="channel-groups">
-                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
-                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
-                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: 1.5rem; border-left: 1px solid rgba(255,255,255,0.1);">📊 Performance Card</button>
-            </div>
-
-            <div class="sub-navigation" id="subTabsArea"></div>
-            <div id="formsWorkspaceArea"></div>
-
-            <!-- EXPORT TARGET WITH STRETCHED ROWS MATRIX -->
-            <div id="dashboardViewArea" style="display:none;">
-                <div id="pdfPrintTarget">
-                    <div class="feedback-badge-container">
-                        <div>
-                            <h2 style="font-family:'Space Grotesk'; font-size:1.6rem; font-weight:700; margin-bottom:0.25rem;">Performance Score Matrix</h2>
-                            <p style="color:var(--text-muted); font-size:0.9rem;">Sincronización métrica global de auditorías de calidad.</p>
-                        </div>
-                        <div class="global-score-hero" id="lblGlobalScore">100%</div>
-                    </div>
-
-                    <div class="dashboard-grid">
-                        <div>
-                            <div class="card" style="margin-bottom: 2rem; padding: 0px; overflow: hidden; border-radius: var(--radius-md);">
-                                <table class="screenshot-matrix" id="screenshotPerformanceMatrix">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 70px; text-align: center;">Item</th>
-                                            <th style="width: 150px; text-align: center;">Canal</th>
-                                            <th>Criterio de Evaluación</th>
-                                            <th style="width: 100px; text-align: center;">Max Pts</th>
-                                            <th style="width: 100px; text-align: center;">Nota Cal.</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- SECCIÓN 1 -->
-                                        <tr class="section-title-row"><td colspan="5">SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA</td></tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">1.1</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
-                                            <td style="font-weight: 600;">Saludo Adecuado<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Saludo profesional y personalizado alineado con los estándares de la empresa.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">5</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_1_1">5.0</td>
-                                        </tr>
-                                        <!-- SECCIÓN 2 -->
-                                        <tr class="section-title-row"><td colspan="5">SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO</td></tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">2.1</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
-                                            <td style="font-weight: 600;">Resolución Exacta y Efectiva<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Proporcionó información precisa y resolvió claramente la inquietud del cliente.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">20</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_1">20.0</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">2.2</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
-                                            <td style="font-weight: 600;">Alternativas Ofrecidas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Ofreció alternativas apropiadas cuando correspondía.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">15</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_2">15.0</td>
-                                        </tr>
-                                        <tr id="row_m_2_3">
-                                            <td style="text-align: center; font-weight: 700;">2.3</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
-                                            <td style="font-weight: 600;">Resolución Exacta y Efectiva<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Resolución precisa alineada con la política de la empresa.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">30</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_3">30.0</td>
-                                        </tr>
-                                        <tr id="row_m_2_4">
-                                            <td style="text-align: center; font-weight: 700;">2.4</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
-                                            <td style="font-weight: 600;">Plantilla Correcta Utilizada<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Usó la plantilla aprobada correcta cuando fue requerida.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">15</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_2_4">15.0</td>
-                                        </tr>
-                                        <!-- SECCIÓN 3 -->
-                                        <tr class="section-title-row"><td colspan="5">SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN</td></tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">3.1</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
-                                            <td style="font-weight: 600;">Gestión de Espera y del Tiempo / Respuesta Oportuna<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Manejó los tiempos de respuesta efectivamente y evitó retrasos innecesarios.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">15</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_1">15.0</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">3.2</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-all">Todos</span></td>
-                                            <td style="font-weight: 600;">Gramática y Ortografía<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Comunicación clara, sin errores de gramática ni ortografía.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">10</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_2">10.0</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">3.3</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
-                                            <td style="font-weight: 600;">Comunicación Profesional e Inteligencia Emocional<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Mantuvo un tono profesional, respetuoso y enfocado en el cliente.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">20</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_3">20.0</td>
-                                        </tr>
-                                        <tr id="row_m_3_4">
-                                            <td style="text-align: center; font-weight: 700;">3.4</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
-                                            <td style="font-weight: 600;">Formato Adecuado<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Aseguró estructura clara y presentación organizada.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">10</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_3_4">10.0</td>
-                                        </tr>
-                                        <!-- SECCIÓN 4 -->
-                                        <tr class="section-title-row"><td colspan="5">SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL</td></tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">4.1</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
-                                            <td style="font-weight: 600;">Asistencia Adicional - Soporte Extra<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Ofreció ayuda adicional antes de cerrar la interacción.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">10</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_1">10.0</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; font-weight: 700;">4.2</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-cc">Chats/Llamadas</span></td>
-                                            <td style="font-weight: 600;">Asistencia Adicional - Promociones y Ofertas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Compartió promociones relevantes cuando fue aplicable.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">5</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_2">5.0</td>
-                                        </tr>
-                                        <tr id="row_m_4_3">
-                                            <td style="text-align: center; font-weight: 700;">4.3</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
-                                            <td style="font-weight: 600;">Firma Incluida<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Incluyó la firma profesional requerida.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">5</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_3">5.0</td>
-                                        </tr>
-                                        <tr id="row_m_4_4">
-                                            <td style="text-align: center; font-weight: 700;">4.4</td>
-                                            <td style="text-align: center;"><span class="badge-channel badge-em">Correos Electrónicos</span></td>
-                                            <td style="font-weight: 600;">Asistencia Adicional - Promociones y Ofertas<br><span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">Compartió promociones relevantes cuando fue aplicable.</span></td>
-                                            <td style="text-align: center; font-weight: 500;">10</td>
-                                            <td style="text-align: center; font-weight: 700;" id="m_val_4_4">10.0</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <!-- CONTROL DE CORTE DE PÁGINA PARA LA SECCIÓN DE COMENTARIOS -->
-                            <div class="card page-break-before">
-                                <div class="card-title">📝 Notas de Calibración Estratégica</div>
-                                <div class="form-group">
-                                    <label>Observaciones Generales</label>
-                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Escriba un resumen del desempeño..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Plan de Desarrollo</label>
-                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Objetivos tácticos para el próximo ciclo..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- REGISTER MODAL -->
-    <div class="modal-overlay" id="configModal">
-        <div class="modal-card">
-            <div class="card-title">⚙️ Agregar Parámetro Dinámico</div>
-            <div class="form-group">
-                <label>Lista Destino</label>
-                <select id="configType" class="form-control">
-                    <option value="agents">Lista de Agentes</option>
-                    <option value="evaluators">Lista de Evaluadores</option>
-                    <option value="roles">Lista de Perfiles</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Identificador del Elemento</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Nombre...">
-            </div>
-            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:2rem;">
-                <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="addNewConfigItem()">Añadir Registro</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
+// DATA MAESTRA INICIAL
         const defaultLists = {
-            agents: ["Adrian Navarro", "Andrey Castillo", "Carlos Amador", "Daniel Gonzalez", "David Cruz", "Jose Pablo Robles", "Kevin Salazar", "Mariana Varela", "Naomy Sanchez", "Samuel Carballo", "Vanessa Umaña"],
-            evaluators: ["Adriana Vasquez", "Alfred Villalobos", "Carlos Barrantes", "Isabelle Morales", "Mario Acon", "Natalia Sibaja", "Victor Ramirez"],
-            roles: ["New Hire", "T1", "T2", "T3", "Processing Squad", "Deposits", "Payouts", "Senior", "Sup / Floor Support", "VIP"]
+            agents: [
+                "Adrian Navarro", "Andrey Castillo", "Anilu Guzman", "Carlos Alejandro Amador Luna",
+                "Carlos Amador", "Carlos Ortiz", "Carolina Castro", "Charlene Rose", "Daniel Gonzalez",
+                "Daniel Leandro", "David Cruz", "David Vogler", "Diego Matamoros", "Eckart Lutz",
+                "Eddison Prendas", "Edson Stewart Retana", "Elena Rojas", "Elliot Navarro", "Emerson Hernandez",
+                "Fer Blanco", "Graciela Bravo", "Ignacio Blanco", "Isaac Barrantes", "Isaac Porras",
+                "Israel Aburto", "Jose David Shedden", "Jose Maria Cartin", "Jose Pablo Robles", "Josué Vargas",
+                "Julian Mena", "Kemar Clare", "Kendall Montoya", "Kevin Salazar", "Kevin Zamora", "Keysha Cross",
+                "Luis Carvajal", "Luis Fernando Ruiz", "Maria Jose Quiros", "Mariana Bejarano", "Mariana Varela",
+                "Marlon Wright", "Mauricio Alvarado", "Michelle Saborio", "Naigell Beckford", "Naomy Sanchez",
+                "Nicole Román", "Pablo Guzman", "Phillip Desanti", "Rory Bulgarelli", "Samuel Carballo",
+                "Sebastian Puerta", "Sebastian Rivera", "Sheydron Clark", "Silvana Suarez", "Stephannie Cunningham",
+                "Tamara Donaire", "Thimy Gonzalez", "Valerie Alfaro", "Vanessa Umaña", "Yasser Quiros"
+            ],
+            evaluators: [
+                "Adriana Vasquez", "Alfred Villalobos", "Amy", "Carlos Barrantes", "Isabelle Morales",
+                "Kendra Temple", "Kunti Solis", "Maria Jose Fallas", "Mario Acon", "Natalia Sibaja",
+                "Nicole Valverde", "Pablo Retana", "Victor Ramirez"
+            ],
+            roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_luxury_edition')) || defaultLists;
+        // CARGA SEGURA DESDE LOCALSTORAGE (Validando que existan todas las propiedades)
+        let currentLists = defaultLists;
+        try {
+            const saved = localStorage.getItem('qa_lists');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed && parsed.agents && parsed.evaluators && parsed.roles) {
+                    currentLists = parsed;
+                }
+            }
+        } catch(e) {
+            console.error("Error cargando localStorage, usando defaults", e);
+        }
 
+        // CRITERIOS DE PHONES Y CHATS
         const phoneChatCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
-            { id: "2.1", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
-            { id: "2.2", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
-            { id: "3.3", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
-            { id: "4.1", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
-            { id: "4.2", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
+            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
+            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
         ];
 
+        // CRITERIOS DE EMAILS
         const emailCriteria = [
-            { id: "1.1", section: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
-            { id: "2.3", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
-            { id: "2.4", section: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
-            { id: "3.1", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
-            { id: "3.2", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
-            { id: "3.4", section: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
-            { id: "4.3", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
-            { id: "4.4", section: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
+            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
+            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
         ];
 
+        // ESTADO DE LA APLICACIÓN GLOBAL PARA LAS 12 INTERACCIONES
         let currentGroup = "Phones";
         let currentSubIndex = 1;
         let evaluationState = {};
 
+        // INICIALIZACIÓN DE LA ESTRUCTURA DE DATOS PARA LAS 12 PESTAÑAS
         function initDataStructure() {
             const groups = ["Phones", "Chats", "Emails"];
             groups.forEach(g => {
                 evaluationState[g] = { checkedGlobal: true };
                 const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
+                
                 for(let i=1; i<=4; i++) {
                     evaluationState[g][i] = {
                         active: true,
-                        accountNumber: "",
-                        interactionId: "",
                         comments: { "S1": "", "S2": "", "S3": "", "S4": "" },
                         scores: {}
                     };
                     criteriaList.forEach(c => {
-                        evaluationState[g][i].scores[c.id] = { classification: "Yes", points: c.max_pts };
+                        evaluationState[g][i].scores[c.id] = {
+                            classification: "Yes",
+                            points: c.max_pts
+                        };
                     });
                 }
             });
         }
 
         window.onload = function() {
-            initDataStructure();
-            renderDropdowns();
-            renderActiveCheckboxes();
-            buildAllForms();
-            switchChannelGroup("Phones");
-            document.getElementById('metaInteractionDate').valueAsDate = new Date();
+            try {
+                initDataStructure();
+                renderDropdowns();
+                renderActiveCheckboxes();
+                buildAllForms();
+                switchChannelGroup("Phones");
+                
+                // Configuración segura de fechas predeterminadas
+                const inputInt = document.getElementById('metaInteractionDate');
+                const inputEval = document.getElementById('metaEvaluationDate');
+                const inputFollow = document.getElementById('dashFollowUpDate');
+
+                if(inputInt) inputInt.valueAsDate = new Date();
+                if(inputEval) inputEval.valueAsDate = new Date();
+                if(inputFollow) inputFollow.valueAsDate = new Date(Date.now() + 7*24*60*60*1000);
+            } catch (error) {
+                console.error("Error crítico durante la inicialización de la interfaz:", error);
+            }
         };
 
+        // RENDER DE SELECTORES DEL SIDEBAR
         function renderDropdowns() {
-            document.getElementById('metaAgent').innerHTML = currentLists.agents.map(a => `<option value="${a}">${a}</option>`).join('');
-            document.getElementById('metaEvaluator').innerHTML = currentLists.evaluators.map(e => `<option value="${e}">${e}</option>`).join('');
-            document.getElementById('metaRole').innerHTML = currentLists.roles.map(r => `<option value="${r}">${r}</option>`).join('');
+            const sAgent = document.getElementById('metaAgent');
+            const sEval = document.getElementById('metaEvaluator');
+            const sRole = document.getElementById('metaRole');
+
+            if(sAgent && currentLists.agents) sAgent.innerHTML = currentLists.agents.map(a => `<option value="${a}">${a}</option>`).join('');
+            if(sEval && currentLists.evaluators) sEval.innerHTML = currentLists.evaluators.map(e => `<option value="${e}">${e}</option>`).join('');
+            if(sRole && currentLists.roles) sRole.innerHTML = currentLists.roles.map(r => `<option value="${r}">${r}</option>`).join('');
         }
 
+        // CONTROL DE RESTRICCIÓN DE ROL T1 PARA EMAILS
         function checkAgentRole() {
-            const role = document.getElementById('metaRole').value;
+            const roleEl = document.getElementById('metaRole');
+            if(!roleEl) return;
+            const role = roleEl.value;
             const emailTab = document.getElementById('btnGroupEmails');
-            const row23 = document.getElementById('row_m_2_3');
-            const row24 = document.getElementById('row_m_2_4');
-            const row34 = document.getElementById('row_m_3_4');
-            const row43 = document.getElementById('row_m_4_3');
-            const row44 = document.getElementById('row_m_4_4');
             
             if (role === "T1") {
-                emailTab.classList.add('disabled-tab');
+                if(emailTab) emailTab.classList.add('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = false;
-                for(let i=1; i<=4; i++) evaluationState["Emails"][i].active = false;
-                if (row23) { row23.style.display = "none"; row24.style.display = "none"; row34.style.display = "none"; row43.style.display = "none"; row44.style.display = "none"; }
-                if (currentGroup === "Emails") switchChannelGroup("Phones");
+                for(let i=1; i<=4; i++) {
+                    evaluationState["Emails"][i].active = false;
+                    let ck = document.getElementById(`ck_Emails_${i}`);
+                    if(ck) ck.checked = false;
+                }
+                if (currentGroup === "Emails") {
+                    switchChannelGroup("Phones");
+                }
             } else {
-                emailTab.classList.remove('disabled-tab');
+                if(emailTab) emailTab.classList.remove('disabled-tab');
                 evaluationState["Emails"].checkedGlobal = true;
-                for(let i=1; i<=4; i++) evaluationState["Emails"][i].active = true;
-                if (row23) { row23.style.display = "table-row"; row24.style.display = "table-row"; row34.style.display = "table-row"; row43.style.display = "table-row"; row44.style.display = "table-row"; }
+                for(let i=1; i<=4; i++) {
+                    evaluationState["Emails"][i].active = true;
+                    let ck = document.getElementById(`ck_Emails_${i}`);
+                    if(ck) ck.checked = true;
+                }
             }
             renderActiveCheckboxes();
             calculateGlobalMatrix();
         }
 
+        // RENDER DE CHECKBOXES EN SIDEBAR (CASOS ACTIVOS)
         function renderActiveCheckboxes() {
             const container = document.getElementById('checkboxGrid');
+            if(!container) return;
+            
             let html = "";
             const groups = ["Phones", "Chats", "Emails"];
-            const isT1 = (document.getElementById('metaRole').value === "T1");
+            const roleEl = document.getElementById('metaRole');
+            const isT1 = roleEl ? (roleEl.value === "T1") : false;
 
             groups.forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:0.5rem; font-weight:700; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
+                html += `<div style="margin-top:0.5rem; font-weight:700; font-size:0.8rem; color:#AEB7FF;">${g.toUpperCase()}</div>`;
                 for(let i=1; i<=4; i++) {
+                    const labelName = g === "Phones" ? `Llamada ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
                     html += `
                         <div class="checkbox-item">
-                            <label for="ck_${g}_${i}">${g === "Phones" ? "Call" : g === "Chats" ? "Chat" : "Email"} ${i}</label>
+                            <label for="ck_${g}_${i}">${labelName}</label>
                             <input type="checkbox" id="ck_${g}_${i}" ${checked} onchange="toggleCaseActive('${g}', ${i}, this.checked)">
                         </div>
                     `;
@@ -828,61 +180,87 @@
 
         function toggleCaseActive(group, index, isChecked) {
             evaluationState[group][index].active = isChecked;
+            
+            const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
+            if(subTabEl) {
+                subTabEl.style.opacity = !isChecked ? "0.4" : "1";
+            }
             calculateSingleFormScore(group, index);
             calculateGlobalMatrix();
         }
 
+        // NAVEGACIÓN ENTRE GRUPOS Y PESTAÑAS
         function switchChannelGroup(groupName) {
-            if (groupName === "Emails" && document.getElementById('metaRole').value === "T1") return;
+            const roleEl = document.getElementById('metaRole');
+            if (groupName === "Emails" && roleEl && roleEl.value === "T1") return;
+
             currentGroup = groupName;
             
-            document.getElementById('btnGroupPhones').classList.remove('active');
-            document.getElementById('btnGroupChats').classList.remove('active');
-            document.getElementById('btnGroupEmails').classList.remove('active');
-            document.getElementById('btnGroupDashboard').classList.remove('active');
+            const pTab = document.getElementById('btnGroupPhones');
+            const cTab = document.getElementById('btnGroupChats');
+            const eTab = document.getElementById('btnGroupEmails');
+            const dTab = document.getElementById('btnGroupDashboard');
+
+            if(pTab) pTab.classList.remove('active');
+            if(cTab) cTab.classList.remove('active');
+            if(eTab) eTab.classList.remove('active');
+            if(dTab) dTab.classList.remove('active');
 
             if (groupName === "Dashboard") {
-                document.getElementById('btnGroupDashboard').classList.add('active');
-                document.getElementById('subTabsArea').style.display = "none";
-                document.getElementById('formsWorkspaceArea').style.display = "none";
-                document.getElementById('dashboardViewArea').style.display = "block";
+                if(dTab) dTab.classList.add('active');
+                if(document.getElementById('subTabsArea')) document.getElementById('subTabsArea').style.display = "none";
+                if(document.getElementById('formsWorkspaceArea')) document.getElementById('formsWorkspaceArea').style.display = "none";
+                if(document.getElementById('dashboardViewArea')) document.getElementById('dashboardViewArea').style.display = "block";
                 calculateGlobalMatrix();
                 return;
             }
 
-            document.getElementById(`btnGroup${groupName}`).classList.add('active');
-            document.getElementById('subTabsArea').style.display = "flex";
-            document.getElementById('formsWorkspaceArea').style.display = "block";
-            document.getElementById('dashboardViewArea').style.display = "none";
+            const targetTab = document.getElementById(`btnGroup${groupName}`);
+            if(targetTab) targetTab.classList.add('active');
+            
+            if(document.getElementById('subTabsArea')) document.getElementById('subTabsArea').style.display = "flex";
+            if(document.getElementById('formsWorkspaceArea')) document.getElementById('formsWorkspaceArea').style.display = "block";
+            if(document.getElementById('dashboardViewArea')) document.getElementById('dashboardViewArea').style.display = "none";
 
             buildSubTabs();
-            switchSubTab(currentSubIndex);
+            switchSubTab(1);
         }
 
         function buildSubTabs() {
             const area = document.getElementById('subTabsArea');
+            if(!area) return;
             let html = "";
             for (let i = 1; i <= 4; i++) {
-                const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
-                html += `<button class="sub-tab-btn ${i === currentSubIndex ? 'active' : ''}" onclick="switchSubTab(${i})">${name}</button>`;
+                const name = currentGroup === "Phones" ? `Llamada ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
+                const activeClass = i === currentSubIndex ? "active" : "";
+                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.4;'";
+                html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
             }
             area.innerHTML = html;
         }
 
         function switchSubTab(index) {
             currentSubIndex = index;
-            document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
-            const targetEl = document.getElementById(`form_container_${currentGroup}_${index}`);
+            const buttons = document.querySelectorAll('.sub-tab-btn');
+            buttons.forEach((b, idx) => {
+                if (idx === (index - 1)) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+
+            const allContainers = document.querySelectorAll('.form-container');
+            allContainers.forEach(c => c.classList.remove('active'));
+
+            const targetId = `form_container_${currentGroup}_${index}`;
+            const targetEl = document.getElementById(targetId);
             if (targetEl) targetEl.classList.add('active');
         }
 
-        function updateFormValue(group, index, field, value) {
-            evaluationState[group][index][field] = value.trim();
-        }
-
+        // CONSTRUCCIÓN DINÁMICA DE LOS FORMULARIOS
         function buildAllForms() {
             const area = document.getElementById('formsWorkspaceArea');
-            area.innerHTML = "";
+            if(!area) return;
+            area.innerHTML = ""; 
+
             const groups = ["Phones", "Chats", "Emails"];
 
             groups.forEach(g => {
@@ -897,37 +275,71 @@
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th style="width:55%;">Criterio</th>
-                                    <th>Evaluación</th>
-                                    <th>Max</th>
-                                    <th>Puntos</th>
+                                    <th>Criterio de Evaluación</th>
+                                    <th>Clasificación</th>
+                                    <th>Puntos Máx.</th>
+                                    <th>Score</th>
                                 </tr>
                             </thead>
                             <tbody>
                     `;
 
+                    let currentSection = "";
                     criteriaList.forEach(c => {
+                        if (c.section !== currentSection) {
+                            currentSection = c.section;
+                            tableHtml += `
+                                <tr class="section-header-row">
+                                    <td colspan="2">${currentSection}</td>
+                                    <td colspan="2" style="text-align:right;">
+                                        <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem;">Comentarios Sección:</span>
+                                        <input type="text" placeholder="Añadir observaciones..." 
+                                               class="form-control" style="width:280px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.8rem;"
+                                               value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
+                                               onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
+                                    </td>
+                                </tr>
+                            `;
+                        }
+
                         tableHtml += `
-                            <tr>
+                            <tr class="criterion-row">
                                 <td>
-                                    <span style="font-weight:600;">${c.text}</span>
+                                    <strong>${c.text}</strong>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
                                 <td>
-                                    <div class="qa-selector-group">
-                                        <button class="qa-pill active" data-val="Yes" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'Yes', this)">Yes</button>
-                                        <button class="qa-pill" data-val="Partially" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'Partially', this)">Partial</button>
-                                        <button class="qa-pill" data-val="No" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'No', this)">No</button>
-                                        <button class="qa-pill" data-val="N/A" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'N/A', this)">N/A</button>
-                                    </div>
+                                    <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="Partially">Partially</option>
+                                        <option value="No">No</option>
+                                        <option value="N/A">N/A</option>
+                                    </select>
                                 </td>
-                                <td>${c.max_pts}</td>
-                                <td><span id="score_box_${g}_${i}_${c.id}" class="score-display-box" style="background:rgba(16,185,129,0.1); color:#34D399;">${c.max_pts}</span></td>
+                                <td style="font-weight:700; color:var(--text-muted);">${c.max_pts}</td>
+                                <td>
+                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
+                                </td>
                             </tr>
                         `;
                     });
 
-                    tableHtml += `</tbody></table>`;
+                    tableHtml += `
+                            </tbody>
+                        </table>
+                        
+                        <div class="form-footer-scores">
+                            <div class="footer-score-block">
+                                <span>Puntos Obtenidos</span>
+                                <div id="lbl_pts_${g}_${i}" style="color:#FFF;">100.00</div>
+                            </div>
+                            <div class="footer-score-block">
+                                <span>Porcentaje Individual</span>
+                                <div id="lbl_pct_${g}_${i}" style="color:var(--success);">100%</div>
+                            </div>
+                        </div>
+                    `;
+
                     container.innerHTML = tableHtml;
                     area.appendChild(container);
                     calculateSingleFormScore(g, i);
@@ -935,29 +347,56 @@
             });
         }
 
-        function setQAClassification(group, index, criterionId, val, btnEl) {
-            const container = btnEl.parentElement;
-            container.querySelectorAll('.qa-pill').forEach(b => b.classList.remove('active'));
-            btnEl.classList.add('active');
+        function getSectionKey(secName) {
+            if(secName.includes("SECTION 1")) return "S1";
+            if(secName.includes("SECTION 2")) return "S2";
+            if(secName.includes("SECTION 3")) return "S3";
+            return "S4";
+        }
 
+        function updateSectionComment(group, index, secKey, val) {
+            evaluationState[group][index].comments[secKey] = val;
+        }
+
+        function updateRowScore(group, index, criterionId, value) {
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
             const crit = criteriaList.find(c => c.id === criterionId);
             let finalPts = 0;
-            const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
-            
-            if (val === "Yes") { finalPts = crit.max_pts; box.style.background = "rgba(16,185,129,0.1)"; box.style.color = "#34D399"; }
-            else if (val === "Partially") { finalPts = crit.max_pts * 0.5; box.style.background = "rgba(245,158,11,0.1)"; box.style.color = "#FBBF24"; }
-            else if (val === "No") { finalPts = 0; box.style.background = "rgba(239,68,68,0.1)"; box.style.color = "#F87171"; }
-            else if (val === "N/A") { finalPts = 0; box.style.background = "rgba(255,255,255,0.05)"; box.style.color = "#64748B"; }
 
-            box.innerText = val === "N/A" ? "N/A" : finalPts;
-            evaluationState[group][index].scores[criterionId] = { classification: val, points: finalPts };
+            const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
+            if(!box) return;
+            box.className = "score-display-box";
+
+            if (value === "Yes") {
+                finalPts = crit.max_pts;
+                box.classList.add('status-yes');
+            } else if (value === "Partially") {
+                finalPts = crit.max_pts * 0.5;
+                box.classList.add('status-partial');
+            } else if (value === "No") {
+                finalPts = 0;
+                box.classList.add('status-no');
+            } else if (value === "N/A") {
+                finalPts = 0;
+                box.classList.add('status-na');
+            }
+
+            box.innerText = value === "N/A" ? "N/A" : finalPts;
+
+            evaluationState[group][index].scores[criterionId] = {
+                classification: value,
+                points: finalPts
+            };
+
             calculateSingleFormScore(group, index);
         }
 
         function calculateSingleFormScore(group, index) {
+            if (!evaluationState[group] || !evaluationState[group][index]) return;
+
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
-            let earnedSum = 0, maxSumAvailable = 0;
+            let earnedSum = 0;
+            let maxSumAvailable = 0;
 
             criteriaList.forEach(c => {
                 const sc = evaluationState[group][index].scores[c.id];
@@ -967,107 +406,285 @@
                 }
             });
 
+            let pct = maxSumAvailable > 0 ? (earnedSum / maxSumAvailable) * 100 : 100;
+
             evaluationState[group][index].calculatedScore = earnedSum;
             evaluationState[group][index].calculatedMax = maxSumAvailable;
+            evaluationState[group][index].calculatedPct = pct;
+
+            const lblPts = document.getElementById(`lbl_pts_${group}_${index}`);
+            const lblPct = document.getElementById(`lbl_pct_${group}_${index}`);
+
+            if(lblPts && lblPct) {
+                lblPts.innerText = earnedSum.toFixed(2);
+                lblPct.innerText = pct.toFixed(0) + "%";
+                lblPct.style.color = pct >= 90 ? "var(--success)" : (pct >= 70 ? "var(--warning)" : "var(--danger)");
+            }
         }
 
-        function getMatrixCalculation(targetId, filterGroups, textNameMatched) {
-            let totalEarned = 0, totalMax = 0;
-            let dynamicActive = false;
+        // CALCULO DE MATRIZ GLOBAL Y FEEDBACK
+        function calculateGlobalMatrix() {
+            const roleEl = document.getElementById('metaRole');
+            const isT1 = roleEl ? (roleEl.value === "T1") : false;
+            const groups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
+            
+            let totalEarnedGlobal = 0;
+            let totalMaxGlobal = 0;
 
-            filterGroups.forEach(g => {
-                const listCriteria = (g === "Emails") ? emailCriteria : phoneChatCriteria;
-                const matchCrit = listCriteria.find(c => c.text === textNameMatched);
-                if (matchCrit) {
+            const fortList = document.getElementById('dashFortalezasList');
+            const obsList = document.getElementById('dashObservarList');
+            const mejList = document.getElementById('dashMejorasList');
+            
+            if(fortList) fortList.innerHTML = "";
+            if(obsList) obsList.innerHTML = "";
+            if(mejList) mejList.innerHTML = "";
+
+            let addedFort = new Set();
+            let addedObs = new Set();
+            let addedMej = new Set();
+
+            const matrixTable = document.getElementById('matrixPointsTable');
+            if(!matrixTable) return;
+
+            let mHtml = `
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Phones Avg</th>
+                        <th>Chats Avg</th>
+                        ${!isT1 ? '<th>Emails Avg</th>' : ''}
+                        <th>Total Average</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            const standardIds = ["1.1", "2.1", "2.2", "3.1", "3.2", "3.3", "4.1", "4.2"];
+
+            standardIds.forEach(id => {
+                let rowSumPoints = 0;
+                let rowCountCases = 0;
+                let channelAverages = {};
+
+                groups.forEach(g => {
+                    let chanSum = 0;
+                    let chanCount = 0;
+                    
+                    const critList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
+                    const crObj = critList.find(c => c.id === id);
+
                     for(let i=1; i<=4; i++) {
                         if(evaluationState[g][i].active) {
-                            const scoreObj = evaluationState[g][i].scores[matchCrit.id];
-                            if(scoreObj && scoreObj.classification !== "N/A") {
-                                dynamicActive = true;
-                                totalEarned += scoreObj.points;
-                                totalMax += matchCrit.max_pts;
+                            const sc = evaluationState[g][i].scores[id];
+                            if(sc && sc.classification !== "N/A") {
+                                chanSum += sc.points;
+                                chanCount += crObj.max_pts;
+
+                                const fullText = crObj.text;
+                                const fullDesc = crObj.desc;
+
+                                if(sc.classification === "Yes" && !addedFort.has(fullText) && fortList) {
+                                    addedFort.add(fullText);
+                                    fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                } else if(sc.classification === "Partially" && !addedObs.has(fullText) && obsList) {
+                                    addedObs.add(fullText);
+                                    obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                } else if(sc.classification === "No" && !addedMej.has(fullText) && mejList) {
+                                    addedMej.add(fullText);
+                                    mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                }
                             }
                         }
                     }
-                }
+
+                    let chanAvgPct = chanCount > 0 ? (chanSum / chanCount) * 100 : null;
+                    channelAverages[g] = chanAvgPct;
+
+                    if(chanAvgPct !== null) {
+                        rowSumPoints += chanSum;
+                        rowCountCases += chanCount;
+                    }
+                });
+
+                let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : 100;
+
+                mHtml += `
+                    <tr>
+                        <td style="font-weight:700; color:#AEB7FF;">${id}</td>
+                        <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
+                        <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
+                        ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
+                        <td style="background: rgba(255,255,255,0.02); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
+                    </tr>
+                `;
             });
 
-            const element = document.getElementById(targetId);
-            if (!dynamicActive) {
-                if(element) element.innerText = "N/A";
-                return;
-            }
-            let baseMax = targetId.includes("m_val_1_1") ? 5 : (targetId.includes("m_val_2_1") ? 20 : (targetId.includes("m_val_2_2") ? 15 : (targetId.includes("m_val_2_3") ? 30 : (targetId.includes("m_val_2_4") ? 15 : (targetId.includes("m_val_3_1") ? 15 : (targetId.includes("m_val_3_2") ? 10 : (targetId.includes("m_val_3_3") ? 20 : (targetId.includes("m_val_3_4") ? 10 : (targetId.includes("m_val_4_1") ? 10 : (targetId.includes("m_val_4_2") ? 5 : (targetId.includes("m_val_4_3") ? 5 : 10)))))))))))) : 0;
-            let finalValue = totalMax > 0 ? (totalEarned / totalMax) * baseMax : 0;
-            if(element) element.innerText = finalValue.toFixed(1);
-        }
+            mHtml += `</tbody>`;
+            matrixTable.innerHTML = mHtml;
 
-        function calculateGlobalMatrix() {
-            const isT1 = (document.getElementById('metaRole').value === "T1");
-            
-            getMatrixCalculation("m_val_1_1", ["Phones", "Chats", "Emails"], "Proper Greeting & Account Verification");
-            getMatrixCalculation("m_val_2_1", ["Phones", "Chats"], "Accurate & Effective Resolution");
-            getMatrixCalculation("m_val_2_2", ["Phones", "Chats"], "Alternatives Offered");
-            
-            if(!isT1) {
-                getMatrixCalculation("m_val_2_3", ["Emails"], "Accurate Information & Effective Resolution");
-                getMatrixCalculation("m_val_2_4", ["Emails"], "Correct Template Used");
-                getMatrixCalculation("m_val_3_4", ["Emails"], "Proper Formatting");
-                getMatrixCalculation("m_val_4_3", ["Emails"], "Signature Included");
-                getMatrixCalculation("m_val_4_4", ["Emails"], "Extra Assistance - Promotions & Offers");
-            }
-
-            getMatrixCalculation("m_val_3_1", ["Phones", "Chats", "Emails"], isT1 ? "Hold & Dead Air Time Management" : "Timely Response");
-            getMatrixCalculation("m_val_3_2", ["Phones", "Chats", "Emails"], "Grammar & Spelling");
-            getMatrixCalculation("m_val_3_3", ["Phones", "Chats"], "Professional Communication & Emotional Intelligence");
-            getMatrixCalculation("m_val_4_1", ["Phones", "Chats"], "Extra Assistance - Additional Support (Mandatory)");
-            getMatrixCalculation("m_val_4_2", ["Phones", "Chats"], "Extra Assistance - Promotions & Offers");
-
-            let totalEarnedGlobal = 0, totalMaxGlobal = 0;
-            const coreGroups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
-            
-            coreGroups.forEach(g => {
+            groups.forEach(g => {
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
-                        totalEarnedGlobal += evaluationState[g][i].calculatedScore;
-                        totalMaxGlobal += evaluationState[g][i].calculatedMax;
+                        totalEarnedGlobal += evaluationState[g][i].calculatedScore || 0;
+                        totalMaxGlobal += evaluationState[g][i].calculatedMax || 0;
                     }
                 }
             });
 
             let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
-            document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(0) + "%";
+            if(document.getElementById('lblGlobalScore')) {
+                document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
+            }
+            
+            if(fortList && fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
+            if(obsList && obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
+            if(mejList && mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>Ninguno en esta sesión.</p>";
         }
 
-        function openModal(id) { document.getElementById(id).style.display = "flex"; }
-        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+        function renderMatrixBadge(val) {
+            if(val === null || val === undefined) return `<span class="matrix-badge status-na">N/A</span>`;
+            let cls = "status-yes";
+            if(val < 90 && val >= 70) cls = "status-partial";
+            if(val < 70) cls = "status-no";
+            return `<span class="matrix-badge ${cls}">${val.toFixed(0)}%</span>`;
+        }
+
+        function openModal(id) { if(document.getElementById(id)) document.getElementById(id).style.display = "flex"; }
+        function closeModal(id) { if(document.getElementById(id)) document.getElementById(id).style.display = "none"; }
 
         function addNewConfigItem() {
             const type = document.getElementById('configType').value;
             const value = document.getElementById('configValue').value.trim();
-            if(!value) return;
+
+            if(!value) { alert("Por favor ingresa un nombre válido."); return; }
+
             currentLists[type].push(value);
-            localStorage.setItem('qa_lists_luxury_edition', JSON.stringify(currentLists));
+            if(type !== 'roles') currentLists[type].sort();
+
+            localStorage.setItem('qa_lists', JSON.stringify(currentLists));
             renderDropdowns();
+            renderActiveCheckboxes();
+            
+            document.getElementById('configValue').value = "";
             closeModal('configModal');
         }
 
-        function exportUltimatePDF() {
-            const agentName = document.getElementById('metaAgent').value || "Agente";
-            const element = document.getElementById('pdfPrintTarget');
-            
-            // Forzar Layout Limpio de Impresión sin cortes abruptos en bordes
-            const opt = {
-                margin:       [0.4, 0.4, 0.4, 0.4],
-                filename:     `QA_Reporte_${agentName.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#060913' },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { mode: ['avoid-all', 'css'] } // Evita que se corten tablas e inputs por la mitad
-            };
+        // EXPORTACIÓN EXCEL
+        async function exportPremiumExcel() {
+            try {
+                const agentName = document.getElementById('metaAgent').value;
+                const evaluatorName = document.getElementById('metaEvaluator').value;
+                const roleName = document.getElementById('metaRole').value;
+                const intDate = document.getElementById('metaInteractionDate').value;
+                const evalDate = document.getElementById('metaEvaluationDate').value;
+                const globalScoreStr = document.getElementById('lblGlobalScore').innerText;
 
-            html2pdf().set(opt).from(element).save();
+                const workbook = new ExcelJS.Workbook();
+                const wsSummary = workbook.addWorksheet('Feedback Summary');
+                wsSummary.views = [{ showGridLines: true }];
+
+                wsSummary.mergeCells('A1:E2');
+                const titleCell = wsSummary.getCell('A1');
+                titleCell.value = "QA PERFORMANCE FEEDBACK CARD";
+                titleCell.font = { name: 'Segoe UI', size: 16, bold: true, color: { argb: 'FFFFFF' } };
+                titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1F2937' } };
+                titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
+
+                wsSummary.getCell('A4').value = "Agent Name:"; wsSummary.getCell('B4').value = agentName;
+                wsSummary.getCell('A5').value = "Role:"; wsSummary.getCell('B5').value = roleName;
+                wsSummary.getCell('A6').value = "Evaluator:"; wsSummary.getCell('B6').value = evaluatorName;
+                wsSummary.getCell('C4').value = "Interaction Date:"; wsSummary.getCell('D4').value = intDate;
+                wsSummary.getCell('C5').value = "Evaluation Date:"; wsSummary.getCell('D5').value = evalDate;
+                
+                wsSummary.getCell('E4').value = "OVERALL SCORE";
+                wsSummary.getCell('E4').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: '4B5563' } };
+                wsSummary.getCell('E5').value = parseFloat(globalScoreStr) / 100;
+                wsSummary.getCell('E5').font = { name: 'Segoe UI', size: 20, bold: true, color: { argb: '10B981' } };
+                wsSummary.getCell('E5').numFmt = '0.00%';
+
+                ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true, color: { argb: '374151' } });
+
+                wsSummary.getCell('A8').value = "CONSOLIDATED PERFORMANCE MATRIX";
+                wsSummary.getCell('A8').font = { size: 12, bold: true, color: { argb: '1F2937' } };
+
+                const headers = ["Criterion ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
+                headers.forEach((h, i) => {
+                    const cell = wsSummary.getCell(9, i + 1);
+                    cell.value = h;
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '4F46E5' } };
+                    cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+                    cell.alignment = { horizontal: 'center' };
+                });
+
+                const matrixRows = document.querySelectorAll('#matrixPointsTable tbody tr');
+                matrixRows.forEach((row, rIdx) => {
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach((c, cIdx) => {
+                        const targetCell = wsSummary.getCell(10 + rIdx, cIdx + 1);
+                        let txt = c.innerText.trim();
+                        if(txt.includes('%')) {
+                            targetCell.value = parseFloat(txt) / 100;
+                            targetCell.numFmt = '0%';
+                            let num = parseFloat(txt);
+                            let color = num >= 90 ? 'D1FAE5' : (num >= 70 ? 'FEF3C7' : 'FEE2E2');
+                            targetCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
+                        } else {
+                            targetCell.value = txt;
+                        }
+                        targetCell.alignment = { horizontal: 'center' };
+                    });
+                });
+
+                let nextRow = 12 + matrixRows.length;
+                wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC FEEDBACK NOTES";
+                wsSummary.getCell(`A${nextRow}`).font = { size: 12, bold: true };
+
+                wsSummary.getCell(`A${nextRow+2}`).value = "General Session Comments:";
+                wsSummary.getCell(`B${nextRow+2}`).value = document.getElementById('dashGeneralComments').value;
+                wsSummary.getCell(`A${nextRow+4}`).value = "Development Goals for Next Period:";
+                wsSummary.getCell(`B${nextRow+4}`).value = document.getElementById('dashGoals').value;
+                wsSummary.getCell(`A${nextRow+6}`).value = "Performance Rating:";
+                wsSummary.getCell(`B${nextRow+6}`).value = document.getElementById('dashPerformanceRating').value;
+                wsSummary.getCell(`C${nextRow+6}`).value = "Follow-up Date:";
+                wsSummary.getCell(`D${nextRow+6}`).value = document.getElementById('dashFollowUpDate').value;
+
+                [`A${nextRow+2}`, `A${nextRow+4}`, `A${nextRow+6}`, `C${nextRow+6}`].forEach(k => wsSummary.getCell(k).font = { bold: true });
+                wsSummary.columns.forEach(col => col.width = 22);
+
+                const wsData = workbook.addWorksheet('Raw Evaluation Data');
+                wsData.views = [{ showGridLines: true }];
+
+                const dataHeaders = ["Channel Group", "Case Index", "Criterion ID", "Classification", "Points Earned"];
+                dataHeaders.forEach((dh, idx) => {
+                    const cell = wsData.getCell(1, idx + 1);
+                    cell.value = dh;
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '374151' } };
+                    cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+                });
+
+                let dataRowCounter = 2;
+                const groups = ["Phones", "Chats", "Emails"];
+                groups.forEach(g => {
+                    for(let i=1; i<=4; i++) {
+                        if(evaluationState[g][i].active) {
+                            Object.keys(evaluationState[g][i].scores).forEach(cId => {
+                                const item = evaluationState[g][i].scores[cId];
+                                wsData.getCell(dataRowCounter, 1).value = g;
+                                wsData.getCell(dataRowCounter, 2).value = `Case ${i}`;
+                                wsData.getCell(dataRowCounter, 3).value = cId;
+                                wsData.getCell(dataRowCounter, 4).value = item.classification;
+                                wsData.getCell(dataRowCounter, 5).value = item.points;
+                                dataRowCounter++;
+                            });
+                        }
+                    }
+                });
+                wsData.columns.forEach(col => col.width = 18);
+
+                const buffer = await workbook.xlsx.writeBuffer();
+                saveAs(new Blob([buffer]), `QA_Feedback_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
+            } catch(err) {
+                alert("Error generando el reporte Excel. Verifica que todos los campos requeridos estén llenos.");
+                console.error(err);
+            }
         }
-    </script>
-</body>
-</html>
