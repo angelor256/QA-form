@@ -3,331 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Platform // Editorial Premium Edition</title>
+    <title>QA Performance Dashboard // Studio Edition</title>
     
-    <!-- Google Fonts: Premium & Editorial Design -->
+    <!-- Google Fonts: Editorial & Premium Clean Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- html2pdf library for clean rendering -->
+    <!-- html2pdf library to ensure pristine layout downloads -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #fcfcfc;
+            --bg-outer: #f3f4f6;
             --bg-card: #ffffff;
-            --text-dark: #000000;
-            --text-muted: #707070;
-            --accent-green: #10b981;
-            --accent-brand: #000000;
-            --border-thin: #e5e5e5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --accent-color: #000000;
             
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --na: #94a3b8;
+            --na: #9ca3af;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-dark);
-            padding: 0;
+            background-color: var(--bg-outer);
+            color: var(--text-main);
             min-height: 100vh;
+            padding-bottom: 4rem;
         }
 
-        /* --- EDITORIAL HERO HEADER (Inspired by image layout) --- */
-        header {
-            background: var(--text-dark);
-            color: white;
-            padding: 4rem 3rem;
+        /* --- TOP NAVIGATION BAR (Inspired by image_4356c0.png) --- */
+        .top-navbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid var(--text-dark);
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo-area h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .logo-area p {
-            color: #a3a3a3;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 0.75rem;
-        }
-
-        .header-actions {
+        .nav-container {
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .btn {
-            padding: 1rem 2rem;
-            font-weight: 600;
-            font-size: 0.85rem;
-            font-family: 'Space Grotesk', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid transparent;
-        }
-
-        .btn-primary {
-            background: white;
-            color: black;
-        }
-
-        .btn-primary:hover {
+        .nav-btn {
             background: transparent;
-            color: white;
-            border-color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border-color: rgba(255,255,255,0.3);
-        }
-
-        .btn-secondary:hover {
-            border-color: white;
-        }
-
-        /* --- ASYMMETRIC GRID LAYOUT --- */
-        .app-layout {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            min-height: calc(100vh - 180px);
-        }
-
-        /* Sidebar with explicit borders like a magazine template */
-        .sidebar {
-            border-right: 1px solid var(--border-thin);
-            background: white;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .sidebar-section-title {
-            font-family: 'Space Grotesk', sans-serif;
+            border: none;
+            color: var(--text-muted);
             font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-main);
+            background: #f9fafb;
+        }
+
+        .nav-btn.active {
+            color: white;
+            background: var(--accent-color);
+        }
+
+        .nav-btn.dash-toggle {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .nav-btn.dash-toggle.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .nav-btn.disabled-tab {
+            opacity: 0.3;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border-color);
+        }
+
+        /* --- CORE WRAPPER CONTAINER --- */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- LARGE EDITORIAL INTRO HERO --- */
+        .intro-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+        }
+
+        .intro-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .intro-hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- CENTRAL CARD CONTAINER (Inspired by image_4356c0.png) --- */
+        .premium-card-layout {
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* --- TWO COLUMN SETUP FOR EVALUATION STATE --- */
+        .evaluation-layout-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+        }
+
+        .meta-sidebar {
+            border-right: 1px solid var(--border-color);
+            padding-right: 2rem;
+        }
+
+        .section-mini-title {
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
-            color: var(--text-dark);
-            border-bottom: 1px solid var(--text-dark);
-            padding-bottom: 0.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
         }
 
         .form-control {
             width: 100%;
-            background-color: transparent;
-            border: 1px solid #d1d1d1;
-            padding: 0.75rem 1rem;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-            font-weight: 400;
+            background: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-main);
             transition: all 0.2s ease;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--text-dark);
+            border-color: var(--accent-color);
+            background: white;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border-thin);
-        }
-
-        .checkbox-item label {
+            padding: 0.5rem 0;
             font-size: 0.85rem;
-            font-weight: 500;
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--text-dark);
+            accent-color: var(--accent-color);
             cursor: pointer;
         }
 
-        /* Workspace Core */
-        .workspace {
-            background: var(--bg-main);
-        }
-
-        /* Magazine Style Channel Tabs */
-        .channel-groups {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border-bottom: 1px solid var(--text-dark);
-            background: white;
-        }
-
-        .tab-btn {
-            padding: 1.5rem;
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            border-right: 1px solid var(--border-thin);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            text-align: center;
-        }
-
-        .tab-btn:hover {
-            color: var(--text-dark);
-            background: #fafafa;
-        }
-
-        .tab-btn.active {
-            color: white;
-            background: var(--text-dark);
-        }
-
-        .tab-btn.disabled-tab {
-            opacity: 0.25;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
-
-        #btnGroupDashboard {
-            border-right: none;
-            background: #f1f5f9;
-            color: var(--text-dark);
-        }
-        #btnGroupDashboard.active {
-            background: #1e293b;
-            color: white;
-        }
-
+        /* --- SUB NAVIGATION --- */
         .sub-navigation {
             display: flex;
-            background: white;
-            border-bottom: 1px solid var(--border-thin);
-            padding: 0 2rem;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
         }
 
         .sub-tab-btn {
-            padding: 1rem 1.5rem;
             background: transparent;
-            color: var(--text-muted);
             border: none;
+            padding: 0.5rem 1rem;
             font-size: 0.8rem;
             font-weight: 600;
-            text-transform: uppercase;
+            color: var(--text-muted);
             cursor: pointer;
-            position: relative;
+            border-radius: 6px;
         }
 
         .sub-tab-btn.active {
-            color: var(--text-dark);
-        }
-        .sub-tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--text-dark);
+            background: #f3f4f6;
+            color: var(--text-main);
         }
 
-        .form-container {
-            display: none;
-            padding: 3rem;
-        }
-
-        .form-container.active {
-            display: block;
-        }
-
-        .meta-case-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            background: white;
-            padding: 2rem;
-            border: 1px solid var(--border-thin);
-            border-bottom: none;
-        }
-
-        /* Clean Editorial Tables */
+        /* --- TABLES & OBJECTS --- */
         .evaluation-table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border: 1px solid var(--border-thin);
+            margin-top: 1rem;
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 1rem 1.5rem;
-            background: #fafafa;
-            color: var(--text-dark);
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            padding: 0.75rem 1rem;
+            background: #f9fafb;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--text-dark);
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .evaluation-table tr.section-header-row td {
-            background: var(--text-dark);
-            color: white;
+            background: #f3f4f6;
+            color: var(--text-main);
             font-weight: 700;
-            font-size: 0.85rem;
-            font-family: 'Space Grotesk', sans-serif;
-            padding: 1rem 1.5rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            padding: 0.75rem 1rem;
         }
 
         .evaluation-table td {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border-thin);
-            font-size: 0.9rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
             vertical-align: middle;
         }
 
@@ -335,275 +272,230 @@
             display: block;
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 0.25rem;
-            font-weight: 400;
+            margin-top: 0.2rem;
         }
 
         .select-classification {
-            background-color: white;
-            color: var(--text-dark);
-            border: 1px solid #c8c8c8;
-            padding: 0.4rem 0.6rem;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.85rem;
             cursor: pointer;
-            width: 110px;
         }
 
         .badge-pill {
-            padding: 0.3rem 0.6rem;
-            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
             font-size: 0.75rem;
-            text-align: center;
-            display: inline-block;
-            text-transform: uppercase;
-            border: 1px solid transparent;
+            font-weight: 700;
         }
 
-        .status-yes { background-color: #f0fdf4; color: var(--success); border-color: #bbf7d0; }
-        .status-partial { background-color: #fffbeb; color: var(--warning); border-color: #fde68a; }
-        .status-no { background-color: #fef2f2; color: var(--danger); border-color: #fecaca; }
-        .status-na { background-color: #f5f5f5; color: var(--na); border-color: #e5e5e5; }
+        .status-yes { background: #ecfdf5; color: var(--success); }
+        .status-partial { background: #fffbeb; color: var(--warning); }
+        .status-no { background: #fef2f2; color: var(--danger); }
+        .status-na { background: #f3f4f6; color: var(--na); }
 
         .form-footer-scores {
             display: flex;
             justify-content: flex-end;
-            gap: 4rem;
-            background: white;
-            padding: 2rem;
-            border: 1px solid var(--border-thin);
-            border-top: none;
+            gap: 3rem;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
         }
 
         .footer-score-block text {
             display: block;
             font-size: 0.65rem;
-            color: var(--text-muted);
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 0.25rem;
+            color: var(--text-muted);
         }
 
         .footer-score-block div {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* --- DASHBOARD & FEEDBACK BLOCKS VIEW --- */
-        #dashboardViewArea {
-            padding: 3rem;
-        }
-
-        /* Asymmetric block representation inspired by the user's photo */
-        .editorial-row-hero {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            border: 1px solid var(--text-dark);
-            background: white;
+        /* --- DASHBOARD VIEW (100% SPANISH AS REQUESTED) --- */
+        .dashboard-hero-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
             margin-bottom: 3rem;
         }
 
-        .hero-banner-left {
-            padding: 4rem 3rem;
-            background: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-right: 1px solid var(--text-dark);
-        }
-
-        .hero-banner-left h2 {
-            font-family: 'Syne', sans-serif;
+        .dashboard-hero-block h2 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-banner-left p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .hero-score-right {
-            background: #10b981; /* Solid block color match */
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            text-align: center;
-        }
-
-        .global-score-hero {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4rem;
             font-weight: 700;
-            line-height: 1;
         }
 
-        .global-score-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 0.5rem;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
+        .global-score-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 3rem;
         }
 
         .matrix-table th {
-            background-color: #fafafa;
-            color: var(--text-dark);
-            font-family: 'Space Grotesk', sans-serif;
+            background: #f9fafb;
+            color: var(--text-muted);
+            font-size: 0.75rem;
             font-weight: 700;
-            padding: 1rem;
-            border: 1px solid var(--border-thin);
-            font-size: 0.8rem;
             text-transform: uppercase;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
         }
 
         .matrix-table td {
-            border: 1px solid var(--border-thin);
-            padding: 1.25rem 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
             font-size: 0.85rem;
         }
 
         .matrix-section-title {
-            background: #000000 !important;
-            color: #ffffff !important;
-            font-family: 'Space Grotesk', sans-serif;
+            background: #f3f4f6 !important;
+            color: var(--text-main) !important;
             font-weight: 700;
-            text-align: left !important;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
 
-        .comment-box-area {
-            width: 100%;
-            background: #fafafa;
-            border: 1px solid var(--border-thin);
-            padding: 1rem;
-            color: var(--text-dark);
-            min-height: 120px;
-            resize: vertical;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* EXCLUSIVELY SPANISH LABELS FOR THE FINAL FEEDBACK MODULE AS REQUESTED */
-        .feedback-container-spanish {
+        .feedback-spanish-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-top: 2rem;
         }
 
-        .feedback-block {
-            background: white;
-            border: 1px solid var(--border-thin);
-            padding: 2rem;
-        }
-        
-        .feedback-block-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--text-dark);
+        .feedback-column {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
         }
 
-        .feedback-item-box {
-            padding: 0.75rem 1rem;
-            border-left: 3px solid var(--text-dark);
-            background: #fafafa;
-            margin-bottom: 0.5rem;
+        .feedback-column h3 {
             font-size: 0.85rem;
-            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-main);
         }
 
-        /* --- PDF PRINT BREAK & CUT CONTROLS --- */
-        .pdf-page-block {
+        .feedback-item {
+            background: #f9fafb;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-left: 3px solid var(--text-main);
+        }
+
+        /* --- PDF COMPONENT BLOCK CONTEXTS --- */
+        .pdf-block {
             page-break-inside: avoid;
             break-inside: avoid;
         }
+
+        .action-bar-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-action {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-action-primary { background: black; color: white; }
+        .btn-action-secondary { background: white; border-color: #d1d5db; color: var(--text-main); }
 
         /* MODAL */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0,0,0,0.3);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 200;
         }
-
-        .modal-card {
+        .modal-body {
             background: white;
-            border: 1px solid var(--text-dark);
+            padding: 2.5rem;
+            border-radius: 16px;
             width: 100%;
-            max-width: 450px;
-            padding: 3rem;
+            max-width: 400px;
         }
 
         @media print {
-            .header-actions, .channel-groups, .sub-navigation, .sidebar, .select-classification {
+            .top-navbar, .action-bar-footer, .meta-sidebar, .sub-navigation, .select-classification {
                 display: none !important;
             }
-            .app-layout {
+            .evaluation-layout-grid {
                 grid-template-columns: 1fr !important;
             }
-            body {
-                background: white;
-                padding: 0;
-            }
-            #dashboardViewArea {
+            .premium-card-layout {
                 padding: 0 !important;
+                border: none !important;
             }
+            body { background: white; }
         }
     </style>
 </head>
 <body>
 
-    <div id="pdfExportContainer">
-        <header>
-            <div class="logo-area">
-                <h1>QA // STUDIO INTEL</h1>
-                <p>Operational Performance Dashboard</p>
-            </div>
-            <div class="header-actions">
-                <button class="btn btn-secondary" onclick="openModal('configModal')">Parameters</button>
-                <button class="btn btn-primary" onclick="exportToPDF()">Export PDF</button>
-            </div>
-        </header>
+    <!-- TOP CONTROL NAVIGATION BAR (Inspired by image_4356c0.png layout) -->
+    <div class="top-navbar">
+        <div class="nav-container">
+            <button class="nav-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
+            <button class="nav-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
+            <button class="nav-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn dash-toggle" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')">Dashboard Matrix</button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn" style="background:#f3f4f6; color:black;" onclick="openModal('configModal')">Parameters</button>
+        </div>
+    </div>
 
-        <div class="app-layout">
+    <div class="main-wrapper" id="pdfExportContainer">
+        
+        <!-- EDITORIAL INTRO HERO HEADER -->
+        <div class="intro-hero">
+            <h1>QA Performance Dashboard</h1>
+            <p>Operational QA Standards & Calibration Matrix</p>
+        </div>
+
+        <!-- MAIN PREMIUM CARD CONTAINER -->
+        <div class="premium-card-layout">
             
-            <!-- SIDEBAR -->
-            <div class="sidebar">
-                <div>
-                    <div class="sidebar-section-title">Session Metadata</div>
+            <!-- EVALUATION FLOW WORKSPACE -->
+            <div class="evaluation-layout-grid" id="evaluationLayoutArea">
+                
+                <!-- SIDEBAR METADATA -->
+                <div class="meta-sidebar">
+                    <div class="section-mini-title">Session Profiles</div>
                     <div class="form-group">
-                        <label>Agent</label>
+                        <label>Agent Name</label>
                         <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
                     </div>
                     <div class="form-group">
@@ -611,7 +503,7 @@
                         <select id="metaEvaluator" class="form-control"></select>
                     </div>
                     <div class="form-group">
-                        <label>Current Role</label>
+                        <label>Current Role Mapping</label>
                         <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
                     </div>
                     <div class="form-group">
@@ -622,127 +514,113 @@
                         <label>Evaluation Date</label>
                         <input type="date" id="metaEvaluationDate" class="form-control">
                     </div>
-                </div>
 
-                <div>
-                    <div class="sidebar-section-title">Active Cases</div>
+                    <div class="section-mini-title" style="margin-top:2.5rem;">Target Cases</div>
                     <div id="checkboxGrid"></div>
                 </div>
+
+                <!-- RIGHT SIDE DYNAMIC WORKSPACE FORM -->
+                <div>
+                    <div class="sub-navigation" id="subTabsArea"></div>
+                    <div id="formsWorkspaceArea"></div>
+                </div>
             </div>
 
-            <!-- WORKSPACE -->
-            <div class="workspace">
+            <!-- DASHBOARD VIEW SUMMARY MODULE (100% SPANISH) -->
+            <div id="dashboardViewArea" style="display:none;">
                 
-                <div class="channel-groups">
-                    <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
-                    <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
-                    <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
-                    <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')">Dashboard Matrix</button>
+                <!-- BLOQUE DEL TOTAL CONSOLIDADO -->
+                <div class="pdf-block dashboard-hero-block">
+                    <div>
+                        <h2>Calificación Global Consolidada</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Resultado porcentual calculado en base a los criterios activos.</p>
+                    </div>
+                    <div class="global-score-display" id="lblGlobalScore">100.00%</div>
                 </div>
 
-                <div class="sub-navigation" id="subTabsArea"></div>
+                <!-- TABLA MATRIZ DE PUNTOS CONSOLIDADA -->
+                <div class="pdf-block" style="margin-bottom: 3rem;">
+                    <div class="section-mini-title" style="color:var(--text-main); font-size:0.85rem; margin-bottom:1.5rem;">📊 Matriz del Cuadro de Mando (Promedios por Criterio)</div>
+                    <table class="matrix-table" id="matrixPointsTable">
+                        <!-- Generado desde JS -->
+                    </table>
+                </div>
 
-                <!-- Core Workspace Evaluation Forms -->
-                <div id="formsWorkspaceArea"></div>
-
-                <!-- DASHBOARD MODULE CONSOLIDATED -->
-                <div id="dashboardViewArea" style="display:none;">
+                <!-- PLAN DE ACCIÓN Y RETROALIMENTACIÓN -->
+                <div class="pdf-block" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem;">
+                    <div class="section-mini-title" style="color:var(--text-main); font-size:0.85rem;">Plan de Desarrollo y Compromisos</div>
                     
-                    <!-- Page Block 1: Hero Score & Core Matrix Table -->
-                    <div class="pdf-page-block" style="margin-bottom: 4rem;">
-                        <div class="editorial-row-hero">
-                            <div class="hero-banner-left">
-                                <h2>Consolidated Global Rating</h2>
-                                <p>Audit results measured explicitly against quality metrics framework.</p>
-                            </div>
-                            <div class="hero-score-right">
-                                <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
-                                <div class="global-score-label">Final Score</div>
-                            </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem;">
+                        <div class="form-group">
+                            <label style="font-weight:700; text-transform:uppercase; font-size:0.7rem; color:var(--text-muted);">Comentarios Generales del Auditor</label>
+                            <textarea id="dashGeneralComments" class="comment-box-area" style="width:100%; min-height:100px; padding:1rem; margin-top:0.5rem; border:1px solid var(--border-color);" placeholder="Escriba comentarios de alineación..."></textarea>
                         </div>
-
-                        <div style="background: white; border: 1px solid var(--border-thin); padding: 2.5rem;">
-                            <div class="sidebar-section-title" style="margin-bottom:2rem;">📊 Scorecard Matrix (Averages per Case Type)</div>
-                            <table class="matrix-table" id="matrixPointsTable">
-                                <!-- Generated Dynamically -->
-                            </table>
+                        <div class="form-group">
+                            <label style="font-weight:700; text-transform:uppercase; font-size:0.7rem; color:var(--text-muted);">Objetivos y Metas de Desempeño</label>
+                            <textarea id="dashGoals" class="comment-box-area" style="width:100%; min-height:100px; padding:1rem; margin-top:0.5rem; border:1px solid var(--border-color);" placeholder="Escriba planes de acción acordados..."></textarea>
                         </div>
                     </div>
 
-                    <!-- Page Block 2: Feedback & Action Plan (Protected against PDF Cuts) -->
-                    <div class="pdf-page-block" style="background: white; border: 1px solid var(--border-thin); padding: 2.5rem;">
-                        <div class="sidebar-section-title">Action Plan & Development</div>
-                        
-                        <div class="dashboard-grid">
-                            <div>
-                                <div class="form-group">
-                                    <label>Auditor General Comments</label>
-                                    <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Write calibration alignment comments..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Development Goals & Commitments</label>
-                                    <textarea id="dashGoals" class="comment-box-area" placeholder="Specify targeted performance actions..."></textarea>
-                                </div>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
-                                    <div class="form-group">
-                                        <label>Evaluation Status</label>
-                                        <select id="dashPerformanceRating" class="form-control">
-                                            <option value="Completed">Completed</option>
-                                            <option value="Non Completed">Non Completed</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Next Feedback Session</label>
-                                        <input type="date" id="dashFollowUpDate" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
+                    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:2rem; margin-top:1rem;">
+                        <div class="form-group">
+                            <label style="font-weight:700; text-transform:uppercase; font-size:0.7rem; color:var(--text-muted);">Estado de la Evaluación</label>
+                            <select id="dashPerformanceRating" class="form-control" style="margin-top:0.5rem;">
+                                <option value="Completed">Completado</option>
+                                <option value="Non Completed">No Completado</option>
+                            </select>
                         </div>
-
-                        <!-- STYLED SPANISH FEEDBACK BOXES AS EXPLICITLY REQUESTED -->
-                        <div class="feedback-container-spanish">
-                            <div class="feedback-block" style="border-top: 3px solid var(--success);">
-                                <div class="feedback-block-title" style="color:var(--success);">Fortalezas (Yes)</div>
-                                <div id="dashFortalezasList"></div>
-                            </div>
-                            <div class="feedback-block" style="border-top: 3px solid var(--warning);">
-                                <div class="feedback-block-title" style="color:var(--warning);">Observaciones (Partially)</div>
-                                <div id="dashObservarList"></div>
-                            </div>
-                            <div class="feedback-block" style="border-top: 3px solid var(--danger);">
-                                <div class="feedback-block-title" style="color:var(--danger);">Oportunidades (No)</div>
-                                <div id="dashMejorasList"></div>
-                            </div>
+                        <div class="form-group">
+                            <label style="font-weight:700; text-transform:uppercase; font-size:0.7rem; color:var(--text-muted);">Próxima Sesión de Seguimiento</label>
+                            <input type="date" id="dashFollowUpDate" class="form-control" style="margin-top:0.5rem;">
                         </div>
                     </div>
 
+                    <!-- MÓDULO DE FORTALEZAS Y ÁREAS EN ESPAÑOL -->
+                    <div class="feedback-spanish-grid">
+                        <div class="feedback-column" style="border-top: 3px solid var(--success);">
+                            <h3 style="color: var(--success);">Fortalezas (Yes)</h3>
+                            <div id="dashFortalezasList"></div>
+                        </div>
+                        <div class="feedback-column" style="border-top: 3px solid var(--warning);">
+                            <h3 style="color: var(--warning);">Observaciones (Partially)</h3>
+                            <div id="dashObservarList"></div>
+                        </div>
+                        <div class="feedback-column" style="border-top: 3px solid var(--danger);">
+                            <h3 style="color: var(--danger);">Oportunidades (No)</h3>
+                            <div id="dashMejorasList"></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+
+            <!-- FOOTER CONTAINER ACTION TRIGGER BAR -->
+            <div class="action-bar-footer">
+                <button class="btn-action btn-action-primary" onclick="exportToPDF()">Export Report PDF</button>
+            </div>
+
         </div>
     </div>
 
-    <!-- PARAMETERS CONFIG MODAL -->
+    <!-- PARAMETERS POPUP MODAL -->
     <div class="modal-overlay" id="configModal">
-        <div class="modal-card">
-            <div class="sidebar-section-title">Manage Profiles</div>
-            
+        <div class="modal-body">
+            <div class="section-mini-title">Profiles Administration</div>
             <div class="form-group">
-                <label>Category</label>
+                <label>Target Field List</label>
                 <select id="configType" class="form-control">
-                    <option value="agents">New Agent</option>
-                    <option value="evaluators">New Evaluator</option>
-                    <option value="roles">New Role</option>
+                    <option value="agents">New Agent Profile</option>
+                    <option value="evaluators">New Evaluator Profile</option>
+                    <option value="roles">New Corporate Role</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Enter string name...">
+                <label>Resource / Individual Identity String</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Type name pattern...">
             </div>
-            
-            <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2.5rem;">
-                <button class="btn btn-secondary" style="color:black; border-color:black;" onclick="closeModal('configModal')">Cancel</button>
-                <button class="btn btn-primary" style="background:black; color:white;" onclick="addNewConfigItem()">Save Changes</button>
+            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:2rem;">
+                <button class="btn-action btn-action-secondary" onclick="closeModal('configModal')">Cancel</button>
+                <button class="btn-action btn-action-primary" onclick="addNewConfigItem()">Save Setup</button>
             </div>
         </div>
     </div>
@@ -754,7 +632,7 @@
             roles: ["New Hire", "T1", "T2", "T3", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_editorial')) || defaultLists;
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_clean')) || defaultLists;
 
         const phoneChatCriteria = [
             { id: "1.1", section: "SECTION 1 — OPENING & ACCOUNT PROFILE", max_pts: 5, text: "Proper Greeting", desc: "Professional and personalized greeting aligned with corporate standards.", app: "All Channels" },
@@ -842,7 +720,7 @@
 
             ["Phones", "Chats", "Emails"].forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:1rem; font-weight:700; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
+                html += `<div style="margin-top:0.75rem; font-weight:700; font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
                 for(let i=1; i<=4; i++) {
                     const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
@@ -867,19 +745,17 @@
             if (groupName === "Emails" && document.getElementById('metaRole').value === "T1") return;
             currentGroup = groupName;
             
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`btnGroup${groupName}`).classList.add('active');
 
             if (groupName === "Dashboard") {
-                document.getElementById('subTabsArea').style.display = "none";
-                document.getElementById('formsWorkspaceArea').style.display = "none";
+                document.getElementById('evaluationLayoutArea').style.display = "none";
                 document.getElementById('dashboardViewArea').style.display = "block";
                 calculateGlobalMatrix();
                 return;
             }
 
-            document.getElementById('subTabsArea').style.display = "flex";
-            document.getElementById('formsWorkspaceArea').style.display = "block";
+            document.getElementById('evaluationLayoutArea').style.display = "grid";
             document.getElementById('dashboardViewArea').style.display = "none";
 
             buildSubTabs();
@@ -923,11 +799,11 @@
                         <div class="meta-case-row">
                             <div class="form-group">
                                 <label>Account #</label>
-                                <input type="text" class="form-control" placeholder="Account ID" value="${evaluationState[g][i].accountId}" onchange="evaluationState['${g}'][${i}].accountId = this.value">
+                                <input type="text" class="form-control" placeholder="Account Reference" value="${evaluationState[g][i].accountId}" onchange="evaluationState['${g}'][${i}].accountId = this.value">
                             </div>
                             <div class="form-group">
                                 <label>Interaction ID</label>
-                                <input type="text" class="form-control" placeholder="Session / Ticket Reference ID" value="${evaluationState[g][i].interactionId}" onchange="evaluationState['${g}'][${i}].interactionId = this.value">
+                                <input type="text" class="form-control" placeholder="Session ID" value="${evaluationState[g][i].interactionId}" onchange="evaluationState['${g}'][${i}].interactionId = this.value">
                             </div>
                         </div>
                     `;
@@ -936,11 +812,11 @@
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Quality Attribute Parameters</th>
-                                    <th>Scope Target</th>
+                                    <th>Quality Parameters Checklist</th>
+                                    <th>Target Scope</th>
                                     <th>Classification</th>
                                     <th>Max</th>
-                                    <th>Points Earned</th>
+                                    <th>Points</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -953,8 +829,8 @@
                             tableHtml += `
                                 <tr class="section-header-row">
                                     <td colspan="3"><strong>${currentSection}</strong></td>
-                                    <td colspan="2" style="text-align:right; background: black;">
-                                        <input type="text" placeholder="Section targeted milestones notes..." class="form-control" style="width:260px; color: white; border-color: #404040; display:inline-block; padding:0.4rem 0.6rem; font-size:0.8rem;"
+                                    <td colspan="2" style="text-align:right;">
+                                        <input type="text" placeholder="Section calibration logs..." class="form-control" style="width:220px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.75rem;"
                                                value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
                                 </tr>
@@ -967,7 +843,7 @@
                                     <strong style="color:var(--text-dark); font-weight:600;">${c.text}</strong>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
-                                <td style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">${c.app}</td>
+                                <td style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">${c.app}</td>
                                 <td>
                                     <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
                                         <option value="Yes">Yes</option>
@@ -985,7 +861,7 @@
                     tableHtml += `</tbody></table>
                         <div class="form-footer-scores">
                             <div class="footer-score-block"><text>Sum Score</text><div id="lbl_pts_${g}_${i}">0.00</div></div>
-                            <div class="footer-score-block"><text>Case Pct Result</text><div id="lbl_pct_${g}_${i}">100%</div></div>
+                            <div class="footer-score-block"><text>Case Result</text><div id="lbl_pct_${g}_${i}">100%</div></div>
                         </div>
                     `;
 
@@ -1043,6 +919,7 @@
             }
         }
 
+        // --- DASHBOARD MATRIX MODULE (100% SPANISH) ---
         function calculateGlobalMatrix() {
             const isT1 = (document.getElementById('metaRole').value === "T1");
             const matrixTable = document.getElementById('matrixPointsTable');
@@ -1055,21 +932,21 @@
             fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
             let sectionsOrder = [
-                { title: "SECTION 1 — OPENING & ACCOUNT PROFILE", list: ["1.1"] },
-                { title: "SECTION 2 — PRODUCT KNOWLEDGE", list: ["2.1", "2.2"] },
-                { title: "SECTION 3 — COMMUNICATION SKILLS", list: ["3.1", "3.2", "3.3"] },
-                { title: "SECTION 4 — CLOSING & ADDITIONAL ASSISTANCE", list: ["4.1", "4.2"] }
+                { title: "SECCIÓN 1 — APERTURA Y PERFIL DE CUENTA", list: ["1.1"] },
+                { title: "SECCIÓN 2 — CONOCIMIENTO DEL PRODUCTO", list: ["2.1", "2.2"] },
+                { title: "SECCIÓN 3 — HABILIDADES DE COMUNICACIÓN", list: ["3.1", "3.2", "3.3"] },
+                { title: "SECCIÓN 4 — CIERRE Y ASISTENCIA ADICIONAL", list: ["4.1", "4.2"] }
             ];
 
             let mHtml = `
                 <thead>
                     <tr>
-                        <th>Evaluated Parameter Metric</th>
-                        <th>Scope Target</th>
-                        <th>Calls Avg</th>
-                        <th>Chats Avg</th>
-                        ${!isT1 ? '<th>Emails Avg</th>' : ''}
-                        <th>Total Average</th>
+                        <th>Métrica del Parámetro Evaluado</th>
+                        <th>Canal Destino</th>
+                        <th>Promedio Llamadas</th>
+                        <th>Promedio Chats</th>
+                        ${!isT1 ? '<th>Promedio Correos</th>' : ''}
+                        <th>Promedio Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1083,9 +960,27 @@
                     let pObj = phoneChatCriteria.find(c => c.id === id);
                     let eObj = emailCriteria.find(c => c.id === id);
                     
-                    targetText = pObj ? pObj.text : eObj.text;
+                    // Traducción o mapeo directo del texto de criterios a Español dentro de la matriz
+                    let txtMap = {
+                        "Proper Greeting": "Saludo Adecuado",
+                        "Accurate & Effective Resolution": "Resolución Exacta y Efectiva",
+                        "Alternatives Offered": "Alternativas Ofrecidas",
+                        "Hold & Time Management / Timely Response": "Gestión de Espera y del Tiempo / Respuesta Oportuna",
+                        "Grammar & Spelling": "Gramática y Ortografía",
+                        "Professional Communication & Emotional Intelligence": "Comunicación Profesional e Inteligencia Emocional",
+                        "Additional Assistance - Extra Support": "Asistencia Adicional - Soporte Extra",
+                        "Additional Assistance - Promos & Offers": "Asistencia Adicional - Promociones y Ofertas",
+                        "Correct Template Used": "Plantilla Correcta Utilizada",
+                        "Proper Formatting": "Formato Adecuado",
+                        "Signature Included": "Firma Incluida"
+                    };
+
+                    let engText = pObj ? pObj.text : eObj.text;
+                    targetText = txtMap[engText] || engText;
                     targetDesc = pObj ? pObj.desc : eObj.desc;
-                    targetApp = pObj ? pObj.app : eObj.app;
+                    
+                    let appMap = { "All Channels": "Todos", "Chats/Calls": "Chats/Llamadas", "Emails": "Correos" };
+                    targetApp = appMap[pObj ? pObj.app : eObj.app] || "Todos";
 
                     let rowSum = 0, rowCount = 0;
                     let averages = { Phones: null, Chats: null, Emails: null };
@@ -1105,13 +1000,14 @@
                                     cSum += sc.points;
                                     cMax += specificCriterion.max_pts;
 
-                                    // FEEDBACK BOXES POPULATED WITH SPANISH STRINGS AS SPECIFIED
+                                    let channelLabelES = g === "Phones" ? "Llamada" : (g === "Chats" ? "Chat" : "Correo");
+
                                     if(sc.classification === "Yes") {
-                                        fortList.innerHTML += `<div class="feedback-item-box">${targetText} [${g} ${i}]</div>`;
+                                        fortList.innerHTML += `<div class="feedback-item">${targetText} [${channelLabelES} ${i}]</div>`;
                                     } else if(sc.classification === "Partially") {
-                                        obsList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--warning);">${targetText} [${g} ${i}]</div>`;
+                                        obsList.innerHTML += `<div class="feedback-item" style="border-left-color:var(--warning);">${targetText} [${channelLabelES} ${i}]</div>`;
                                     } else if(sc.classification === "No") {
-                                        mejList.innerHTML += `<div class="feedback-item-box" style="border-left-color:var(--danger);">${targetText} [${g} ${i}]</div>`;
+                                        mejList.innerHTML += `<div class="feedback-item" style="border-left-color:var(--danger);">${targetText} [${channelLabelES} ${i}]</div>`;
                                     }
                                 }
                             }
@@ -1128,13 +1024,12 @@
                         <tr>
                             <td>
                                 <strong>${id} - ${targetText}</strong>
-                                <span class="desc-sub">${targetDesc}</span>
                             </td>
-                            <td style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">${targetApp}</td>
+                            <td style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">${targetApp}</td>
                             <td>${renderMatrixBadge(averages["Phones"])}</td>
                             <td>${renderMatrixBadge(averages["Chats"])}</td>
                             ${!isT1 ? `<td>${renderMatrixBadge(averages["Emails"])}</td>` : ''}
-                            <td style="font-weight:700; background:#fafafa;">${renderMatrixBadge(totalRowAvg)}</td>
+                            <td style="font-weight:700; background:#f9fafb;">${renderMatrixBadge(totalRowAvg)}</td>
                         </tr>
                     `;
                 });
@@ -1174,29 +1069,28 @@
             if(!value) return;
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
-            localStorage.setItem('qa_lists_editorial', JSON.stringify(currentLists));
+            localStorage.setItem('qa_lists_clean', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
             document.getElementById('configValue').value = "";
             closeModal('configModal');
         }
 
-        // --- PRECISE PDF GENERATION HANDLING (ANTI-CUT SOLUTION) ---
+        // --- ANTI-CUT PERFECT PDF DOWNLOAD SCRIPT ---
         function exportToPDF() {
             const agentElement = document.getElementById('metaAgent');
             const agentName = agentElement.options[agentElement.selectedIndex]?.text || 'Agent';
             
-            // Force rendering switch to dashboard state to capture full structural values
+            // Force temporary active tab alignment to capture full view context state cleanly
             switchChannelGroup('Dashboard');
 
             const element = document.getElementById('pdfExportContainer');
             
-            // Configuration options tweaking the canvas wrapper to prevent unexpected slicing on container breaks
             const opt = {
                 margin:       [0.4, 0.4, 0.4, 0.4],
-                filename:     `QA_Performance_Studio_Report_${agentName.replace(/\s+/g, '_')}.pdf`,
+                filename:     `QA_Performance_Dashboard_${agentName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' },
                 pagebreak:    { mode: ['css', 'legacy'] }
             };
