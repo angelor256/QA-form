@@ -3,243 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Quality Hub — Professional Dashboard</title>
+    <title>QA Quality Hub — Premium Experience</title>
     
+    <!-- Modern Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- ExcelJS & FileSaver Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <style>
         :root {
-            --bg-main: #F8FAFC;       /* Soft, smooth background */
+            --bg-glass: rgba(255, 255, 255, 0.75);
             --bg-card: #FFFFFF;
-            --bg-input: #F8FAFC;
-            --border-color: #E2E8F0;   /* Ultra-delicate 1px borders */
-            --text-main: #0F172A;      /* Elegant dark slate */
-            --text-muted: #64748B;     /* Smooth gray for secondary text */
+            --border-glow: rgba(79, 70, 229, 0.1);
+            --border-color: #E2E8F0;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
             
-            --primary: #4F46E5;        /* Deep, professional Indigo */
+            /* Executive Premium Palette */
+            --primary: #4F46E5;
+            --primary-gradient: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
             --primary-light: #EEF2FF;
-            --success: #10B981;        /* Smooth Mint Green */
+            --success: #10B981;
+            --success-gradient: linear-gradient(135deg, #34D399 0%, #059669 100%);
             --success-bg: #ECFDF5;
             --success-text: #065F46;
-            --warning: #F59E0B;        /* Delicate Amber */
+            --warning: #F59E0B;
             --warning-bg: #FFFBEB;
             --warning-text: #92400E;
-            --danger: #EF4444;         /* Soft Crimson Rose */
+            --danger: #EF4444;
             --danger-bg: #FEF2F2;
             --danger-text: #991B1B;
-            --neutral-bg: #F1F5F9;
+            --neutral-bg: #F8FAFC;
             
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            --radius-xl: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --blur-effect: blur(16px);
+            --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.03), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
+            --shadow-glow: 0 20px 40px -15px rgba(79, 70, 229, 0.15);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'SF Pro Display', 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-main);
+            background: radial-gradient(circle at 10% 20%, rgba(243, 244, 246, 0.7) 0%, rgba(248, 250, 252, 1) 100%);
             color: var(--text-main);
-            padding: 2rem;
+            padding: 2.5rem;
             min-height: 100vh;
         }
 
+        /* --- GLASSMORPHISM HEADER --- */
         header {
             max-width: 1400px;
-            margin: 0 auto 2rem auto;
+            margin: 0 auto 2.5rem auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
+            background: var(--bg-glass);
+            backdrop-filter: var(--blur-effect);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 1.5rem 2.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-premium);
         }
 
         .logo-area h1 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: var(--text-main);
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.75px;
+            background: linear-gradient(135deg, #1E1B4B 0%, #4F46E5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .logo-area p {
             color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
         }
 
         .header-actions {
             display: flex;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.875rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid var(--border-color);
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--primary-gradient);
             color: #FFFFFF;
-            border-color: var(--primary);
+            border: none;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
         }
 
         .btn-primary:hover {
-            background: #4338CA;
-            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
         }
 
         .btn-secondary {
-            background: var(--bg-card);
+            background: #FFFFFF;
             color: var(--text-main);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-main);
+            background: var(--neutral-bg);
+            transform: translateY(-1px);
         }
 
+        /* --- CONTAINER LAYOUT --- */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
+            grid-template-columns: 310px 1fr;
+            gap: 2.5rem;
         }
 
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
+            background: #FFFFFF;
+            border: 1px solid rgba(226, 232, 240, 0.7);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-premium);
+            transition: transform 0.3s ease;
         }
 
         .card-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             color: var(--text-main);
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
             display: block;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.75px;
         }
 
         .form-control {
             width: 100%;
-            background-color: var(--bg-input);
+            background-color: var(--neutral-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 0.6rem 0.75rem;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
             color: var(--text-main);
-            font-size: 0.875rem;
-            transition: all 0.15s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
             background: #FFFFFF;
-            box-shadow: 0 0 0 3px var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.5rem 0.25rem;
+            padding: 0.65rem 0.5rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: var(--neutral-bg);
         }
         
         .checkbox-item label {
-            font-size: 0.875rem;
+            font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             color: var(--text-main);
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             accent-color: var(--primary);
             cursor: pointer;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
         }
 
+        /* --- MODERN NAVIGATION TABS --- */
         .workspace {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .channel-groups {
             display: flex;
             gap: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
+            background: rgba(226, 232, 240, 0.4);
+            padding: 0.4rem;
+            border-radius: var(--radius-md);
+            width: fit-content;
         }
 
         .tab-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-sm);
             background: transparent;
             color: var(--text-muted);
-            border: 1px solid transparent;
-            font-size: 0.875rem;
-            font-weight: 500;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
         }
 
         .tab-btn:hover {
             color: var(--text-main);
-            background: var(--neutral-bg);
         }
 
         .tab-btn.active {
-            background: var(--primary-light);
+            background: #FFFFFF;
             color: var(--primary);
-            font-weight: 600;
+            box-shadow: var(--shadow-premium);
         }
 
         .tab-btn.disabled-tab {
@@ -250,24 +275,26 @@
 
         .sub-navigation {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
 
         .sub-tab-btn {
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            background: var(--bg-card);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-md);
+            background: #FFFFFF;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .sub-tab-btn.active {
             background: var(--text-main);
             color: #FFFFFF;
             border-color: var(--text-main);
+            box-shadow: var(--shadow-premium);
         }
 
         .form-container {
@@ -278,201 +305,268 @@
             display: block;
         }
 
+        /* --- EVALUATION WORKSPACE TABLE --- */
         .evaluation-table {
             width: 100%;
-            border-collapse: collapse;
-            background: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            margin-top: -8px;
         }
 
         .evaluation-table th {
             text-align: left;
-            padding: 0.85rem 1rem;
-            background: #F8FAFC;
+            padding: 1rem 1.25rem;
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.75px;
+            font-weight: 700;
         }
 
         .evaluation-table tr.section-header-row td {
-            background: #F1F5F9;
+            background: linear-gradient(90deg, #F1F5F9 0%, rgba(241, 245, 249, 0) 100%);
             color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 0.65rem 1rem;
-            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
         }
 
-        .evaluation-table td {
-            padding: 0.9rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.875rem;
+        .evaluation-table tbody tr:not(.section-header-row) td {
+            background: #FFFFFF;
+            padding: 1.25rem;
+            border-top: 1px solid rgba(226, 232, 240, 0.6);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
-        .evaluation-table tr:last-child td {
-            border-bottom: none;
+        .evaluation-table tbody tr:not(.section-header-row) td:first-child {
+            border-left: 1px solid rgba(226, 232, 240, 0.6);
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+
+        .evaluation-table tbody tr:not(.section-header-row) td:last-child {
+            border-right: 1px solid rgba(226, 232, 240, 0.6);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .evaluation-table tbody tr:not(.section-header-row):hover td {
+            border-color: rgba(79, 70, 229, 0.2);
+            background: #FAF9FF;
         }
 
         .desc-sub {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.825rem;
             color: var(--text-muted);
-            margin-top: 0.2rem;
+            margin-top: 0.3rem;
+            font-weight: 400;
         }
 
-        .select-classification {
-            background-color: #FFFFFF;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 0.4rem;
-            width: 110px;
-            font-size: 0.85rem;
-            cursor: pointer;
+        /* QA FRIENDLY CLASSIFICATION SELECTOR BUTTONS */
+        .qa-selector-group {
+            display: flex;
+            gap: 0.25rem;
+            background: var(--neutral-bg);
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            width: fit-content;
         }
+
+        .qa-pill {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.15s ease;
+        }
+
+        .qa-pill.active[data-val="Yes"] { background: var(--success); color: white; }
+        .qa-pill.active[data-val="Partially"] { background: var(--warning); color: white; }
+        .qa-pill.active[data-val="No"] { background: var(--danger); color: white; }
+        .qa-pill.active[data-val="N/A"] { background: var(--text-muted); color: white; }
 
         .score-display-box {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-align: center;
-            min-width: 50px;
-        }
-
-        .status-yes { background-color: var(--success-bg); color: var(--success-text); }
-        .status-partial { background-color: var(--warning-bg); color: var(--warning-text); }
-        .status-no { background-color: var(--danger-bg); color: var(--danger-text); }
-        .status-na { background-color: var(--neutral-bg); color: var(--text-muted); }
-
-        .form-footer-scores {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: flex-end;
-            gap: 1.5rem;
-            background: var(--bg-card);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .footer-score-block {
-            text-align: right;
-        }
-
-        .footer-score-block span {
-            display: block;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .footer-score-block div {
-            font-size: 1.35rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
             font-weight: 700;
-            margin-top: 0.1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            min-width: 55px;
         }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1.8fr 1.2fr;
-            gap: 1.5rem;
-        }
-
+        /* --- VISUAL SHOWCASE PERFORMANCE CARD --- */
         .feedback-badge-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #FFFFFF;
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+            color: #FFFFFF;
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-glow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-badge-container::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 300px; height: 300px;
+            background: rgba(79, 70, 229, 0.25);
+            filter: blur(60px);
+            border-radius: 50%;
+        }
+
+        /* Radial Hero Score Gauge */
+        .radial-score-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radial-score-wrapper svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .radial-score-wrapper circle {
+            width: 100%; height: 100%;
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
+
+        .radial-bg-circle { stroke: rgba(255, 255, 255, 0.1); }
+        .radial-progress-circle {
+            stroke: var(--primary);
+            stroke-dasharray: 314;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s ease;
         }
 
         .global-score-hero {
+            position: absolute;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #FFFFFF;
         }
 
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .matrix-table th, .matrix-table td {
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem 1rem;
+            padding: 1rem 1.25rem;
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .matrix-table th {
-            background-color: #F8FAFC;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            background: var(--neutral-bg);
         }
 
         .matrix-badge {
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.85rem;
             display: inline-block;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 2rem;
         }
 
         .feedback-card-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .feedback-item-box {
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-bottom: 0.4rem;
-            font-size: 0.85rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-left: 4px solid transparent;
         }
 
-        .feedback-item-box.f-yes { background: var(--success-bg); color: var(--success-text); }
-        .feedback-item-box.f-partial { background: var(--warning-bg); color: var(--warning-text); }
-        .feedback-item-box.f-no { background: var(--danger-bg); color: var(--danger-text); }
+        .feedback-item-box.f-yes { background: var(--success-bg); color: var(--success-text); border-left-color: var(--success); }
+        .feedback-item-box.f-partial { background: var(--warning-bg); color: var(--warning-text); border-left-color: var(--warning); }
+        .feedback-item-box.f-no { background: var(--danger-bg); color: var(--danger-text); border-left-color: var(--danger); }
 
-        .feedback-item-title {
-            font-weight: 600;
+        .form-footer-scores {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            background: #FFFFFF;
+            padding: 1.25rem 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .footer-score-block text {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-score-block div {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 0.15rem;
         }
 
         .comment-box-area {
             width: 100%;
-            background: var(--bg-input);
+            background: var(--neutral-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 0.6rem;
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
             color: var(--text-main);
-            min-height: 80px;
+            min-height: 90px;
             resize: vertical;
-            font-size: 0.875rem;
-            margin-top: 0.3rem;
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
         }
 
+        /* --- WINDOW MODAL COMFORT --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.15);
-            backdrop-filter: blur(2px);
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -483,127 +577,143 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             width: 100%;
-            max-width: 450px;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
+            max-width: 480px;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
 
+    <!-- CONTROL HUB HEADER -->
     <header>
         <div class="logo-area">
             <h1>QA Quality Hub</h1>
-            <p>Performance Evaluation & Metrics Manager</p>
+            <p>Next-Gen Evaluation Suite</p>
         </div>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Manage Attributes</button>
+            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Attributes</button>
             <button class="btn btn-primary" onclick="exportPremiumExcel()">📊 Export Session Report</button>
         </div>
     </header>
 
     <div class="container">
         
+        <!-- CONTROL CONSOLE SIDEBAR -->
         <div class="sidebar">
             <div class="card">
-                <div class="card-title">📋 Session Meta</div>
+                <div class="card-title">📋 Audit Meta Context</div>
                 
                 <div class="form-group">
-                    <label>Agent</label>
+                    <label>Agent Profile</label>
                     <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
                 </div>
                 <div class="form-group">
-                    <label>Evaluator</label>
+                    <label>Assigned Evaluator</label>
                     <select id="metaEvaluator" class="form-control"></select>
                 </div>
                 <div class="form-group">
-                    <label>Role</label>
+                    <label>Operation Role</label>
                     <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
                 </div>
                 <div class="form-group">
-                    <label>Interaction Date</label>
+                    <label>Interaction Log Date</label>
                     <input type="date" id="metaInteractionDate" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Evaluation Date</label>
+                    <label>Evaluation Process Date</label>
                     <input type="date" id="metaEvaluationDate" class="form-control">
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">🎯 Active Interactions</div>
+                <div class="card-title">🎯 Targeted Workload</div>
                 <div id="checkboxGrid"></div>
             </div>
         </div>
 
+        <!-- MAIN PRODUCTION AREA -->
         <div class="workspace">
             
+            <!-- Navigation Channels Control -->
             <div class="channel-groups">
                 <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">Phones</button>
                 <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">Chats</button>
                 <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">Emails</button>
-                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; color: var(--primary); font-weight:600;">Performance Card</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: 1.5rem; background: var(--primary-light);">Performance Card</button>
             </div>
 
+            <!-- Context Sub-tabs -->
             <div class="sub-navigation" id="subTabsArea"></div>
 
+            <!-- Tabular Live Form -->
             <div id="formsWorkspaceArea"></div>
 
+            <!-- "WOW" HUD VISUAL PERFORMANCE METRIC VIEW -->
             <div id="dashboardViewArea" style="display:none;">
                 <div class="feedback-badge-container">
                     <div>
-                        <h2 style="font-family:'Plus Jakarta Sans'; font-size:1.35rem; font-weight:700; margin-bottom:0.15rem;">Consolidated Score</h2>
-                        <p style="color:var(--text-muted); font-size:0.85rem;">Aggregated compliance result computed from active cases.</p>
+                        <h2 style="font-family:'Plus Jakarta Sans'; font-size:1.65rem; font-weight:800; margin-bottom:0.3rem; letter-spacing:-0.5px;">Evaluation Completed Successfully</h2>
+                        <p style="color:rgba(255,255,255,0.7); font-size:0.95rem; font-weight: 400;">Your calculated final compliance quality metric has been synthesized.</p>
                     </div>
-                    <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
+                    
+                    <!-- High Impact Radial Dial Gauge -->
+                    <div class="radial-score-wrapper">
+                        <svg>
+                            <circle class="radial-bg-circle" cx="60" cy="60" r="50"></circle>
+                            <circle class="radial-progress-circle" id="radialCircle" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="global-score-hero" id="lblGlobalScore">100%</div>
+                    </div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div>
-                        <div class="card" style="margin-bottom: 1.5rem; overflow-x: auto; padding:1rem;">
-                            <div class="card-title" style="margin-bottom:0.75rem;">📊 Performance Criteria Matrix</div>
+                        <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
+                            <div class="card-title">📊 Metrics Performance Matrix</div>
                             <table class="matrix-table" id="matrixPointsTable"></table>
                         </div>
 
                         <div class="card">
-                            <div class="card-title">📝 Strategic Comments</div>
+                            <div class="card-title">📝 Executive Commentary Reflection</div>
                             <div class="form-group">
                                 <label>General Evaluation Feedback</label>
-                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Type key findings..."></textarea>
+                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Enter session executive overview summary..."></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Action Plan & Next Steps</label>
-                                <textarea id="dashGoals" class="comment-box-area" placeholder="Target milestones..."></textarea>
+                                <label>Strategic Calibration Action Plan</label>
+                                <textarea id="dashGoals" class="comment-box-area" placeholder="Enter target optimization roadmaps execution steps..."></textarea>
                             </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.75rem;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem;">
                                 <div class="form-group">
-                                    <label>Session Status</label>
+                                    <label>Session Tracking State</label>
                                     <select id="dashPerformanceRating" class="form-control">
                                         <option value="Completed">Completed</option>
                                         <option value="Non Completed">Non Completed</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Follow-Up Date</label>
+                                    <label>Next Recalibration Date</label>
                                     <input type="date" id="dashFollowUpDate" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Behavior Dynamic Feedlists -->
                     <div class="feedback-card-list">
-                        <div class="card" style="padding:1.25rem;">
-                            <div class="card-title" style="color:var(--success-text); font-size:0.95rem;">🌟 Observed Strengths</div>
-                            <div id="dashFortalezasList" style="max-height: 200px; overflow-y:auto;"></div>
+                        <div class="card">
+                            <div class="card-title" style="color:var(--success); font-weight:800;">🌟 Mastered Key Strengths</div>
+                            <div id="dashFortalezasList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="padding:1.25rem;">
-                            <div class="card-title" style="color:var(--warning-text); font-size:0.95rem;">👁️ Strategic Observations</div>
-                            <div id="dashObservarList" style="max-height: 200px; overflow-y:auto;"></div>
+                        <div class="card">
+                            <div class="card-title" style="color:var(--warning); font-weight:800;">👁️ Calibration Observations</div>
+                            <div id="dashObservarList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
-                        <div class="card" style="padding:1.25rem;">
-                            <div class="card-title" style="color:var(--danger-text); font-size:0.95rem;">🚀 Areas for Growth</div>
-                            <div id="dashMejorasList" style="max-height: 200px; overflow-y:auto;"></div>
+                        <div class="card">
+                            <div class="card-title" style="color:var(--danger); font-weight:800;">🚀 Targeted Growth Areas</div>
+                            <div id="dashMejorasList" style="max-height: 220px; overflow-y:auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -612,11 +722,12 @@
         </div>
     </div>
 
+    <!-- CONFIG CONTROL WINDOW MODAL -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-card">
-            <div class="card-title">⚙️ Add Attributes</div>
+            <div class="card-title">⚙️ Add Platform Attributes</div>
             <div class="form-group">
-                <label>Target List</label>
+                <label>Target Field Target List</label>
                 <select id="configType" class="form-control">
                     <option value="agents">Agent Profile</option>
                     <option value="evaluators">Evaluator Profile</option>
@@ -624,16 +735,17 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Value Label</label>
-                <input type="text" id="configValue" class="form-control" placeholder="Type label name...">
+                <label>Attribute Label Identifier</label>
+                <input type="text" id="configValue" class="form-control" placeholder="Type label descriptor string...">
             </div>
-            <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:2rem;">
                 <button class="btn btn-secondary" onclick="closeModal('configModal')">Cancel</button>
                 <button class="btn btn-primary" onclick="addNewConfigItem()">Add Record</button>
             </div>
         </div>
     </div>
 
+    <!-- CODE ENGINE LOGIC ENGINE -->
     <script>
         const defaultLists = {
             agents: [
@@ -658,7 +770,7 @@
             roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentLists = JSON.parse(localStorage.getItem('qa_lists_v3')) || defaultLists;
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_premium')) || defaultLists;
 
         const phoneChatCriteria = [
             { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
@@ -696,15 +808,12 @@
                     evaluationState[g][i] = {
                         active: true,
                         accountNumber: "",
-                        interactionId: "", // Field requested added here
+                        interactionId: "",
                         comments: { "S1": "", "S2": "", "S3": "", "S4": "" },
                         scores: {}
                     };
                     criteriaList.forEach(c => {
-                        evaluationState[g][i].scores[c.id] = {
-                            classification: "Yes",
-                            points: c.max_pts
-                        };
+                        evaluationState[g][i].scores[c.id] = { classification: "Yes", points: c.max_pts };
                     });
                 }
             });
@@ -766,7 +875,7 @@
 
             groups.forEach(g => {
                 if (g === "Emails" && isT1) return;
-                html += `<div style="margin-top:0.5rem; font-weight:600; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">${g}</div>`;
+                html += `<div style="margin-top:0.75rem; font-weight:700; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">${g}</div>`;
                 for(let i=1; i<=4; i++) {
                     const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
                     const checked = evaluationState[g][i].active ? "checked" : "";
@@ -863,17 +972,18 @@
                     container.className = "form-container";
 
                     let tableHtml = `
-                        <div style="background:#FFF; border:1px solid var(--border-color); padding:0.75rem 1.25rem; border-radius:8px; margin-bottom:1rem; display:flex; justify-content: space-between; align-items:center; box-shadow:var(--shadow-sm)">
-                            <div style="font-weight:600; font-size:0.85rem; color:var(--text-muted); text-transform:uppercase;">Interactions Reference Meta</div>
+                        <!-- Delicate Meta Inputs Panel Banner -->
+                        <div style="background:#FFF; border:1px solid var(--border-color); padding:1rem 1.5rem; border-radius:var(--radius-md); margin-bottom:1.5rem; display:flex; justify-content: space-between; align-items:center; box-shadow:var(--shadow-premium)">
+                            <div style="font-weight:700; font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Interaction Tracking Reference</div>
                             <div style="display:flex; gap:1.5rem;">
-                                <div style="display:flex; align-items:center; gap:0.4rem;">
-                                    <label style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">Account #:</label>
-                                    <input type="text" placeholder="CX Account Num" class="form-control" style="width:160px; padding:0.3rem 0.5rem;"
+                                <div style="display:flex; align-items:center; gap:0.5rem;">
+                                    <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Account #:</label>
+                                    <input type="text" placeholder="CX Account" class="form-control" style="width:150px; padding:0.4rem 0.75rem;"
                                            value="${evaluationState[g][i].accountNumber || ''}" oninput="updateFormValue('${g}', ${i}, 'accountNumber', this.value)">
                                 </div>
-                                <div style="display:flex; align-items:center; gap:0.4rem;">
-                                    <label style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">Interaction ID:</label>
-                                    <input type="text" placeholder="Call/Chat/Email Ref ID" class="form-control" style="width:180px; padding:0.3rem 0.5rem;"
+                                <div style="display:flex; align-items:center; gap:0.5rem;">
+                                    <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Interaction ID:</label>
+                                    <input type="text" placeholder="Reference Reference ID" class="form-control" style="width:180px; padding:0.4rem 0.75rem;"
                                            value="${evaluationState[g][i].interactionId || ''}" oninput="updateFormValue('${g}', ${i}, 'interactionId', this.value)">
                                 </div>
                             </div>
@@ -882,8 +992,8 @@
                         <table class="evaluation-table">
                             <thead>
                                 <tr>
-                                    <th>Criteria Item Definition</th>
-                                    <th>Classification</th>
+                                    <th style="width:50%;">Criteria Parameter Definition</th>
+                                    <th>Audit Classification Control</th>
                                     <th>Max</th>
                                     <th>Score</th>
                                 </tr>
@@ -898,9 +1008,9 @@
                             tableHtml += `
                                 <tr class="section-header-row">
                                     <td colspan="2">${currentSection}</td>
-                                    <td colspan="2" style="text-align:right;">
-                                        <input type="text" placeholder="Section reference feedback commentary notes..." 
-                                               class="form-control" style="width:340px; display:inline-block; padding:0.25rem 0.5rem; font-size:0.8rem; background:#FFF;"
+                                    <td colspan="2" style="text-align:right; border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                                        <input type="text" placeholder="Type micro verification feedback log for this segment..." 
+                                               class="form-control" style="width:360px; display:inline-block; padding:0.4rem 0.75rem; font-size:0.85rem; background:#FFF;"
                                                value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
                                                onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
                                     </td>
@@ -910,21 +1020,21 @@
 
                         tableHtml += `
                             <tr>
-                                <td style="width:55%;">
-                                    <span style="font-weight:500; color:var(--text-main);">${c.text}</span>
+                                <td>
+                                    <span style="font-weight:600; color:var(--text-main); font-size:0.95rem;">${c.text}</span>
                                     <span class="desc-sub">${c.desc}</span>
                                 </td>
                                 <td>
-                                    <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
-                                        <option value="Yes" selected>Yes</option>
-                                        <option value="Partially">Partially</option>
-                                        <option value="No">No</option>
-                                        <option value="N/A">N/A</option>
-                                    </select>
+                                    <div class="qa-selector-group">
+                                        <button class="qa-pill active" data-val="Yes" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'Yes', this)">Yes</button>
+                                        <button class="qa-pill" data-val="Partially" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'Partially', this)">Partial</button>
+                                        <button class="qa-pill" data-val="No" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'No', this)">No</button>
+                                        <button class="qa-pill" data-val="N/A" onclick="setQAClassification('${g}', ${i}, '${c.id}', 'N/A', this)">N/A</button>
+                                    </div>
                                 </td>
-                                <td style="color:var(--text-muted); font-size:0.8rem;">${c.max_pts}</td>
+                                <td style="color:var(--text-muted); font-weight:600; font-size:0.85rem;">${c.max_pts}</td>
                                 <td>
-                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
+                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes" style="background:var(--success-bg); color:var(--success-text);">${c.max_pts}</span>
                                 </td>
                             </tr>
                         `;
@@ -935,12 +1045,12 @@
                         </table>
                         
                         <div class="form-footer-scores">
-                            <div class="footer-score-block" style="border-right: 1px solid var(--border-color); padding-right:1.5rem;">
-                                <span>Earned Points</span>
+                            <div class="footer-score-block" style="border-right: 1px solid var(--border-color); padding-right:2rem;">
+                                <text>Earned Points</text>
                                 <div id="lbl_pts_${g}_${i}">100.00</div>
                             </div>
                             <div class="footer-score-block">
-                                <span>Compliance Rate</span>
+                                <text>Compliance Index Score</text>
                                 <div id="lbl_pct_${g}_${i}" style="color:var(--success);">100%</div>
                             </div>
                         </div>
@@ -964,21 +1074,24 @@
             evaluationState[group][index].comments[secKey] = val;
         }
 
-        function updateRowScore(group, index, criterionId, value) {
+        function setQAClassification(group, index, criterionId, val, btnEl) {
+            const container = btnEl.parentElement;
+            container.querySelectorAll('.qa-pill').forEach(b => b.classList.remove('active'));
+            btnEl.classList.add('active');
+
             const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
             const crit = criteriaList.find(c => c.id === criterionId);
             let finalPts = 0;
 
             const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
-            box.className = "score-display-box";
+            
+            if (val === "Yes") { finalPts = crit.max_pts; box.style.background = "var(--success-bg)"; box.style.color = "var(--success-text)"; }
+            else if (val === "Partially") { finalPts = crit.max_pts * 0.5; box.style.background = "var(--warning-bg)"; box.style.color = "var(--warning-text)"; }
+            else if (val === "No") { finalPts = 0; box.style.background = "var(--danger-bg)"; box.style.color = "var(--danger-text)"; }
+            else if (val === "N/A") { finalPts = 0; box.style.background = "var(--neutral-bg)"; box.style.color = "var(--text-muted)"; }
 
-            if (value === "Yes") { finalPts = crit.max_pts; box.classList.add('status-yes'); }
-            else if (value === "Partially") { finalPts = crit.max_pts * 0.5; box.classList.add('status-partial'); }
-            else if (value === "No") { finalPts = 0; box.classList.add('status-no'); }
-            else if (value === "N/A") { finalPts = 0; box.classList.add('status-na'); }
-
-            box.innerText = value === "N/A" ? "N/A" : finalPts;
-            evaluationState[group][index].scores[criterionId] = { classification: value, points: finalPts };
+            box.innerText = val === "N/A" ? "N/A" : finalPts;
+            evaluationState[group][index].scores[criterionId] = { classification: val, points: finalPts };
 
             calculateSingleFormScore(group, index);
         }
@@ -1025,24 +1138,21 @@
             fortList.innerHTML = ""; obsList.innerHTML = ""; mejList.innerHTML = "";
 
             let addedFort = new Set(), addedObs = new Set(), addedMej = new Set();
-
             const matrixTable = document.getElementById('matrixPointsTable');
             
-            // REQUESTED UPDATE: Replace raw Identifier Code ID with actual full parameter strings titles labels
             let mHtml = `
                 <thead>
                     <tr>
-                        <th style="text-align:left;">Evaluation Quality Criteria Name</th>
+                        <th style="text-align:left;">Metrics Performance Criteria Name</th>
                         <th>Phones Avg</th>
                         <th>Chats Avg</th>
                         ${!isT1 ? '<th>Emails Avg</th>' : ''}
-                        <th style="background:#F1F5F9;">Overall Status</th>
+                        <th style="background:rgba(79,70,229,0.05); color:var(--primary);">Overall Matrix</th>
                     </tr>
                 </thead>
                 <tbody>
             `;
 
-            // Unified listing map of unique text categories parameters to run loops seamlessly 
             const uniqueTexts = [
                 "Proper Greeting & Account Verification",
                 "Accurate & Effective Resolution",
@@ -1081,13 +1191,13 @@
 
                                     if(sc.classification === "Yes" && !addedFort.has(txtTitle)) {
                                         addedFort.add(txtTitle);
-                                        fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                        fortList.innerHTML += `<div class="feedback-item-box f-yes">${txtTitle}</div>`;
                                     } else if(sc.classification === "Partially" && !addedObs.has(txtTitle)) {
                                         addedObs.add(txtTitle);
-                                        obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                        obsList.innerHTML += `<div class="feedback-item-box f-partial">${txtTitle}</div>`;
                                     } else if(sc.classification === "No" && !addedMej.has(txtTitle)) {
                                         addedMej.add(txtTitle);
-                                        mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${txtTitle}</div></div>`;
+                                        mejList.innerHTML += `<div class="feedback-item-box f-no">${txtTitle}</div>`;
                                     }
                                 }
                             }
@@ -1107,11 +1217,11 @@
                     let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : 100;
                     mHtml += `
                         <tr>
-                            <td style="text-align:left; font-weight:500; color:var(--text-main);">${txtTitle}</td>
+                            <td style="text-align:left; font-weight:600; color:var(--text-main);">${txtTitle}</td>
                             <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
                             <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
                             ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
-                            <td style="background: #F8FAFC; font-weight:600;">${renderMatrixBadge(totalRowAvg)}</td>
+                            <td style="background: rgba(79,70,229,0.02); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
                         </tr>
                     `;
                 }
@@ -1130,19 +1240,30 @@
             });
 
             let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
-            document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
             
-            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
-            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
-            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.8rem;'>None recorded.</p>";
+            // Render Radial Visual Progress
+            document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(0) + "%";
+            const circle = document.getElementById('radialCircle');
+            
+            // Math for dashoffset mapping logic base 314 circumferences values
+            let offsetVal = 314 - (314 * finalGlobalPct) / 100;
+            circle.style.strokeDashoffset = offsetVal;
+
+            if(finalGlobalPct >= 90) circle.style.stroke = "var(--success)";
+            else if(finalGlobalPct >= 70) circle.style.stroke = "var(--warning)";
+            else circle.style.stroke = "var(--danger)";
+            
+            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); padding:0.5rem;'>None logged.</p>";
+            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); padding:0.5rem;'>None logged.</p>";
+            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); padding:0.5rem;'>None logged.</p>";
         }
 
         function renderMatrixBadge(val) {
-            if(val === null || val === undefined) return `<span class="matrix-badge status-na">N/A</span>`;
-            let cls = "status-yes";
-            if(val < 90 && val >= 70) cls = "status-partial";
-            if(val < 70) cls = "status-no";
-            return `<span class="matrix-badge ${cls}">${val.toFixed(0)}%</span>`;
+            if(val === null || val === undefined) return `<span class="matrix-badge" style="background:var(--neutral-bg); color:var(--text-muted)">N/A</span>`;
+            let style = "background:var(--success-bg); color:var(--success-text);";
+            if(val < 90 && val >= 70) style = "background:var(--warning-bg); color:var(--warning-text);";
+            if(val < 70) style = "background:var(--danger-bg); color:var(--danger-text);";
+            return `<span class="matrix-badge" style="${style}">${val.toFixed(0)}%</span>`;
         }
 
         function openModal(id) { document.getElementById(id).style.display = "flex"; }
@@ -1156,7 +1277,7 @@
             currentLists[type].push(value);
             if(type !== 'roles') currentLists[type].sort();
 
-            localStorage.setItem('qa_lists_v3', JSON.stringify(currentLists));
+            localStorage.setItem('qa_lists_premium', JSON.stringify(currentLists));
             renderDropdowns();
             renderActiveCheckboxes();
             
@@ -1231,7 +1352,7 @@
 
             wsSummary.columns = [{ width: 45 }, { width: 16 }, { width: 16 }, { width: 16 }, { width: 18 }];
 
-            // DATA LOGS PER INTERACTION SHEET (With Account # and Interaction ID fields embedded properly)
+            // GRANULAR AUDIT SHEET LOGS (With Interaction IDs included accurately)
             const wsData = workbook.addWorksheet('Granular Interaction Audits');
             wsData.views = [{ showGridLines: true }];
 
@@ -1244,8 +1365,8 @@
             });
 
             let activeRowIdx = 2;
-            const groups = ["Phones", "Chats", "Emails"];
-            groups.forEach(g => {
+            const coreGroups = ["Phones", "Chats", "Emails"];
+            coreGroups.forEach(g => {
                 const listRef = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 for(let i=1; i<=4; i++) {
                     if(evaluationState[g][i].active) {
@@ -1269,7 +1390,7 @@
             wsData.columns = [{ width: 12 }, { width: 18 }, { width: 18 }, { width: 22 }, { width: 45 }, { width: 16 }, { width: 15 }];
 
             const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer]), `QA_Dashboard_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
+            saveAs(new Blob([buffer]), `QA_Premium_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
         }
     </script>
 </body>
