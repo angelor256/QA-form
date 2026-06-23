@@ -3,491 +3,1368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQUAD WORKFORCE HUB // WEEKLY PERFORMANCE</title>
+    <title>QA Quality Hub — Premium Feedback Matrix</title>
     
-    <!-- Premium Fonts -->
+    <!-- Modern & Edgy Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- ExcelJS & FileSaver Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-    <!-- Premium Luxury Dark Mode Styles -->
     <style>
         :root {
-            --bg-dark: #09090b;       /* Pure deeply-elegant graphite black */
-            --panel-bg: #121214;      /* Solid smooth surface */
-            --border-color: #222226;  /* Extremely subtle dividing lines */
-            --text-primary: #f4f4f5;   /* Crisp white-silver */
-            --text-muted: #a1a1aa;     /* Refined slate grey */
-            --accent-gold: #e4e4e7;    /* Premium platinum white accent */
-            --accent-dim: #27272a;     /* Sophisticated muted highlight */
-            --font-sans: 'Inter', sans-serif;
+            --bg-main: #F4F3EF; /* Clean, premium off-white */
+            --bg-card: #FFFFFF;
+            --bg-input: #FDFDFD;
+            --border-color: #1A1A1A; /* Sharp, clean black strokes */
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --primary: #5B42F3; /* Vibrant Electric Purple */
+            --primary-glow: rgba(91, 66, 243, 0.1);
+            --success: #00E676; /* Mint Neon Success */
+            --success-bg: #E8FDF3;
+            --warning: #FFB300;
+            --warning-bg: #FFF8E1;
+            --danger: #FF3366; /* Hot Pink Neon Danger */
+            --danger-bg: #FFE5EC;
+            --neutral: #757575;
+            --neutral-bg: #F5F5F5;
+            --shadow-flat: 4px 4px 0px #1A1A1A;
+            --shadow-flat-hover: 7px 7px 0px #1A1A1A;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 40px 20px;
-            letter-spacing: -0.01em;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Header Architecture */
-        .app-header {
-            text-align: center;
-            margin-bottom: 40px;
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 2.5rem 2rem;
+            min-height: 100vh;
         }
 
-        .header-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin: 0;
-            color: #ffffff;
-        }
-
-        /* Premium Minimalist Navigation */
-        .tabs-container {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 8px 16px;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .tab-btn:hover {
-            color: var(--text-primary);
-        }
-
-        .tab-btn.active {
-            color: #ffffff;
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -13px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: var(--text-primary);
-        }
-
-        /* Dashboard Panel & Premium Tables */
-        .dashboard-container {
-            max-width: 1100px;
-            margin: 0 auto 50px auto;
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .panel-header {
+        header {
+            max-width: 1400px;
+            margin: 0 auto 2.5rem auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            background: var(--bg-card);
+            border: 3px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-flat);
+            border-radius: 16px;
         }
 
-        .panel-header h2 {
-            font-size: 1.15rem;
+        .logo-area h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin: 0;
-            font-weight: 600;
         }
 
-        .status-indicator {
-            font-size: 0.75rem;
-            color: #10b981;
-            background-color: rgba(16, 185, 129, 0.08);
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-weight: 500;
-        }
-
-        table.squad-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table.squad-table th {
+        .logo-area p {
             color: var(--text-muted);
+            font-size: 0.95rem;
             font-weight: 500;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
+            margin-top: 0.15rem;
         }
 
-        table.squad-table td {
-            padding: 16px;
+        .header-actions {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 700;
             font-size: 0.9rem;
-            color: var(--text-primary);
-            border-bottom: 1px solid #1a1a1e;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 3px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 3px 3px 0px var(--border-color);
+            text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
         }
 
-        table.squad-table tr:last-child td {
-            border-bottom: none;
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--border-color);
         }
 
-        .tag-dedicated {
-            font-weight: 600;
-            color: #e4e4e7;
-            background-color: var(--accent-dim);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
+        .btn-primary {
+            background: #00F5D4; /* Vibrant Cyber Teal */
+            color: var(--text-main);
         }
 
-        /* Premium Form Design (Interaction Logger) */
-        .interaction-section {
-            max-width: 1100px;
+        .btn-primary:hover {
+            background: #00F5D4;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--border-color);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: #FF007F;
+            color: #FFF;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--border-color);
+        }
+
+        .btn-success {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--border-color);
+        }
+
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .form-card {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        .form-card h3 {
-            font-size: 1.25rem;
-            margin: 0 0 6px 0;
-            font-weight: 500;
-        }
-
-        .form-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: 0 0 24px 0;
-        }
-
-        .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-bottom: 24px;
+            grid-template-columns: 310px 1fr;
+            gap: 2.5rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 3px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-flat);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 0.5rem;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
-            font-size: 0.75rem;
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        .form-group input, .form-group select {
-            background-color: #18181b;
-            border: 1px solid var(--border-color);
-            color: #ffffff;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
+        .form-control {
+            width: 100%;
+            background-color: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 0.9rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
             transition: all 0.2s ease;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-control:focus {
             outline: none;
-            border-color: #4b5563;
-            background-color: #202024;
+            background: #FFF;
+            box-shadow: 3px 3px 0px var(--primary);
         }
 
-        .submit-btn {
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-family: var(--font-sans);
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+        .checkbox-item:hover {
+            background: var(--bg-main);
+        }
+        
+        .checkbox-item label {
+            font-size: 0.95rem;
             font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+
+        .workspace {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .channel-groups {
+            display: flex;
+            gap: 0.75rem;
+            background: transparent;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 3px solid var(--border-color);
+            font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            box-shadow: 3px 3px 0px var(--border-color);
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
         }
 
-        .submit-btn:hover {
-            background-color: #e4e4e7;
+        .tab-btn:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px var(--border-color);
         }
+
+        .tab-btn.active {
+            background: #FCEADE; /* Soft Peach Contrast Highlight */
+            box-shadow: none;
+            transform: translate(2px, 2px);
+            border-color: var(--border-color);
+        }
+
+        .tab-btn.disabled-tab {
+            opacity: 0.4;
+            cursor: not-allowed;
+            text-decoration: line-through;
+            box-shadow: none;
+        }
+
+        .sub-navigation {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .sub-tab-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: var(--text-muted);
+            border: 2px solid var(--border-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .sub-tab-btn.active {
+            background: var(--text-main);
+            color: #FFF;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .evaluation-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 3px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #FFF;
+        }
+
+        .evaluation-table th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--border-color);
+            color: #FFF;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .evaluation-table tr.section-header-row td {
+            background: #F1EFFFF;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .evaluation-table td {
+            padding: 1.1rem 1rem;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.95rem;
+            background: #FFF;
+        }
+
+        .evaluation-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .desc-sub {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            font-weight: 500;
+        }
+
+        .select-classification {
+            background-color: #FFF;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            width: 120px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .score-display-box {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 800;
+            text-align: center;
+            min-width: 70px;
+            border: 2px solid var(--border-color);
+        }
+
+        /* Sharp Status Colors */
+        .status-yes { background-color: var(--success-bg); color: #007934; }
+        .status-partial { background-color: var(--warning-bg); color: #B78103; }
+        .status-no { background-color: var(--danger-bg); color: #C2185B; }
+        .status-na { background-color: var(--neutral-bg); color: var(--text-muted); }
+
+        .form-footer-scores {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            background: var(--bg-card);
+            padding: 1.25rem 2rem;
+            border-radius: 14px;
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+        }
+
+        .footer-score-block {
+            text-align: right;
+        }
+
+        .footer-score-block span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-score-block div {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.9fr 1.1fr;
+            gap: 2rem;
+        }
+
+        .feedback-badge-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FFE2E2; /* Contrast color block */
+            padding: 1.75rem 2.25rem;
+            border-radius: 16px;
+            border: 3px solid var(--border-color);
+            box-shadow: var(--shadow-flat);
+            margin-bottom: 2rem;
+        }
+
+        .global-score-hero {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 2px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .matrix-table th {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .matrix-badge {
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+        }
+
+        .feedback-card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feedback-item-box {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 0.6rem;
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+        .feedback-item-box.f-yes { background: var(--success-bg); }
+        .feedback-item-box.f-partial { background: var(--warning-bg); }
+        .feedback-item-box.f-no { background: var(--danger-bg); }
+
+        .feedback-item-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .feedback-item-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            border: 3px solid var(--border-color);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            padding: 2.25rem;
+            box-shadow: 8px 8px 0px var(--border-color);
+        }
+
+        .comment-box-area {
+            width: 100%;
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-main);
+            min-height: 100px;
+            resize: vertical;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-tag">// WORKFORCE MANAGEMENT ARCHITECTURE</div>
-        <h1>Squad Weekly Schedule</h1>
+    <!-- MAIN HEADER -->
+    <header>
+        <div class="logo-area">
+            <h1>QA QUALITY HUB</h1>
+            <p>Elevating Performance • Matrix Dashboard Edition</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="openModal('configModal')">⚙️ Manage Lists</button>
+            <button class="btn btn-success" onclick="exportPremiumExcel()">📊 Export Report</button>
+        </div>
     </header>
 
-    <!-- Premium Navigation Tabs -->
-    <nav class="tabs-container" id="tabsMenu">
-        <button class="tab-btn active" onclick="changeDay('Monday')">Monday</button>
-        <button class="tab-btn" onclick="changeDay('Tuesday')">Tuesday</button>
-        <button class="tab-btn" onclick="changeDay('Wednesday')">Wednesday</button>
-        <button class="tab-btn" onclick="changeDay('Thursday')">Thursday</button>
-        <button class="tab-btn" onclick="changeDay('Friday')">Friday</button>
-        <button class="tab-btn" onclick="changeDay('Saturday')">Saturday</button>
-        <button class="tab-btn" onclick="changeDay('Sunday')">Sunday</button>
-    </nav>
-
-    <!-- Main Dashboard Container -->
-    <main class="dashboard-container">
-        <div class="panel-header">
-            <h2 id="currentDayTitle">SCHEDULE: MONDAY</h2>
-            <span class="status-indicator">Live System Tracking</span>
-        </div>
+    <div class="container">
         
-        <div id="tableContainer"></div>
-    </main>
+        <!-- SIDEBAR PARAMETERS -->
+        <div class="sidebar">
+            <div class="card">
+                <div class="card-title">📋 Evaluation Data</div>
+                
+                <div class="form-group">
+                    <label>Agent</label>
+                    <select id="metaAgent" class="form-control" onchange="checkAgentRole()"></select>
+                </div>
+                <div class="form-group">
+                    <label>Evaluator</label>
+                    <select id="metaEvaluator" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Current Role</label>
+                    <select id="metaRole" class="form-control" onchange="checkAgentRole()"></select>
+                </div>
+                <div class="form-group">
+                    <label>Interaction Date</label>
+                    <input type="date" id="metaInteractionDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Evaluation Date</label>
+                    <input type="date" id="metaEvaluationDate" class="form-control">
+                </div>
+            </div>
 
-    <!-- Interaction Logger Form -->
-    <section class="interaction-section">
-        <div class="form-card">
-            <h3>Log Channel Interaction</h3>
-            <p class="form-subtitle">Assign tracking reference details for customer channels.</p>
+            <div class="card">
+                <div class="card-title">🎯 Active Cases</div>
+                <div id="checkboxGrid">
+                    <!-- Dynamic Items -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN WORKSPACE -->
+        <div class="workspace">
             
-            <form id="interactionForm" onsubmit="handleFormSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="channelType">Channel / Interaction Type</label>
-                        <select id="channelType">
-                            <option value="call_1">Call 1</option>
-                            <option value="call_2">Call 2</option>
-                            <option value="chat_1">Chat 1</option>
-                            <option value="chat_2">Chat 2</option>
-                            <option value="email_1">Email 1</option>
-                            <option value="email_2">Email 2</option>
-                        </select>
+            <!-- Channel Tab Selectors -->
+            <div class="channel-groups">
+                <button class="tab-btn active" id="btnGroupPhones" onclick="switchChannelGroup('Phones')">📱 Phones Channel</button>
+                <button class="tab-btn" id="btnGroupChats" onclick="switchChannelGroup('Chats')">💬 Chats Channel</button>
+                <button class="tab-btn" id="btnGroupEmails" onclick="switchChannelGroup('Emails')">📧 Emails Channel</button>
+                <button class="tab-btn" id="btnGroupDashboard" onclick="switchChannelGroup('Dashboard')" style="margin-left: auto; background: #E6E2FF; color: var(--primary);">📋 Performance Card</button>
+            </div>
+
+            <!-- Case Sub-Navigation Navigation -->
+            <div class="sub-navigation" id="subTabsArea">
+                <!-- Autogenerated via JS -->
+            </div>
+
+            <!-- Dynamic Workspace Area for Tables -->
+            <div id="formsWorkspaceArea">
+                <!-- 12 Forms injected here -->
+            </div>
+
+            <!-- CONSOLIDATED DASHBOARD VIEW -->
+            <div id="dashboardViewArea" style="display:none;">
+                <div class="feedback-badge-container">
+                    <div>
+                        <h2 style="font-family:'Space Grotesk', sans-serif; font-size:1.8rem; font-weight:700; margin-bottom:0.25rem; text-transform:uppercase;">Consolidated Performance</h2>
+                        <p style="color:var(--text-muted); font-weight:500;">Overall score computed from all verified and active interactions.</p>
+                    </div>
+                    <div class="global-score-hero" id="lblGlobalScore">100.00%</div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div>
+                        <div class="card" style="margin-bottom: 2rem; overflow-x: auto;">
+                            <div class="card-title">📊 Scorecard Grid Matrix</div>
+                            <table class="matrix-table" id="matrixPointsTable">
+                                <!-- Computed values -->
+                            </table>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">📝 Strategic Feedback Notes</div>
+                            <div class="form-group">
+                                <label>General Review Comments</label>
+                                <textarea id="dashGeneralComments" class="comment-box-area" placeholder="Type key findings and actionable highlights for this session..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Growth Action Items & Goals</label>
+                                <textarea id="dashGoals" class="comment-box-area" placeholder="Target development milestones for the agent next period..."></textarea>
+                            </div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem;">
+                                <div class="form-group">
+                                    <label>Session Status</label>
+                                    <select id="dashPerformanceRating" class="form-control">
+                                        <option value="Completed">Completed</option>
+                                        <option value="Non Completed">Non Completed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Follow-Up Target Date</label>
+                                    <input type="date" id="dashFollowUpDate" class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="accountId">Customer Account ID</label>
-                        <input type="text" id="accountId" placeholder="e.g. CX-99421" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="interactionId">Interaction ID</label>
-                        <input type="text" id="interactionId" placeholder="e.g. INT-88301" required>
+                    <!-- Right Column: Visual Feedback Cards -->
+                    <div class="feedback-card-list">
+                        <div class="card" style="border-top: 6px solid #00C853;">
+                            <div class="card-title" style="color:#007934;">🌟 Key Strengths</div>
+                            <div id="dashFortalezasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        </div>
+                        <div class="card" style="border-top: 6px solid #FFAB00;">
+                            <div class="card-title" style="color:#B78103;">👁️ Main Observations</div>
+                            <div id="dashObservarList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        </div>
+                        <div class="card" style="border-top: 6px solid #FF1744;">
+                            <div class="card-title" style="color:#C2185B;">🚀 Improvement Areas</div>
+                            <div id="dashMejorasList" style="max-height: 250px; overflow-y:auto; padding-right:0.25rem;"></div>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn">Register Log Entry</button>
-            </form>
-        </div>
-    </section>
+            </div>
 
-    <!-- Operational Core Logic Script -->
+        </div>
+    </div>
+
+    <!-- CONFIGURATION LIST PARAMETERS MODAL -->
+    <div class="modal-overlay" id="configModal">
+        <div class="modal-card">
+            <div class="card-title">⚙️ Manage Attributes</div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.25rem; font-weight:500;">Add customized elements to lists dynamically inside active local browser cache storage.</p>
+            
+            <div class="form-group">
+                <label>List Dataset Target</label>
+                <select id="configType" class="form-control">
+                    <option value="agents">New Agent Profile</option>
+                    <option value="evaluators">New Evaluator Profile</option>
+                    <option value="roles">New Standard Role</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Value Designation</label>
+                <input type="text" id="configValue" class="form-control" placeholder="e.g., Jonathan Doe / Tier 4 Team">
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:2rem;">
+                <button class="btn btn-secondary" style="box-shadow:none;" onclick="closeModal('configModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addNewConfigItem()">Add Record</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CODE LOGIC ARCHITECTURE ENGINE -->
     <script>
-        let weeklyData = {
-            "Monday": [],
-            "Tuesday": [],
-            "Wednesday": [],
-            "Thursday": [],
-            "Friday": [],
-            "Saturday": [],
-            "Sunday": []
+        const defaultLists = {
+            agents: [
+                "Adrian Navarro", "Andrey Castillo", "Anilu Guzman", "Carlos Alejandro Amador Luna",
+                "Carlos Amador", "Carlos Ortiz", "Carolina Castro", "Charlene Rose", "Daniel Gonzalez",
+                "Daniel Leandro", "David Cruz", "David Vogler", "Diego Matamoros", "Eckart Lutz",
+                "Eddison Prendas", "Edson Stewart Retana", "Elena Rojas", "Elliot Navarro", "Emerson Hernandez",
+                "Fer Blanco", "Graciela Bravo", "Ignacio Blanco", "Isaac Barrantes", "Isaac Porras",
+                "Israel Aburto", "Jose David Shedden", "Jose Maria Cartin", "Jose Pablo Robles", "Josué Vargas",
+                "Julian Mena", "Kemar Clare", "Kendall Montoya", "Kevin Salazar", "Kevin Zamora", "Keysha Cross",
+                "Luis Carvajal", "Luis Fernando Ruiz", "Maria Jose Quiros", "Mariana Bejarano", "Mariana Varela",
+                "Marlon Wright", "Mauricio Alvarado", "Michelle Saborio", "Naigell Beckford", "Naomy Sanchez",
+                "Nicole Román", "Pablo Guzman", "Phillip Desanti", "Rory Bulgarelli", "Samuel Carballo",
+                "Sebastian Puerta", "Sebastian Rivera", "Sheydron Clark", "Silvana Suarez", "Stephannie Cunningham",
+                "Tamara Donaire", "Thimy Gonzalez", "Valerie Alfaro", "Vanessa Umaña", "Yasser Quiros"
+            ],
+            evaluators: [
+                "Adriana Vasquez", "Alfred Villalobos", "Amy", "Carlos Barrantes", "Isabelle Morales",
+                "Kendra Temple", "Kunti Solis", "Maria Jose Fallas", "Mario Acon", "Natalia Sibaja",
+                "Nicole Valverde", "Pablo Retana", "Victor Ramirez"
+            ],
+            roles: ["New Hire", "T1", "T2", "T3", "3rd Party Specialist", "Processing Squad", "Deposits", "Payouts", "Night Shift", "Senior", "Sup / Floor Support", "VIP"]
         };
 
-        let currentActiveDay = "Monday";
+        let currentLists = JSON.parse(localStorage.getItem('qa_lists_v2')) || defaultLists;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadCSVData();
-        });
+        const phoneChatCriteria = [
+            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Proper Greeting & Account Verification", desc: "Greeting and account & PIN verification completed correctly" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 20, text: "Accurate & Effective Resolution", desc: "Provided accurate, policy-aligned information and clearly explained the resolution or next steps" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Alternatives Offered", desc: "Offered valid alternatives when applicable" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 20, text: "Professional Communication & Emotional Intelligence", desc: "Maintained a professional tone, acknowledged customer concerns, and used positive, solution-oriented language" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Clear grammar and spelling" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Hold & Dead Air Time Management", desc: "Managed hold times or dead air correctly" },
+            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Additional Support (Mandatory)", desc: "After resolution, offered further assistance or clarification if needed" },
+            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+        ];
 
-        function loadCSVData() {
-            fetch('cronograma.csv')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Unable to locate the required cronograma.csv file in the repository.");
-                    }
-                    return response.text();
-                })
-                .then(csvText => {
-                    processCSV(csvText);
-                    distributeWeeklyTasks();
-                    renderDay(currentActiveDay);
-                })
-                .catch(err => {
-                    document.getElementById('tableContainer').innerHTML =
-                        `<p style="color: #ef4444; font-weight: 500; font-size: 0.9rem;">OPERATIONAL ERROR: ${err.message}</p>`;
-                });
-        }
+        const emailCriteria = [
+            { id: "1.1", section: "SECTION 1 — OPENING", max_pts: 5, text: "Personalized Greeting", desc: "Correct Name Used" },
+            { id: "2.1", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 30, text: "Accurate Information & Effective Resolution", desc: "Accurate resolution aligned with company policy" },
+            { id: "2.2", section: "SECTION 2 — PRODUCT KNOWLEDGE", max_pts: 15, text: "Correct Template Used", desc: "Appropriate template selected according to case type" },
+            { id: "3.1", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Grammar & Spelling", desc: "Proper grammar, spelling, punctuation, and sentence structure" },
+            { id: "3.2", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 10, text: "Proper Formatting", desc: "Correct font, size, color, spacing" },
+            { id: "3.3", section: "SECTION 3 — COMMUNICATION SKILLS", max_pts: 15, text: "Timely Response", desc: "SLA Compliance - 1 hour" },
+            { id: "4.1", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 5, text: "Signature Included", desc: "Email contains required signature" },
+            { id: "4.2", section: "SECTION 4 — CLOSURE & EXTRA ASSISTANCE", max_pts: 10, text: "Extra Assistance - Promotions & Offers", desc: "Offered relevant current or future promotions aligned to customer profile" }
+        ];
 
-        function processCSV(text) {
-            const lines = text.split(/\r?\n/);
-            
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
-                const columns = lines[i].split(',');
+        let currentGroup = "Phones";
+        let currentSubIndex = 1;
+        let evaluationState = {};
+
+        function initDataStructure() {
+            const groups = ["Phones", "Chats", "Emails"];
+            groups.forEach(g => {
+                evaluationState[g] = { checkedGlobal: true };
+                const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
                 
-                let agent = columns[0]?.trim();
-                let dayUnformatted = columns[1]?.trim();
-                let shiftStart = columns[2]?.trim();
-                let shiftEnd = columns[3]?.trim();
-                let status = columns[4]?.trim();
-                
-                let dayKey = normalizeDayName(dayUnformatted);
-                
-                if (weeklyData[dayKey]) {
-                    weeklyData[dayKey].push({
-                        name: agent,
-                        start: shiftStart,
-                        end: shiftEnd,
-                        status: status,
-                        primaryTask: 'Pending',
-                        secondaryTask: 'None'
+                for(let i=1; i<=4; i++) {
+                    evaluationState[g][i] = {
+                        active: true,
+                        accountNumber: "",
+                        comments: { "S1": "", "S2": "", "S3": "", "S4": "" },
+                        scores: {}
+                    };
+                    criteriaList.forEach(c => {
+                        evaluationState[g][i].scores[c.id] = {
+                            classification: "Yes",
+                            points: c.max_pts
+                        };
                     });
                 }
-            }
-        }
-
-        function normalizeDayName(day) {
-            if (!day) return "Monday";
-            let d = day.toLowerCase();
-            if (d.includes("lun") || d.includes("mon")) return "Monday";
-            if (d.includes("mar") || d.includes("tue")) return "Tuesday";
-            if (d.includes("mie") || d.includes("mié") || d.includes("wed")) return "Wednesday";
-            if (d.includes("jue") || d.includes("thu")) return "Thursday";
-            if (d.includes("vie") || d.includes("fri")) return "Friday";
-            if (d.includes("sab") || d.includes("sáb") || d.includes("sat")) return "Saturday";
-            if (d.includes("dom") || d.includes("sun")) return "Sunday";
-            return "Monday";
-        }
-
-        function distributeWeeklyTasks() {
-            Object.keys(weeklyData).forEach(day => {
-                let dailyAgents = weeklyData[day];
-                let activeAgents = dailyAgents.filter(a => a.status.toLowerCase() === 'work');
-                
-                activeAgents.forEach((agent, index) => {
-                    if (index % 3 === 0) {
-                        agent.primaryTask = 'Casino';
-                    } else if (index % 3 === 1) {
-                        agent.primaryTask = 'VIP Support';
-                    } else {
-                        agent.primaryTask = 'General Tier 1';
-                    }
-                });
-
-                let secondaryRoles = ['Zelle Blast', 'Bonus Audit', 'Email Outbound'];
-                let secondaryIndex = 0;
-                
-                activeAgents.forEach(agent => {
-                    if (agent.primaryTask === 'Casino') {
-                        agent.secondaryTask = 'EXEMPT (Dedicated Casino)';
-                    } else {
-                        agent.secondaryTask = secondaryRoles[secondaryIndex % secondaryRoles.length];
-                        secondaryIndex++;
-                    }
-                });
             });
         }
 
-        function changeDay(targetDay) {
-            currentActiveDay = targetDay;
-            const buttons = document.querySelectorAll('.tab-btn');
+        window.onload = function() {
+            initDataStructure();
+            renderDropdowns();
+            renderActiveCheckboxes();
+            buildAllForms();
+            switchChannelGroup("Phones");
             
-            buttons.forEach(btn => {
-                if(btn.textContent.trim().toLowerCase() === targetDay.toLowerCase()) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
+            document.getElementById('metaInteractionDate').valueAsDate = new Date();
+            document.getElementById('metaEvaluationDate').valueAsDate = new Date();
+            document.getElementById('dashFollowUpDate').valueAsDate = new Date(Date.now() + 7*24*60*60*1000);
+        };
+
+        function renderDropdowns() {
+            const sAgent = document.getElementById('metaAgent');
+            const sEval = document.getElementById('metaEvaluator');
+            const sRole = document.getElementById('metaRole');
+
+            sAgent.innerHTML = currentLists.agents.map(a => `<option value="${a}">${a}</option>`).join('');
+            sEval.innerHTML = currentLists.evaluators.map(e => `<option value="${e}">${e}</option>`).join('');
+            sRole.innerHTML = currentLists.roles.map(r => `<option value="${r}">${r}</option>`).join('');
+        }
+
+        function checkAgentRole() {
+            const role = document.getElementById('metaRole').value;
+            const emailTab = document.getElementById('btnGroupEmails');
+            
+            if (role === "T1") {
+                emailTab.classList.add('disabled-tab');
+                evaluationState["Emails"].checkedGlobal = false;
+                for(let i=1; i<=4; i++) {
+                    evaluationState["Emails"][i].active = false;
+                    let ck = document.getElementById(`ck_Emails_${i}`);
+                    if(ck) ck.checked = false;
+                }
+                if (currentGroup === "Emails") {
+                    switchChannelGroup("Phones");
+                }
+            } else {
+                emailTab.classList.remove('disabled-tab');
+                evaluationState["Emails"].checkedGlobal = true;
+                for(let i=1; i<=4; i++) {
+                    evaluationState["Emails"][i].active = true;
+                    let ck = document.getElementById(`ck_Emails_${i}`);
+                    if(ck) ck.checked = true;
+                }
+            }
+            renderActiveCheckboxes();
+            calculateGlobalMatrix();
+        }
+
+        function renderActiveCheckboxes() {
+            const container = document.getElementById('checkboxGrid');
+            let html = "";
+            const groups = ["Phones", "Chats", "Emails"];
+            const isT1 = (document.getElementById('metaRole').value === "T1");
+
+            groups.forEach(g => {
+                if (g === "Emails" && isT1) return;
+                html += `<div style="margin-top:0.75rem; font-weight:800; font-size:0.8rem; letter-spacing:0.5px; color:var(--primary); font-family:'Space Grotesk'">${g.toUpperCase()}</div>`;
+                for(let i=1; i<=4; i++) {
+                    const labelName = g === "Phones" ? `Call ${i}` : (g === "Chats" ? `Chat ${i}` : `Email ${i}`);
+                    const checked = evaluationState[g][i].active ? "checked" : "";
+                    html += `
+                        <div class="checkbox-item">
+                            <label for="ck_${g}_${i}">${labelName}</label>
+                            <input type="checkbox" id="ck_${g}_${i}" ${checked} onchange="toggleCaseActive('${g}', ${i}, this.checked)">
+                        </div>
+                    `;
                 }
             });
-            
-            document.getElementById('currentDayTitle').textContent = `SCHEDULE: ${targetDay.toUpperCase()}`;
-            renderDay(targetDay);
+            container.innerHTML = html;
         }
 
-        function renderDay(day) {
-            const container = document.getElementById('tableContainer');
-            const agents = weeklyData[day];
+        function toggleCaseActive(group, index, isChecked) {
+            evaluationState[group][index].active = isChecked;
+            const subTabEl = document.getElementById(`subTabBtn_${group}_${index}`);
+            if(subTabEl) {
+                subTabEl.style.opacity = !isChecked ? "0.4" : "1";
+            }
+            calculateSingleFormScore(group, index);
+            calculateGlobalMatrix();
+        }
+
+        function switchChannelGroup(groupName) {
+            if (groupName === "Emails" && document.getElementById('metaRole').value === "T1") return;
+
+            currentGroup = groupName;
             
-            if (!agents || agents.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No operational data mapped for this timeline.</p>';
+            document.getElementById('btnGroupPhones').classList.remove('active');
+            document.getElementById('btnGroupChats').classList.remove('active');
+            document.getElementById('btnGroupEmails').classList.remove('active');
+            document.getElementById('btnGroupDashboard').classList.remove('active');
+
+            if (groupName === "Dashboard") {
+                document.getElementById('btnGroupDashboard').classList.add('active');
+                document.getElementById('subTabsArea').style.display = "none";
+                document.getElementById('formsWorkspaceArea').style.display = "none";
+                document.getElementById('dashboardViewArea').style.display = "block";
+                calculateGlobalMatrix();
                 return;
             }
+
+            document.getElementById(`btnGroup${groupName}`).classList.add('active');
+            document.getElementById('subTabsArea').style.display = "flex";
+            document.getElementById('formsWorkspaceArea').style.display = "block";
+            document.getElementById('dashboardViewArea').style.display = "none";
+
+            buildSubTabs();
+            switchSubTab(currentSubIndex);
+        }
+
+        function buildSubTabs() {
+            const area = document.getElementById('subTabsArea');
+            let html = "";
+            for (let i = 1; i <= 4; i++) {
+                const name = currentGroup === "Phones" ? `Call ${i}` : (currentGroup === "Chats" ? `Chat ${i}` : `Email ${i}`);
+                const activeClass = i === currentSubIndex ? "active" : "";
+                const opacityStyle = evaluationState[currentGroup][i].active ? "" : "style='opacity:0.4;'";
+                html += `<button class="sub-tab-btn ${activeClass}" id="subTabBtn_${currentGroup}_${i}" ${opacityStyle} onclick="switchSubTab(${i})">${name}</button>`;
+            }
+            area.innerHTML = html;
+        }
+
+        function switchSubTab(index) {
+            currentSubIndex = index;
+            const buttons = document.querySelectorAll('.sub-tab-btn');
+            buttons.forEach((b, idx) => {
+                if (idx === (index - 1)) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+
+            const allContainers = document.querySelectorAll('.form-container');
+            allContainers.forEach(c => c.classList.remove('active'));
+
+            const targetId = `form_container_${currentGroup}_${index}`;
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) targetEl.classList.add('active');
+        }
+
+        function updateAccountNumber(group, index, value) {
+            evaluationState[group][index].accountNumber = value.trim();
+        }
+
+        function buildAllForms() {
+            const area = document.getElementById('formsWorkspaceArea');
+            area.innerHTML = "";
+
+            const groups = ["Phones", "Chats", "Emails"];
+
+            groups.forEach(g => {
+                const criteriaList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
+
+                for (let i = 1; i <= 4; i++) {
+                    const container = document.createElement('div');
+                    container.id = `form_container_${g}_${i}`;
+                    container.className = "form-container";
+
+                    let tableHtml = `
+                        <!-- Account Details Top Banner Block -->
+                        <div style="background:#FFF; border:3px solid var(--border-color); padding:1rem; border-radius:12px; margin-bottom:1rem; display:flex; align-items:center; gap:1.5rem; box-shadow:3px 3px 0px var(--border-color)">
+                            <div style="font-family:'Space Grotesk'; font-weight:700; font-size:1rem; text-transform:uppercase; min-width:130px;">🎯 Interaction Meta:</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; width:100%; max-width:400px;">
+                                <label style="font-size:0.85rem; font-weight:800; text-transform:uppercase; white-space:nowrap;">Account #:</label>
+                                <input type="text" placeholder="Insert CX Account Reference Number..." 
+                                       class="form-control" style="padding:0.4rem 0.6rem; font-size:0.9rem;"
+                                       value="${evaluationState[g][i].accountNumber || ''}"
+                                       oninput="updateAccountNumber('${g}', ${i}, this.value)">
+                            </div>
+                        </div>
+
+                        <table class="evaluation-table">
+                            <thead>
+                                <tr>
+                                    <th>Evaluation Criteria Descriptor</th>
+                                    <th>Classification</th>
+                                    <th>Max Pts</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    let currentSection = "";
+                    criteriaList.forEach(c => {
+                        if (c.section !== currentSection) {
+                            currentSection = c.section;
+                            tableHtml += `
+                                <tr class="section-header-row">
+                                    <td colspan="2">${currentSection}</td>
+                                    <td colspan="2" style="text-align:right;">
+                                        <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem;">Section Comments:</span>
+                                        <input type="text" placeholder="Add section notes..." 
+                                               class="form-control" style="width:300px; display:inline-block; padding:0.3rem 0.5rem; font-size:0.85rem;"
+                                               value="${evaluationState[g][i].comments[getSectionKey(currentSection)] || ''}" 
+                                               onchange="updateSectionComment('${g}', ${i}, '${getSectionKey(currentSection)}', this.value)">
+                                    </td>
+                                </tr>
+                            `;
+                        }
+
+                        tableHtml += `
+                            <tr class="criterion-row">
+                                <td style="width:50%;">
+                                    <strong style="font-weight:700; color:var(--text-main);">${c.text}</strong>
+                                    <span class="desc-sub">${c.desc}</span>
+                                </td>
+                                <td>
+                                    <select class="select-classification" onchange="updateRowScore('${g}', ${i}, '${c.id}', this.value)">
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="Partially">Partially</option>
+                                        <option value="No">No</option>
+                                        <option value="N/A">N/A</option>
+                                    </select>
+                                </td>
+                                <td style="font-weight:700; color:var(--text-muted);">${c.max_pts}</td>
+                                <td>
+                                    <span id="score_box_${g}_${i}_${c.id}" class="score-display-box status-yes">${c.max_pts}</span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHtml += `
+                            </tbody>
+                        </table>
+                        
+                        <div class="form-footer-scores">
+                            <div class="footer-score-block">
+                                <span>Points Secured</span>
+                                <div id="lbl_pts_${g}_${i}" style="color:var(--text-main);">100.00</div>
+                            </div>
+                            <div class="footer-score-block">
+                                <span>Interaction Percentage</span>
+                                <div id="lbl_pct_${g}_${i}" style="color:#007934;">100%</div>
+                            </div>
+                        </div>
+                    `;
+
+                    container.innerHTML = tableHtml;
+                    area.appendChild(container);
+                    calculateSingleFormScore(g, i);
+                }
+            });
+        }
+
+        function getSectionKey(secName) {
+            if(secName.includes("SECTION 1")) return "S1";
+            if(secName.includes("SECTION 2")) return "S2";
+            if(secName.includes("SECTION 3")) return "S3";
+            return "S4";
+        }
+
+        function updateSectionComment(group, index, secKey, val) {
+            evaluationState[group][index].comments[secKey] = val;
+        }
+
+        function updateRowScore(group, index, criterionId, value) {
+            const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
+            const crit = criteriaList.find(c => c.id === criterionId);
+            let finalPts = 0;
+
+            const box = document.getElementById(`score_box_${group}_${index}_${criterionId}`);
+            box.className = "score-display-box";
+
+            if (value === "Yes") {
+                finalPts = crit.max_pts;
+                box.classList.add('status-yes');
+            } else if (value === "Partially") {
+                finalPts = crit.max_pts * 0.5;
+                box.classList.add('status-partial');
+            } else if (value === "No") {
+                finalPts = 0;
+                box.classList.add('status-no');
+            } else if (value === "N/A") {
+                finalPts = 0;
+                box.classList.add('status-na');
+            }
+
+            box.innerText = value === "N/A" ? "N/A" : finalPts;
+
+            evaluationState[group][index].scores[criterionId] = {
+                classification: value,
+                points: finalPts
+            };
+
+            calculateSingleFormScore(group, index);
+        }
+
+        function calculateSingleFormScore(group, index) {
+            if (!evaluationState[group] || !evaluationState[group][index]) return;
+
+            const criteriaList = (group === "Emails") ? emailCriteria : phoneChatCriteria;
+            let earnedSum = 0;
+            let maxSumAvailable = 0;
+
+            criteriaList.forEach(c => {
+                const sc = evaluationState[group][index].scores[c.id];
+                if (sc.classification !== "N/A") {
+                    earnedSum += sc.points;
+                    maxSumAvailable += c.max_pts;
+                }
+            });
+
+            let pct = maxSumAvailable > 0 ? (earnedSum / maxSumAvailable) * 100 : 100;
+
+            evaluationState[group][index].calculatedScore = earnedSum;
+            evaluationState[group][index].calculatedMax = maxSumAvailable;
+            evaluationState[group][index].calculatedPct = pct;
+
+            const lblPts = document.getElementById(`lbl_pts_${group}_${index}`);
+            const lblPct = document.getElementById(`lbl_pct_${group}_${index}`);
+
+            if(lblPts && lblPct) {
+                lblPts.innerText = earnedSum.toFixed(2);
+                lblPct.innerText = pct.toFixed(0) + "%";
+                lblPct.style.color = pct >= 90 ? "#007934" : (pct >= 70 ? "#B78103" : "#C2185B");
+            }
+        }
+
+        function calculateGlobalMatrix() {
+            const isT1 = (document.getElementById('metaRole').value === "T1");
+            const groups = isT1 ? ["Phones", "Chats"] : ["Phones", "Chats", "Emails"];
             
-            let html = `
-                <table class="squad-table">
+            let totalEarnedGlobal = 0;
+            let totalMaxGlobal = 0;
+
+            const fortList = document.getElementById('dashFortalezasList');
+            const obsList = document.getElementById('dashObservarList');
+            const mejList = document.getElementById('dashMejorasList');
+            
+            fortList.innerHTML = "";
+            obsList.innerHTML = "";
+            mejList.innerHTML = "";
+
+            let addedFort = new Set();
+            let addedObs = new Set();
+            let addedMej = new Set();
+
+            const matrixTable = document.getElementById('matrixPointsTable');
+            let mHtml = `
                 <thead>
                     <tr>
-                        <th>Agent</th>
-                        <th>Shift Timeline</th>
-                        <th>Status</th>
-                        <th>Primary Task</th>
-                        <th>Secondary Assignment</th>
+                        <th>ID</th>
+                        <th>Phones Avg</th>
+                        <th>Chats Avg</th>
+                        ${!isT1 ? '<th>Emails Avg</th>' : ''}
+                        <th>Total Average</th>
                     </tr>
                 </thead>
                 <tbody>
             `;
-            
-            agents.forEach(a => {
-                let isCasino = a.primaryTask === 'Casino';
-                let isWorking = a.status.toLowerCase() === 'work';
-                
-                html += `
+
+            const standardIds = ["1.1", "2.1", "2.2", "3.1", "3.2", "3.3", "4.1", "4.2"];
+
+            standardIds.forEach(id => {
+                let rowSumPoints = 0;
+                let rowCountCases = 0;
+                let channelAverages = {};
+
+                groups.forEach(g => {
+                    let chanSum = 0;
+                    let chanCount = 0;
+                    
+                    const critList = (g === "Emails") ? emailCriteria : phoneChatCriteria;
+                    const crObj = critList.find(c => c.id === id);
+
+                    for(let i=1; i<=4; i++) {
+                        if(evaluationState[g][i].active) {
+                            const sc = evaluationState[g][i].scores[id];
+                            if(sc && sc.classification !== "N/A") {
+                                chanSum += sc.points;
+                                chanCount += crObj.max_pts;
+
+                                const fullText = crObj.text;
+                                const fullDesc = crObj.desc;
+
+                                if(sc.classification === "Yes" && !addedFort.has(fullText)) {
+                                    addedFort.add(fullText);
+                                    fortList.innerHTML += `<div class="feedback-item-box f-yes"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                } else if(sc.classification === "Partially" && !addedObs.has(fullText)) {
+                                    addedObs.add(fullText);
+                                    obsList.innerHTML += `<div class="feedback-item-box f-partial"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                } else if(sc.classification === "No" && !addedMej.has(fullText)) {
+                                    addedMej.add(fullText);
+                                    mejList.innerHTML += `<div class="feedback-item-box f-no"><div class="feedback-item-title">${fullText}</div><div class="feedback-item-desc">${fullDesc}</div></div>`;
+                                }
+                            }
+                        }
+                    }
+
+                    let chanAvgPct = chanCount > 0 ? (chanSum / chanCount) * 100 : null;
+                    channelAverages[g] = chanAvgPct;
+
+                    if(chanAvgPct !== null) {
+                        rowSumPoints += chanSum;
+                        rowCountCases += chanCount;
+                    }
+                });
+
+                let totalRowAvg = rowCountCases > 0 ? (rowSumPoints / rowCountCases) * 100 : 100;
+
+                mHtml += `
                     <tr>
-                        <td style="font-weight: 500; color: #ffffff;">${a.name}</td>
-                        <td>${a.start} - ${a.end}</td>
-                        <td style="color: ${isWorking ? '#10b981' : '#ef4444'}; font-weight: 500;">${isWorking ? 'Active' : 'OFF'}</td>
-                        <td><span class="${isCasino && isWorking ? 'tag-dedicated' : ''}">${isWorking ? a.primaryTask : '—'}</span></td>
-                        <td style="color: ${isCasino && isWorking ? 'var(--text-muted)' : 'var(--text-primary)'}; opacity: ${isCasino && isWorking ? '0.6' : '1'};">${isWorking ? a.secondaryTask : '—'}</td>
+                        <td style="font-weight:700; color:var(--primary); font-family:'Space Grotesk';">${id}</td>
+                        <td>${renderMatrixBadge(channelAverages["Phones"])}</td>
+                        <td>${renderMatrixBadge(channelAverages["Chats"])}</td>
+                        ${!isT1 ? `<td>${renderMatrixBadge(channelAverages["Emails"])}</td>` : ''}
+                        <td style="background: rgba(0,0,0,0.02); font-weight:700;">${renderMatrixBadge(totalRowAvg)}</td>
                     </tr>
                 `;
             });
+
+            mHtml += `</tbody>`;
+            matrixTable.innerHTML = mHtml;
+
+            groups.forEach(g => {
+                for(let i=1; i<=4; i++) {
+                    if(evaluationState[g][i].active) {
+                        totalEarnedGlobal += evaluationState[g][i].calculatedScore;
+                        totalMaxGlobal += evaluationState[g][i].calculatedMax;
+                    }
+                }
+            });
+
+            let finalGlobalPct = totalMaxGlobal > 0 ? (totalEarnedGlobal / totalMaxGlobal) * 100 : 100;
+            document.getElementById('lblGlobalScore').innerText = finalGlobalPct.toFixed(2) + "%";
             
-            html += '</tbody></table>';
-            container.innerHTML = html;
+            if(fortList.innerHTML === "") fortList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
+            if(obsList.innerHTML === "") obsList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
+            if(mejList.innerHTML === "") mejList.innerHTML = "<p style='color:var(--text-muted); font-size:0.85rem;'>None recorded this session.</p>";
         }
 
-        /* Handler for Form Submission Example */
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const channel = document.getElementById('channelType').value;
-            const cxId = document.getElementById('accountId').value;
-            const intId = document.getElementById('interactionId').value;
+        function renderMatrixBadge(val) {
+            if(val === null || val === undefined) return `<span class="matrix-badge status-na">N/A</span>`;
+            let cls = "status-yes";
+            if(val < 90 && val >= 70) cls = "status-partial";
+            if(val < 70) cls = "status-no";
+            return `<span class="matrix-badge ${cls}">${val.toFixed(0)}%</span>`;
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = "flex"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        function addNewConfigItem() {
+            const type = document.getElementById('configType').value;
+            const value = document.getElementById('configValue').value.trim();
+
+            if(!value) { alert("Please input a valid configuration label name."); return; }
+
+            currentLists[type].push(value);
+            if(type !== 'roles') currentLists[type].sort();
+
+            localStorage.setItem('qa_lists_v2', JSON.stringify(currentLists));
+            renderDropdowns();
+            renderActiveCheckboxes();
             
-            alert(`SUCCESSFULLY REGISTERED\n\nChannel: ${channel.toUpperCase()}\nAccount ID: ${cxId}\nInteraction ID: ${intId}`);
-            document.getElementById('interactionForm').reset();
+            document.getElementById('configValue').value = "";
+            closeModal('configModal');
+        }
+
+        async function exportPremiumExcel() {
+            const agentName = document.getElementById('metaAgent').value;
+            const evaluatorName = document.getElementById('metaEvaluator').value;
+            const roleName = document.getElementById('metaRole').value;
+            const intDate = document.getElementById('metaInteractionDate').value;
+            const evalDate = document.getElementById('metaEvaluationDate').value;
+            const globalScoreStr = document.getElementById('lblGlobalScore').innerText;
+
+            const workbook = new ExcelJS.Workbook();
+            
+            const wsSummary = workbook.addWorksheet('Feedback Summary');
+            wsSummary.views = [{ showGridLines: true }];
+
+            wsSummary.mergeCells('A1:F2');
+            const titleCell = wsSummary.getCell('A1');
+            titleCell.value = "QA PERFORMANCE FEEDBACK CARD";
+            titleCell.font = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
+            titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1A1A1A' } };
+            titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
+
+            wsSummary.getCell('A4').value = "Agent Name:"; wsSummary.getCell('B4').value = agentName;
+            wsSummary.getCell('A5').value = "Role:"; wsSummary.getCell('B5').value = roleName;
+            wsSummary.getCell('A6').value = "Evaluator:"; wsSummary.getCell('B6').value = evaluatorName;
+            wsSummary.getCell('C4').value = "Interaction Date:"; wsSummary.getCell('D4').value = intDate;
+            wsSummary.getCell('C5').value = "Evaluation Date:"; wsSummary.getCell('D5').value = evalDate;
+            
+            wsSummary.getCell('E4').value = "OVERALL SCORE";
+            wsSummary.getCell('E4').font = { name: 'Arial', size: 9, bold: true, color: { argb: '555555' } };
+            wsSummary.getCell('E5').value = parseFloat(globalScoreStr) / 100;
+            wsSummary.getCell('E5').font = { name: 'Arial', size: 22, bold: true, color: { argb: '1A1A1A' } };
+            wsSummary.getCell('E5').numFmt = '0.00%';
+
+            ['A4','A5','A6','C4','C5'].forEach(k => wsSummary.getCell(k).font = { bold: true, color: { argb: '1A1A1A' } });
+
+            wsSummary.getCell('A8').value = "CONSOLIDATED PERFORMANCE MATRIX GRID";
+            wsSummary.getCell('A8').font = { size: 12, bold: true, color: { argb: '1A1A1A' } };
+
+            const headers = ["Criterion ID", "Phones Average", "Chats Average", "Emails Average", "Global Average"];
+            headers.forEach((h, i) => {
+                const cell = wsSummary.getCell(9, i + 1);
+                cell.value = h;
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '5B42F3' } };
+                cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+                cell.alignment = { horizontal: 'center' };
+            });
+
+            const matrixRows = document.querySelectorAll('#matrixPointsTable tbody tr');
+            matrixRows.forEach((row, rIdx) => {
+                const cells = row.querySelectorAll('td');
+                cells.forEach((c, cIdx) => {
+                    const targetCell = wsSummary.getCell(10 + rIdx, cIdx + 1);
+                    let txt = c.innerText.trim();
+                    if(txt.includes('%')) {
+                        targetCell.value = parseFloat(txt) / 100;
+                        targetCell.numFmt = '0%';
+                        let num = parseFloat(txt);
+                        let color = num >= 90 ? 'E8FDF3' : (num >= 70 ? 'FFF8E1' : 'FFE5EC');
+                        targetCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
+                    } else {
+                        targetCell.value = txt;
+                    }
+                    targetCell.alignment = { horizontal: 'center' };
+                });
+            });
+
+            let nextRow = 13 + matrixRows.length;
+            wsSummary.getCell(`A${nextRow}`).value = "STRATEGIC FEEDBACK ANALYSIS";
+            wsSummary.getCell(`A${nextRow}`).font = { size: 12, bold: true };
+
+            wsSummary.getCell(`A${nextRow+2}`).value = "General Session Review Notes:";
+            wsSummary.getCell(`B${nextRow+2}`).value = document.getElementById('dashGeneralComments').value;
+            wsSummary.getCell(`A${nextRow+4}`).value = "Milestone Goals for Next Horizon:";
+            wsSummary.getCell(`B${nextRow+4}`).value = document.getElementById('dashGoals').value;
+            wsSummary.getCell(`A${nextRow+6}`).value = "Session Status:";
+            wsSummary.getCell(`B${nextRow+6}`).value = document.getElementById('dashPerformanceRating').value;
+            wsSummary.getCell(`C${nextRow+6}`).value = "Target Follow-up Plan Date:";
+            wsSummary.getCell(`D${nextRow+6}`).value = document.getElementById('dashFollowUpDate').value;
+
+            [`A${nextRow+2}`, `A${nextRow+4}`, `A${nextRow+6}`, `C${nextRow+6}`].forEach(k => wsSummary.getCell(k).font = { bold: true });
+            wsSummary.columns.forEach(col => col.width = 24);
+
+            // --- TAB 2: AUDIT RAW TRACKING DATA WITH ACCOUNT NUMBERS ---
+            const wsData = workbook.addWorksheet('Raw Evaluation Logs');
+            wsData.views = [{ showGridLines: true }];
+
+            const dataHeaders = ["Channel", "Interaction Ref ID", "Customer Account #", "Criterion Identifier", "Status Matrix", "Earned Score Pts"];
+            dataHeaders.forEach((dh, idx) => {
+                const cell = wsData.getCell(1, idx + 1);
+                cell.value = dh;
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1A1A1A' } };
+                cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+            });
+
+            let dataRowCounter = 2;
+            const groups = ["Phones", "Chats", "Emails"];
+            groups.forEach(g => {
+                for(let i=1; i<=4; i++) {
+                    if(evaluationState[g][i].active) {
+                        Object.keys(evaluationState[g][i].scores).forEach(cId => {
+                            const item = evaluationState[g][i].scores[cId];
+                            wsData.getCell(dataRowCounter, 1).value = g;
+                            wsData.getCell(dataRowCounter, 2).value = `Case Reference ${i}`;
+                            wsData.getCell(dataRowCounter, 3).value = evaluationState[g][i].accountNumber || "N/A";
+                            wsData.getCell(dataRowCounter, 4).value = cId;
+                            wsData.getCell(dataRowCounter, 5).value = item.classification;
+                            wsData.getCell(dataRowCounter, 6).value = item.points;
+                            dataRowCounter++;
+                        });
+                    }
+                }
+            });
+            wsData.columns.forEach(col => col.width = 22);
+
+            const buffer = await workbook.xlsx.writeBuffer();
+            saveAs(new Blob([buffer]), `QA_Feedback_Dashboard_Report_${agentName.replace(/\s+/g, '_')}.xlsx`);
         }
     </script>
 </body>
